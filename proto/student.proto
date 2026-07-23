@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package student;
+
+option go_package = "github.com/afifksupriyadi/scaling-up-rest-vs-grpc/internal/data/model";
+
+// Empty is used for RPCs that take no parameters.
+message Empty {}
+
+// Course represents a single course entry within a semester.
+message Course {
+  string code = 1;
+  string name = 2;
+  int32 credits = 3;
+  float score = 4;
+}
+
+// SemesterRecord represents one semester's academic record.
+message SemesterRecord {
+  int32 semester = 1;
+  float semester_gpa = 2;
+  repeated Course courses = 3;
+}
+
+// AcademicData represents a student's academic program information.
+message AcademicData {
+  string faculty = 1;
+  string study_program = 2;
+  int32 current_semester = 3;
+}
+
+// Student represents a single student record.
+message Student {
+  string student_id = 1;
+  string name = 2;
+  string gender = 3;
+  AcademicData academic_data = 4;
+  repeated SemesterRecord academic_history = 5;
+  float cumulative_gpa = 6;
+}
+
+// StudentResponse always wraps student records in a list,
+// regardless of whether it contains 1 or 100 entries.
+message StudentResponse {
+  repeated Student data = 1;
+}
+
+// StudentService exposes the two data sizes as separate RPCs,
+// mirroring the REST side where each data size is a separate endpoint.
+service StudentService {
+  rpc GetStudent(Empty) returns (StudentResponse);
+  rpc GetStudents(Empty) returns (StudentResponse);
+}

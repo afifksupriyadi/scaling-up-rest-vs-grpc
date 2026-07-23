@@ -1,0 +1,11 @@
+Kombinasi,Ukuran Data,Mean (ms),P99 (ms),Min (ms),Max (ms)
+REST HTTP/1.1 + JSON,1 Entri,1.1,7.0,0,76
+REST HTTP/1.1 + JSON,100 Entri,18.8,53.0,2,186
+REST HTTP/1.1 + Protobuf,1 Entri,0.8,6.0,0,17
+REST HTTP/1.1 + Protobuf,100 Entri,1.2,6.0,0,18
+REST HTTP/2 + JSON,1 Entri,1.0,10.0,0,183
+REST HTTP/2 + JSON,100 Entri,11.6,32.0,2,106
+REST HTTP/2 + Protobuf,1 Entri,0.9,10.0,0,312
+REST HTTP/2 + Protobuf,100 Entri,1.6,13.0,0,62
+gRPC,1 Entri,3.0,20.0,0,95
+gRPC,100 Entri,43.3,154.0,3,470
