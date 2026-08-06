@@ -7,6 +7,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"os"
+	"runtime"
 	"time"
 
 	"scaling-up-rest-vs-grpc/internal/data/cache"
@@ -20,6 +21,11 @@ const (
 )
 
 func main() {
+	// Enables the block profiler, sampling every blocking event (channel,
+	// mutex, etc.), so /debug/pprof/block returns meaningful data instead
+	// of an empty profile, which is Go's default when this is unset.
+	runtime.SetBlockProfileRate(1)
+
 	addr := os.Getenv("REDIS_ADDR")
 	if addr == "" {
 		slog.Error("REDIS_ADDR is not set")
@@ -38,8 +44,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	// pprof runs on a separate port from the gRPC server itself, so it can
-	// be profiled from outside without touching the gRPC handler code at all.
 	go func() {
 		slog.Info("pprof endpoint started", "addr", pprofAddr)
 		http.ListenAndServe(pprofAddr, nil)
