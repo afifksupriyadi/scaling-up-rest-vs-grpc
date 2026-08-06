@@ -4,6 +4,8 @@ import (
 	"context"
 	"log/slog"
 	"net"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"time"
 
@@ -12,7 +14,10 @@ import (
 	"scaling-up-rest-vs-grpc/internal/lib/redis"
 )
 
-const listenAddr = ":50051"
+const (
+	listenAddr = ":50051"
+	pprofAddr  = ":6060"
+)
 
 func main() {
 	addr := os.Getenv("REDIS_ADDR")
@@ -32,9 +37,13 @@ func main() {
 		slog.Error("failed to load dataset from redis", "error", err)
 		os.Exit(1)
 	}
-	if cached.GetSmallDataset() == nil || cached.GetLargeDataset() == nil {
-		slog.Warn("dataset not seeded yet")
-	}
+
+	// pprof runs on a separate port from the gRPC server itself, so it can
+	// be profiled from outside without touching the gRPC handler code at all.
+	go func() {
+		slog.Info("pprof endpoint started", "addr", pprofAddr)
+		http.ListenAndServe(pprofAddr, nil)
+	}()
 
 	server := grpc.NewServer(cached)
 
