@@ -7,16 +7,12 @@ import (
 	"os"
 	"time"
 
-	"scaling-up-rest-vs-grpc/internal/data/store"
+	"scaling-up-rest-vs-grpc/internal/data/cache"
 	"scaling-up-rest-vs-grpc/internal/grpc"
 	"scaling-up-rest-vs-grpc/internal/lib/redis"
 )
 
-const (
-	listenAddr = ":50051"
-	certPath   = "certs/server.crt"
-	keyPath    = "certs/server.key"
-)
+const listenAddr = ":50051"
 
 func main() {
 	addr := os.Getenv("REDIS_ADDR")
@@ -31,20 +27,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	dataStore := store.New()
-	if err := dataStore.LoadFromRedis(context.Background(), client); err != nil {
+	cached := cache.New()
+	if err := cached.LoadFromRedis(context.Background(), client); err != nil {
 		slog.Error("failed to load dataset from redis", "error", err)
 		os.Exit(1)
 	}
-	if dataStore.GetSmallDataset() == nil || dataStore.GetLargeDataset() == nil {
+	if cached.GetSmallDataset() == nil || cached.GetLargeDataset() == nil {
 		slog.Warn("dataset not seeded yet")
 	}
 
-	server, err := grpc.NewServer(certPath, keyPath, dataStore)
-	if err != nil {
-		slog.Error("failed to build grpc server", "error", err)
-		os.Exit(1)
-	}
+	server := grpc.NewServer(cached)
 
 	lis, err := net.Listen("tcp", listenAddr)
 	if err != nil {

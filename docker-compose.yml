@@ -26,7 +26,8 @@ services:
     env_file:
       - .env
     ports:
-      - "8443:8443"
+      - "8080:8080"
+      - "8081:8081"
     depends_on:
       redis:
         condition: service_healthy
@@ -34,15 +35,15 @@ services:
         condition: service_completed_successfully
 
   grpc-server:
-      build:
-        context: .
-        dockerfile: docker/grpc-server.Dockerfile
-      env_file:
-        - .env
-      ports:
-        - "50051:50051"
-      depends_on:
-        redis:
-          condition: service_healthy
-        seeder:
-          condition: service_completed_successfully
+    build:
+      context: .
+      dockerfile: docker/grpc-server.Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "50051:50051"
+    depends_on:
+      redis:
+        condition: service_healthy
+      seeder:
+        condition: service_completed_successfully

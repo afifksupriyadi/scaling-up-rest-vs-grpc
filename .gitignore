@@ -6,4 +6,3 @@ bin/
 
 # Data volume Docker lokal
 .docker-data/
-certs/

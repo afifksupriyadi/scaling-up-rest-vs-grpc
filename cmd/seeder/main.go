@@ -30,7 +30,11 @@ func main() {
 		slog.Error("failed to seed small dataset", "error", err)
 		os.Exit(1)
 	}
-	if err := seedDataset(client, constant.RedisKeyLargeDataset, 100); err != nil {
+	if err := seedDataset(client, constant.RedisKeyMediumDataset, 100); err != nil {
+		slog.Error("failed to seed medium dataset", "error", err)
+		os.Exit(1)
+	}
+	if err := seedDataset(client, constant.RedisKeyLargeDataset, 1000); err != nil {
 		slog.Error("failed to seed large dataset", "error", err)
 		os.Exit(1)
 	}
@@ -38,6 +42,7 @@ func main() {
 	slog.Info("seeding completed", "redis_addr", addr)
 }
 
+// seedDataset generates n fake students, encodes them as a single StudentResponse, and writes the result to Redis under key.
 func seedDataset(client *redis.Client, key string, n int) error {
 	resp, err := seeder.ToStudentResponse(n)
 	if err != nil {

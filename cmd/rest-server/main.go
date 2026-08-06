@@ -6,15 +6,14 @@ import (
 	"os"
 	"time"
 
-	"scaling-up-rest-vs-grpc/internal/data/store"
+	"scaling-up-rest-vs-grpc/internal/data/cache"
 	"scaling-up-rest-vs-grpc/internal/lib/redis"
 	"scaling-up-rest-vs-grpc/internal/rest"
 )
 
 const (
-	listenAddr = ":8443"
-	certPath   = "certs/server.crt"
-	keyPath    = "certs/server.key"
+	http1Addr = ":8080"
+	http2Addr = ":8081"
 )
 
 func main() {
@@ -30,19 +29,30 @@ func main() {
 		os.Exit(1)
 	}
 
-	dataStore := store.New()
-	if err := dataStore.LoadFromRedis(context.Background(), client); err != nil {
+	cached := cache.New()
+	if err := cached.LoadFromRedis(context.Background(), client); err != nil {
 		slog.Error("failed to load dataset from redis", "error", err)
 		os.Exit(1)
 	}
-	if dataStore.GetSmallDataset() == nil || dataStore.GetLargeDataset() == nil {
+	if cached.GetSmallDataset() == nil || cached.GetLargeDataset() == nil {
 		slog.Warn("dataset not seeded yet")
 	}
 
-	server := rest.NewServer(listenAddr, dataStore)
-	slog.Info("rest-server started", "addr", listenAddr)
+	http1Server, http2Server := rest.NewServers(http1Addr, http2Addr, cached)
 
-	if err := server.ListenAndServeTLS(certPath, keyPath); err != nil {
+	errCh := make(chan error, 2)
+
+	go func() {
+		slog.Info("rest-server (HTTP/1.1) started", "addr", http1Addr)
+		errCh <- http1Server.ListenAndServe()
+	}()
+
+	go func() {
+		slog.Info("rest-server (HTTP/2 cleartext) started", "addr", http2Addr)
+		errCh <- http2Server.ListenAndServe()
+	}()
+
+	if err := <-errCh; err != nil {
 		slog.Error("rest server stopped", "error", err)
 		os.Exit(1)
 	}

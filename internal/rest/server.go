@@ -3,31 +3,48 @@ package rest
 import (
 	"net/http"
 
-	"scaling-up-rest-vs-grpc/internal/data/store"
+	"scaling-up-rest-vs-grpc/internal/data/cache"
 	"scaling-up-rest-vs-grpc/internal/rest/handler"
 	"scaling-up-rest-vs-grpc/internal/rest/service"
 )
 
-// NewServer builds the REST http.Server with all 8 routes registered.
-// The http1/http2 segments in the path are labels for JMeter Thread Group
-// organization only; both route to the same handler, since HTTP/1.1 vs
-// HTTP/2 is decided by ALPN negotiation, not by the URL.
-func NewServer(addr string, dataStore *store.Store) *http.Server {
-	svc := service.New(dataStore)
+// NewServers builds two REST http.Server instances sharing the same handler, one restricted to plain HTTP/1.1 on http1Addr and one restricted to unencrypted HTTP/2 (h2c) on http2Addr.
+// - Splitting by port, instead of accepting both protocols on one port, means a client that sends the wrong protocol fails the connection outright instead of silently succeeding on the wrong protocol.
+func NewServers(http1Addr, http2Addr string, cached *cache.Cache) (http1Server, http2Server *http.Server) {
+	svc := service.New(cached)
 	h := handler.New(svc)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /rest/json/http1/students/small", h.ServeJSONSmall)
+	mux.HandleFunc("GET /rest/json/http1/students/medium", h.ServeJSONMedium)
 	mux.HandleFunc("GET /rest/json/http1/students/large", h.ServeJSONLarge)
 	mux.HandleFunc("GET /rest/json/http2/students/small", h.ServeJSONSmall)
+	mux.HandleFunc("GET /rest/json/http2/students/medium", h.ServeJSONMedium)
 	mux.HandleFunc("GET /rest/json/http2/students/large", h.ServeJSONLarge)
 	mux.HandleFunc("GET /rest/protobuf/http1/students/small", h.ServeProtobufSmall)
+	mux.HandleFunc("GET /rest/protobuf/http1/students/medium", h.ServeProtobufMedium)
 	mux.HandleFunc("GET /rest/protobuf/http1/students/large", h.ServeProtobufLarge)
 	mux.HandleFunc("GET /rest/protobuf/http2/students/small", h.ServeProtobufSmall)
+	mux.HandleFunc("GET /rest/protobuf/http2/students/medium", h.ServeProtobufMedium)
 	mux.HandleFunc("GET /rest/protobuf/http2/students/large", h.ServeProtobufLarge)
+	mux.HandleFunc("POST /rest/json/http1/students", h.CreateStudentJSON)
+	mux.HandleFunc("POST /rest/json/http2/students", h.CreateStudentJSON)
+	mux.HandleFunc("POST /rest/protobuf/http1/students", h.CreateStudentProtobuf)
+	mux.HandleFunc("POST /rest/protobuf/http2/students", h.CreateStudentProtobuf)
 
-	return &http.Server{
-		Addr:    addr,
+	http1Server = &http.Server{
+		Addr:    http1Addr,
 		Handler: mux,
 	}
+	http1Server.Protocols = new(http.Protocols)
+	http1Server.Protocols.SetHTTP1(true)
+
+	http2Server = &http.Server{
+		Addr:    http2Addr,
+		Handler: mux,
+	}
+	http2Server.Protocols = new(http.Protocols)
+	http2Server.Protocols.SetUnencryptedHTTP2(true)
+
+	return http1Server, http2Server
 }

@@ -7,5 +7,4 @@ RUN CGO_ENABLED=0 go build -o app ./cmd/rest-server
 
 FROM alpine:3.24
 COPY --from=builder /app/app /app
-COPY certs/ /certs/
 ENTRYPOINT ["/app"]

@@ -7,12 +7,11 @@
 package model
 
 import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -335,8 +334,9 @@ func (x *Student) GetCumulativeGpa() float32 {
 	return 0
 }
 
-// StudentResponse always wraps student records in a list,
-// regardless of whether it contains 1 or 100 entries.
+// StudentResponse always wraps student records in a list.
+// - Applies uniformly to all three read sizes (small=1, medium=100, large=1000).
+// - Keeps the response shape identical across sizes, so only entry count varies.
 type StudentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []*Student             `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
@@ -381,6 +381,52 @@ func (x *StudentResponse) GetData() []*Student {
 	return nil
 }
 
+// CreateStudentResponse acknowledges a successful write.
+// - Deliberately minimal, POST measures deserialization cost of the request, not the size of the response.
+type CreateStudentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateStudentResponse) Reset() {
+	*x = CreateStudentResponse{}
+	mi := &file_proto_student_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateStudentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateStudentResponse) ProtoMessage() {}
+
+func (x *CreateStudentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_student_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateStudentResponse.ProtoReflect.Descriptor instead.
+func (*CreateStudentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_student_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreateStudentResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_proto_student_proto protoreflect.FileDescriptor
 
 const file_proto_student_proto_rawDesc = "" +
@@ -409,11 +455,14 @@ const file_proto_student_proto_rawDesc = "" +
 	"\x10academic_history\x18\x05 \x03(\v2\x17.student.SemesterRecordR\x0facademicHistory\x12%\n" +
 	"\x0ecumulative_gpa\x18\x06 \x01(\x02R\rcumulativeGpa\"7\n" +
 	"\x0fStudentResponse\x12$\n" +
-	"\x04data\x18\x01 \x03(\v2\x10.student.StudentR\x04data2\x81\x01\n" +
-	"\x0eStudentService\x126\n" +
-	"\n" +
-	"GetStudent\x12\x0e.student.Empty\x1a\x18.student.StudentResponse\x127\n" +
-	"\vGetStudents\x12\x0e.student.Empty\x1a\x18.student.StudentResponseBGZEgithub.com/afifksupriyadi/scaling-up-rest-vs-grpc/internal/data/modelb\x06proto3"
+	"\x04data\x18\x01 \x03(\v2\x10.student.StudentR\x04data\"1\n" +
+	"\x15CreateStudentResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\x8e\x02\n" +
+	"\x0eStudentService\x12<\n" +
+	"\x10GetStudentsSmall\x12\x0e.student.Empty\x1a\x18.student.StudentResponse\x12=\n" +
+	"\x11GetStudentsMedium\x12\x0e.student.Empty\x1a\x18.student.StudentResponse\x12<\n" +
+	"\x10GetStudentsLarge\x12\x0e.student.Empty\x1a\x18.student.StudentResponse\x12A\n" +
+	"\rCreateStudent\x12\x10.student.Student\x1a\x1e.student.CreateStudentResponseB-Z+scaling-up-rest-vs-grpc/internal/data/modelb\x06proto3"
 
 var (
 	file_proto_student_proto_rawDescOnce sync.Once
@@ -427,26 +476,31 @@ func file_proto_student_proto_rawDescGZIP() []byte {
 	return file_proto_student_proto_rawDescData
 }
 
-var file_proto_student_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_proto_student_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_proto_student_proto_goTypes = []any{
-	(*Empty)(nil),           // 0: student.Empty
-	(*Course)(nil),          // 1: student.Course
-	(*SemesterRecord)(nil),  // 2: student.SemesterRecord
-	(*AcademicData)(nil),    // 3: student.AcademicData
-	(*Student)(nil),         // 4: student.Student
-	(*StudentResponse)(nil), // 5: student.StudentResponse
+	(*Empty)(nil),                 // 0: student.Empty
+	(*Course)(nil),                // 1: student.Course
+	(*SemesterRecord)(nil),        // 2: student.SemesterRecord
+	(*AcademicData)(nil),          // 3: student.AcademicData
+	(*Student)(nil),               // 4: student.Student
+	(*StudentResponse)(nil),       // 5: student.StudentResponse
+	(*CreateStudentResponse)(nil), // 6: student.CreateStudentResponse
 }
 var file_proto_student_proto_depIdxs = []int32{
 	1, // 0: student.SemesterRecord.courses:type_name -> student.Course
 	3, // 1: student.Student.academic_data:type_name -> student.AcademicData
 	2, // 2: student.Student.academic_history:type_name -> student.SemesterRecord
 	4, // 3: student.StudentResponse.data:type_name -> student.Student
-	0, // 4: student.StudentService.GetStudent:input_type -> student.Empty
-	0, // 5: student.StudentService.GetStudents:input_type -> student.Empty
-	5, // 6: student.StudentService.GetStudent:output_type -> student.StudentResponse
-	5, // 7: student.StudentService.GetStudents:output_type -> student.StudentResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
+	0, // 4: student.StudentService.GetStudentsSmall:input_type -> student.Empty
+	0, // 5: student.StudentService.GetStudentsMedium:input_type -> student.Empty
+	0, // 6: student.StudentService.GetStudentsLarge:input_type -> student.Empty
+	4, // 7: student.StudentService.CreateStudent:input_type -> student.Student
+	5, // 8: student.StudentService.GetStudentsSmall:output_type -> student.StudentResponse
+	5, // 9: student.StudentService.GetStudentsMedium:output_type -> student.StudentResponse
+	5, // 10: student.StudentService.GetStudentsLarge:output_type -> student.StudentResponse
+	6, // 11: student.StudentService.CreateStudent:output_type -> student.CreateStudentResponse
+	8, // [8:12] is the sub-list for method output_type
+	4, // [4:8] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -463,7 +517,7 @@ func file_proto_student_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_student_proto_rawDesc), len(file_proto_student_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

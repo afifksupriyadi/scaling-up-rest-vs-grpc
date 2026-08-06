@@ -1,0 +1,22 @@
+{
+  "studentId": "1300000001",
+  "name": "Abby Ryan",
+  "gender": "male",
+  "academicData": {
+    "faculty": "School of Computing",
+    "studyProgram": "Informatics",
+    "currentSemester": 6
+  },
+  "academicHistory": [
+    {
+      "semester": 1,
+      "semesterGpa": 2.68,
+      "courses": [
+        {"code": "C101", "name": "Computer Networks", "credits": 3, "score": 86.87},
+        {"code": "C102", "name": "Database Systems", "credits": 3, "score": 93.83},
+        {"code": "C103", "name": "Linear Algebra", "credits": 4, "score": 83.36}
+      ]
+    }
+  ],
+  "cumulativeGpa": 3.08
+}

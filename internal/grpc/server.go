@@ -2,26 +2,20 @@ package grpc
 
 import (
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 
+	"scaling-up-rest-vs-grpc/internal/data/cache"
 	"scaling-up-rest-vs-grpc/internal/data/model"
-	"scaling-up-rest-vs-grpc/internal/data/store"
 	"scaling-up-rest-vs-grpc/internal/grpc/handler"
 	"scaling-up-rest-vs-grpc/internal/grpc/service"
 )
 
-// NewServer builds a *grpc.Server with TLS enabled and StudentService
-// registered on it.
-func NewServer(certPath, keyPath string, dataStore *store.Store) (*grpc.Server, error) {
-	creds, err := credentials.NewServerTLSFromFile(certPath, keyPath)
-	if err != nil {
-		return nil, err
-	}
-
-	svc := service.New(dataStore)
+// NewServer builds a *grpc.Server without TLS (plaintext), consistent
+// with grpc-go's own default behavior when grpc.Creds() is not called.
+func NewServer(cached *cache.Cache) *grpc.Server {
+	svc := service.New(cached)
 	h := handler.New(svc)
 
-	s := grpc.NewServer(grpc.Creds(creds))
+	s := grpc.NewServer()
 	model.RegisterStudentServiceServer(s, h)
-	return s, nil
+	return s
 }
