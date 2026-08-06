@@ -1,0 +1,31 @@
+{
+  "student_id": "9999999999",
+  "name": "Test Student",
+  "gender": "male",
+  "academic_data": {
+    "faculty": "School of Computing",
+    "study_program": "Informatics",
+    "current_semester": 1
+  },
+  "academic_history": [
+    {
+      "semester": 1,
+      "semester_gpa": 3.5,
+      "courses": [
+        {"code": "C101", "name": "Test Course A", "credits": 3, "score": 85},
+        {"code": "C102", "name": "Test Course B", "credits": 3, "score": 90},
+        {"code": "C103", "name": "Test Course C", "credits": 4, "score": 88}
+      ]
+    },
+    {
+      "semester": 2,
+      "semester_gpa": 3.6,
+      "courses": [
+        {"code": "C201", "name": "Test Course D", "credits": 3, "score": 92},
+        {"code": "C202", "name": "Test Course E", "credits": 3, "score": 87},
+        {"code": "C203", "name": "Test Course F", "credits": 4, "score": 89}
+      ]
+    }
+  ],
+  "cumulative_gpa": 3.55
+}
