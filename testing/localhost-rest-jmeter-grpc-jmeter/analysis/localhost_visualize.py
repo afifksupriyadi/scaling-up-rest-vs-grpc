@@ -34,6 +34,13 @@ SCRIPT_DIR = Path(__file__).parent
 RESULTS_CSV = SCRIPT_DIR.parent / "results" / "rest-grpc-report_localhost.csv"
 OUTPUT_DIR = SCRIPT_DIR
 
+# Shown under every chart's main title, identifying which scenario this
+# specific chart was generated from, since the three scenarios (localhost,
+# vps-jmeter-only, vps-jmeter-rest-ghz-grpc) share identical output
+# filenames and must be told apart when read in isolation (e.g. pasted
+# into the thesis document one scenario at a time).
+SCENARIO_LABEL = "Lingkungan Pengujian: Localhost (REST & gRPC via JMeter)"
+
 # ---------------------------------------------------------------------------
 # GET (15 Thread Groups: 5 combinations x 3 data sizes)
 # ---------------------------------------------------------------------------
@@ -85,14 +92,15 @@ POST_LABEL_MAP = {
 # Shared styling
 # ---------------------------------------------------------------------------
 
-# Muted, mutually distinct palette for combination lines/bars, softened
-# from the earlier more saturated version for a calmer, more editorial look.
+# Mutually distinct palette for combination lines/bars, chosen so no two
+# combinations read as visually similar even when placed side by side
+# (an earlier palette had three warm brownish tones that blurred together).
 COMBO_COLORS = {
     "REST HTTP/1.1 + JSON": "#A9764F",
-    "REST HTTP/1.1 + Protobuf": "#8D7EB0",
-    "REST HTTP/2 + JSON": "#C98A94",
-    "REST HTTP/2 + Protobuf": "#D6A971",
-    "gRPC": "#6FA593",
+    "REST HTTP/1.1 + Protobuf": "#7B6FA6",
+    "REST HTTP/2 + JSON": "#C74B5C",
+    "REST HTTP/2 + Protobuf": "#C9A227",
+    "gRPC": "#4F9D8C",
 }
 
 SIZE_LABELS = {"small": "1 Entri", "medium": "100 Entri", "large": "1000 Entri"}
@@ -184,7 +192,8 @@ def plot_throughput_bar(summary: pd.DataFrame):
     ax.set_xticks(list(x))
     ax.set_xticklabels(combos, rotation=20, ha="right")
     ax.set_ylabel("Throughput (request/detik)")
-    ax.set_title("Perbandingan Throughput per Kombinasi Protokol/Format (GET)")
+    fig.suptitle("GET - Throughput", fontsize=13, fontweight="bold", y=0.98)
+    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
 
     ax.legend(title="Ukuran Data", loc="upper left", bbox_to_anchor=(1.01, 1.0))
     ax.spines["top"].set_visible(False)
@@ -236,7 +245,8 @@ def plot_response_time_overlay(df: pd.DataFrame, size: str):
 
     ax.set_xlabel("Waktu Sejak Pengujian Dimulai (detik)")
     ax.set_ylabel("Response Time Rata-rata (ms)")
-    ax.set_title(f"Response Time Sepanjang Waktu Pengujian, GET ({SIZE_LABELS[size]})")
+    fig.suptitle(f"GET - Response Time ({SIZE_LABELS[size]})", fontsize=13, fontweight="bold", y=0.98)
+    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.legend(title="Kombinasi")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
@@ -295,7 +305,8 @@ def plot_post_throughput_bar(summary: pd.DataFrame):
     ax.set_xticks(list(x))
     ax.set_xticklabels(combos, rotation=20, ha="right")
     ax.set_ylabel("Throughput (request/detik)")
-    ax.set_title("Perbandingan Throughput per Kombinasi Protokol/Format (POST)")
+    fig.suptitle("POST - Throughput", fontsize=13, fontweight="bold", y=0.98)
+    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.set_ylim(top=max(vals) * 1.15)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
@@ -341,7 +352,8 @@ def plot_post_response_time_overlay(df: pd.DataFrame):
 
     ax.set_xlabel("Waktu Sejak Pengujian Dimulai (detik)")
     ax.set_ylabel("Response Time Rata-rata (ms)")
-    ax.set_title("Response Time Sepanjang Waktu Pengujian (POST)")
+    fig.suptitle("POST - Response Time", fontsize=13, fontweight="bold", y=0.98)
+    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.legend(title="Kombinasi")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)

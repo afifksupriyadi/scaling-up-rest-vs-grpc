@@ -1,0 +1,6 @@
+Kombinasi,Mean (ms),P99 (ms),Min (ms),Max (ms)
+REST HTTP/1.1 + JSON,1.7,3.0,1,21
+REST HTTP/1.1 + Protobuf,1.9,3.0,1,6
+REST HTTP/2 + JSON,0.6,3.0,0,15
+REST HTTP/2 + Protobuf,0.7,3.0,0,8
+gRPC,0.8,3.0,0,9
