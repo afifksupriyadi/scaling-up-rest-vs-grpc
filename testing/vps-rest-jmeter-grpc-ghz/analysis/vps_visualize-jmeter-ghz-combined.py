@@ -166,7 +166,7 @@ def load_ghz_details(path: Path) -> pd.DataFrame:
 def compute_ghz_summary(df: pd.DataFrame) -> dict:
     """Compute mean/p99/min/max/throughput/error_rate for a single ghz report's DataFrame."""
     elapsed = df["elapsed"]
-    duration_s = max(df["timeStamp"].max() - df["timeStamp"].min(), 1) / 1000
+    duration_s = max((df["timeStamp"] + elapsed.clip(lower=0)).max() - df["timeStamp"].min(), 1) / 1000
     return {
         "mean": elapsed.mean(), "p99": elapsed.quantile(0.99),
         "min": elapsed.min(), "max": elapsed.max(),
@@ -242,13 +242,15 @@ def plot_combined_response_time_overlay(rest_df: pd.DataFrame, ghz_dfs: dict, si
         if subset.empty:
             continue
         start = subset["timeStamp"].min()
-        subset["bucket_s"] = (subset["timeStamp"] - start) // 1000
+        # subset["bucket_s"] = (subset["timeStamp"] - start) // 1000
+        subset["bucket_s"] = (subset["timeStamp"] - start) // 500 / 2
         bucketed = subset.groupby("bucket_s")["elapsed"].mean()
         ax.plot(bucketed.index, bucketed.values, label=combo, color=COMBO_COLORS[combo], linewidth=1.5, marker="o", markersize=4)
 
     ghz_df = ghz_dfs[size].copy()
     start = ghz_df["timeStamp"].min()
-    ghz_df["bucket_s"] = (ghz_df["timeStamp"] - start) // 1000
+    # ghz_df["bucket_s"] = (ghz_df["timeStamp"] - start) // 1000
+    ghz_df["bucket_s"] = (ghz_df["timeStamp"] - start) // 500 / 2
     bucketed = ghz_df.groupby("bucket_s")["elapsed"].mean()
     ax.plot(bucketed.index, bucketed.values, label="gRPC", color=COMBO_COLORS["gRPC"], linewidth=1.5, marker="o", markersize=4)
 
@@ -324,13 +326,15 @@ def plot_combined_post_response_time_overlay(rest_df: pd.DataFrame, ghz_post_df:
         if subset.empty:
             continue
         start = subset["timeStamp"].min()
-        subset["bucket_s"] = (subset["timeStamp"] - start) // 1000
+        # subset["bucket_s"] = (subset["timeStamp"] - start) // 1000
+        subset["bucket_s"] = (subset["timeStamp"] - start) // 500 / 2
         bucketed = subset.groupby("bucket_s")["elapsed"].mean()
         ax.plot(bucketed.index, bucketed.values, label=combo, color=COMBO_COLORS[combo], linewidth=1.5, marker="o", markersize=4)
 
     ghz_post_df = ghz_post_df.copy()
     start = ghz_post_df["timeStamp"].min()
-    ghz_post_df["bucket_s"] = (ghz_post_df["timeStamp"] - start) // 1000
+    # ghz_post_df["bucket_s"] = (ghz_post_df["timeStamp"] - start) // 1000
+    ghz_post_df["bucket_s"] = (ghz_post_df["timeStamp"] - start) // 500 / 2
     bucketed = ghz_post_df.groupby("bucket_s")["elapsed"].mean()
     ax.plot(bucketed.index, bucketed.values, label="gRPC", color=COMBO_COLORS["gRPC"], linewidth=1.5, marker="o", markersize=4)
 

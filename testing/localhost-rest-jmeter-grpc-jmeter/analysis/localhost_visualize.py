@@ -237,7 +237,7 @@ def plot_response_time_overlay(df: pd.DataFrame, size: str):
             continue
 
         start = subset["timeStamp"].min()
-        subset["bucket_s"] = (subset["timeStamp"] - start) // 1000
+        subset["bucket_s"] = (subset["timeStamp"] - start) // 500 / 2
         bucketed = subset.groupby("bucket_s")["elapsed"].mean()
 
         ax.plot(bucketed.index, bucketed.values, label=combo, color=COMBO_COLORS[combo],
@@ -344,7 +344,7 @@ def plot_post_response_time_overlay(df: pd.DataFrame):
             continue
 
         start = subset["timeStamp"].min()
-        subset["bucket_s"] = (subset["timeStamp"] - start) // 1000
+        subset["bucket_s"] = (subset["timeStamp"] - start) // 500 / 2
         bucketed = subset.groupby("bucket_s")["elapsed"].mean()
 
         ax.plot(bucketed.index, bucketed.values, label=combo, color=COMBO_COLORS[combo],
