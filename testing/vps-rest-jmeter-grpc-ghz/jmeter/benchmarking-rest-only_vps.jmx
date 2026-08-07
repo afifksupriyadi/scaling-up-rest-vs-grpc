@@ -6,6 +6,7 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
     </TestPlan>
     <hashTree>
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
@@ -42,7 +43,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">/home/afiffks/testing/_scratch-aggregate.csv</stringProp>
+        <stringProp name="filename">/home/afiffks/scaling-up-rest-vs-grpc/testing/vps-rest-jmeter-grpc-ghz/results/_scratch-aggregate_vps-rest-only.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time">
@@ -79,7 +80,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">/home/afiffks/testing/_scratch-rtot.csv</stringProp>
+        <stringProp name="filename">/home/afiffks/scaling-up-rest-vs-grpc/testing/vps-rest-jmeter-grpc-ghz/results/_scratch-rtot_vps-rest-only.csv</stringProp>
         <longProp name="interval_grouping">500</longProp>
         <boolProp name="graph_aggregated">false</boolProp>
         <stringProp name="include_sample_labels"></stringProp>
@@ -90,7 +91,7 @@
         <boolProp name="exclude_checkbox_state">false</boolProp>
       </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-01-rest-http1-json-small">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-01-rest-http1-json-small" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -116,7 +117,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-02-rest-http1-json-medium">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-02-rest-http1-json-medium" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -142,7 +143,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-03-rest-http1-json-large">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-03-rest-http1-json-large" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -168,7 +169,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-04-rest-http1-protobuf-small">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-04-rest-http1-protobuf-small" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -194,7 +195,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-05-rest-http1-protobuf-medium">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-05-rest-http1-protobuf-medium" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -220,7 +221,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-06-rest-http1-protobuf-large">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-06-rest-http1-protobuf-large" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -246,7 +247,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-07-rest-http2-json-small">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-07-rest-http2-json-small" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -299,7 +300,7 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-08-rest-http2-json-medium">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-08-rest-http2-json-medium" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -352,7 +353,7 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-09-rest-http2-json-large">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-09-rest-http2-json-large" enabled="true">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -416,7 +417,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-small" enabled="true">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-small">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -522,7 +523,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-large" enabled="true">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-large">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -575,7 +576,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-post" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-post">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -637,7 +638,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-post" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-post">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -647,9 +648,9 @@
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
             <collectionProp name="HTTPFileArgs.files">
-              <elementProp name="/home/afiffks/testing/student.bin" elementType="HTTPFileArg">
+              <elementProp name="/home/afiffks/scaling-up-rest-vs-grpc/testing/student.bin" elementType="HTTPFileArg">
                 <stringProp name="File.mimetype">application/x-protobuf</stringProp>
-                <stringProp name="File.path">/home/afiffks/testing/student.bin</stringProp>
+                <stringProp name="File.path">/home/afiffks/scaling-up-rest-vs-grpc/testing/student.bin</stringProp>
                 <stringProp name="File.paramname"></stringProp>
               </elementProp>
             </collectionProp>
@@ -672,7 +673,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-post" enabled="true">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-post">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -761,7 +762,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-post" enabled="true">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-post">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -781,9 +782,9 @@
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
             <collectionProp name="HTTPFileArgs.files">
-              <elementProp name="/home/afiffks/testing/student.bin" elementType="HTTPFileArg">
+              <elementProp name="/home/afiffks/scaling-up-rest-vs-grpc/testing/student.bin" elementType="HTTPFileArg">
                 <stringProp name="File.mimetype">application/x-protobuf</stringProp>
-                <stringProp name="File.path">/home/afiffks/testing/student.bin</stringProp>
+                <stringProp name="File.path">/home/afiffks/scaling-up-rest-vs-grpc/testing/student.bin</stringProp>
                 <stringProp name="File.paramname"></stringProp>
               </elementProp>
             </collectionProp>
