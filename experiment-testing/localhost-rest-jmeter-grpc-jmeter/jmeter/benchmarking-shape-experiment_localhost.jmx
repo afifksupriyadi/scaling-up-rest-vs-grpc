@@ -42,7 +42,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\testing\localhost-rest-jmeter-grpc-jmeter\results\rest-grpc-report_localhost.csv</stringProp>
+        <stringProp name="filename">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\experiment-testing\localhost\results\_scratch-aggregate_localhost.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time">
@@ -79,7 +79,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\testing\localhost-rest-jmeter-grpc-jmeter\results\_scratch-rtot_localhost.csv</stringProp>
+        <stringProp name="filename">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\experiment-testing\localhost\results\_scratch-rtot_localhost.csv</stringProp>
         <longProp name="interval_grouping">500</longProp>
         <boolProp name="graph_aggregated">false</boolProp>
         <stringProp name="include_sample_labels"></stringProp>
@@ -539,7 +539,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">1</intProp>
           <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
           <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
           <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
@@ -1036,7 +1036,7 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG-15-grpc-large" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 27 - REST HTTP/2+Protobuf (depth1-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -1047,8 +1047,732 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-large" enabled="true">
-          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\testing</stringProp>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth1-wide-compact">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http2/shape/depth1-wide/compact</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 28 - REST HTTP/2+Protobuf (depth1-wide-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth1-wide-large">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http2/shape/depth1-wide/large</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 29 - REST HTTP/2+Protobuf (depth3-narrow-compact)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth3-narrow-compact">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http2/shape/depth3-narrow/compact</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 30 - REST HTTP/2+Protobuf (depth3-narrow-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth3-narrow-large">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http2/shape/depth3-narrow/large</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 31 - REST HTTP/2+Protobuf (depth4-wide-compact)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth4-wide-compact">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http2/shape/depth4-wide/compact</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 32 - REST HTTP/2+Protobuf (depth4-wide-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth4-wide-large">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http2/shape/depth4-wide/large</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 33 - gRPC (depth0-compact)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth0-compact">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth0Compact</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 34 - gRPC (depth0-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth0-large">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth0Large</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 35 - gRPC (depth1-wide-compact)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth1-wide-compact">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth1WideCompact</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 36 - gRPC (depth1-wide-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth1-wide-large">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth1WideLarge</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 37 - gRPC (depth3-narrow-compact)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth3-narrow-compact">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth3NarrowCompact</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 38 - gRPC (depth3-narrow-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth3-narrow-large">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth3NarrowLarge</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 39 - gRPC (depth4-wide-compact)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth4-wide-compact">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth4WideCompact</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 40 - gRPC (depth4-wide-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth4-wide-large">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
+          <stringProp name="GRPCSampler.libFolder"></stringProp>
+          <stringProp name="GRPCSampler.metadata"></stringProp>
+          <stringProp name="GRPCSampler.host">localhost</stringProp>
+          <stringProp name="GRPCSampler.port">50051</stringProp>
+          <stringProp name="GRPCSampler.fullMethod">shapeexperiment.ShapeExperimentService/GetShapeDepth4WideLarge</stringProp>
+          <stringProp name="GRPCSampler.deadline">10000</stringProp>
+          <boolProp name="GRPCSampler.tls">false</boolProp>
+          <boolProp name="GRPCSampler.tlsDisableVerification">false</boolProp>
+          <stringProp name="GRPCSampler.clientCertFile"></stringProp>
+          <stringProp name="GRPCSampler.clientKeyFile"></stringProp>
+          <stringProp name="GRPCSampler.caCertFile"></stringProp>
+          <stringProp name="GRPCSampler.channelAwaitTermination">1000</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMessageSize">4194304</stringProp>
+          <stringProp name="GRPCSampler.maxInboundMetadataSize">8192</stringProp>
+          <stringProp name="GRPCSampler.requestJson">{}</stringProp>
+        </vn.zalopay.benchmark.GRPCSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 41 - REST HTTP/1.1+JSON (students-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-students-large">
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/json/http1/students/large</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 42 - REST HTTP/1.1+Protobuf (students-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-students-large">
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http1/students/large</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 43 - REST HTTP/2+JSON (students-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-students-large">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/json/http2/students/large</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 44 - REST HTTP/2+Protobuf (students-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-students-large">
+          <boolProp name="HTTPSampler.image_parser">false</boolProp>
+          <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.proxyHost"></stringProp>
+          <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+          <stringProp name="HTTPSampler.proxyPort"></stringProp>
+          <stringProp name="HTTPSampler.proxyUser"></stringProp>
+          <stringProp name="HTTPSampler.proxyPass"></stringProp>
+          <stringProp name="version">3.0.1</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/rest/protobuf/http2/students/large</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+          <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+          <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+          <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+          <boolProp name="HTTP2Sampler.enableHttp1">false</boolProp>
+          <boolProp name="HTTP2Sampler.alpnEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.fallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">false</boolProp>
+          <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+          <boolProp name="HTTP2Sampler.http2PriorKnowledge">true</boolProp>
+          <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+          <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+          <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+        </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 45 - gRPC (students-large)">
+        <intProp name="ThreadGroup.num_threads">100</intProp>
+        <intProp name="ThreadGroup.ramp_time">10</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">100</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-students-large">
+          <stringProp name="GRPCSampler.protoFolder">D:\IF-46-07 - Semester 8\Tugas Akhir\04. Code\scaling-up-rest-vs-grpc\proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
           <stringProp name="GRPCSampler.host">localhost</stringProp>
