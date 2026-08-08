@@ -216,7 +216,7 @@ def plot_throughput_bar(summary: pd.DataFrame, tier: str):
 
     fig, ax = plt.subplots(figsize=(13, 6))
     for shape in shapes:
-        vals = [summary[(summary.combo == c) & (summary.shape == shape) & (summary.tier == tier)]["throughput"].sum()
+        vals = [summary[(summary.combo == c) & (summary["shape"] == shape) & (summary.tier == tier)]["throughput"].sum()
                 for c in combos]
         bars = ax.bar([xi + offsets[shape] for xi in x], vals, width=width,
                       label=SHAPE_LABELS[shape], color=SHAPE_BAR_COLORS[shape], alpha=0.88,
@@ -245,8 +245,8 @@ def _gradation_ratio(summary: pd.DataFrame, metric: str, tier: str) -> tuple[lis
     shapes = SHAPE_ORDER_COMPACT if tier == "compact" else SHAPE_ORDER_LARGE
     xs, ys = [], []
     for shape in shapes:
-        grpc_row = summary[(summary.combo == "gRPC") & (summary.shape == shape) & (summary.tier == tier)]
-        rest_row = summary[(summary.combo == "REST HTTP/2 + Protobuf") & (summary.shape == shape) & (summary.tier == tier)]
+        grpc_row = summary[(summary.combo == "gRPC") & (summary["shape"] == shape) & (summary.tier == tier)]
+        rest_row = summary[(summary.combo == "REST HTTP/2 + Protobuf") & (summary["shape"] == shape) & (summary.tier == tier)]
         if grpc_row.empty or rest_row.empty:
             continue
         ratio = grpc_row[metric].iloc[0] / rest_row[metric].iloc[0]
