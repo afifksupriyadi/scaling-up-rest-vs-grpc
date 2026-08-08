@@ -1,0 +1,363 @@
+syntax = "proto3";
+
+package shapeexperiment;
+
+option go_package = "scaling-up-rest-vs-grpc/internal/data/model";
+
+// Empty is a placeholder request message for all RPC methods in this
+// experiment, since none of them require input parameters.
+message Empty {}
+
+// ============================================================
+// Shared wrapper entities (Company, Department, Team)
+// ============================================================
+
+// Company represents a top-level identity envelope shared across the
+// Depth1, Depth3, and Depth4 structural variants. Its own fields are
+// intentionally kept minimal (identity-level only); the bulk of each
+// variant's payload weight lives in the nested arrays defined per depth.
+message Company {
+  string company_id = 1;
+  string company_name = 2;
+  string industry = 3;
+  int32 founded_year = 4;
+  string headquarters_city = 5;
+  int32 employee_count_total = 6;
+  int64 annual_revenue = 7;
+  string ceo_name = 8;
+}
+
+// Department represents an identity-only grouping node used by the
+// Depth3-Narrow and Depth4-Wide variants.
+message Department {
+  string department_id = 1;
+  string department_name = 2;
+  int32 headcount = 3;
+  int64 budget_annual = 4;
+  string location = 5;
+}
+
+// Team represents an identity-only grouping node nested inside
+// Department, used by the Depth3-Narrow and Depth4-Wide variants.
+message Team {
+  string team_id = 1;
+  string team_name = 2;
+  string team_lead = 3;
+  string focus_area = 4;
+  string formed_date = 5;
+}
+
+// ============================================================
+// Depth 0 — Flat (no nesting at all)
+// ============================================================
+
+// EmployeeFlat is a fully flat record with 100 top-level scalar fields
+// and zero nested messages or arrays. It represents the shallowest
+// point on the structural-depth spectrum under investigation.
+message EmployeeFlat {
+  // -- identitas (10) --
+  string employee_id = 1;
+  string full_name = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string gender = 5;
+  string date_of_birth = 6;
+  string nationality = 7;
+  string marital_status = 8;
+  string national_id = 9;
+  string photo_url = 10;
+
+  // -- kontak (10) --
+  string email = 11;
+  string phone_primary = 12;
+  string phone_secondary = 13;
+  string address_street = 14;
+  string address_city = 15;
+  string address_province = 16;
+  string address_postal_code = 17;
+  string address_country = 18;
+  string emergency_contact_name = 19;
+  string emergency_contact_phone = 20;
+
+  // -- kepegawaian (10) --
+  string job_title = 21;
+  string department_name = 22;
+  string team_name = 23;
+  string manager_name = 24;
+  string employment_status = 25;
+  string employment_type = 26;
+  string hire_date = 27;
+  string work_location = 28;
+  string work_mode = 29;
+  string badge_number = 30;
+
+  // -- kompensasi (10) --
+  int64 base_salary = 31;
+  string currency = 32;
+  string pay_frequency = 33;
+  double bonus_target_pct = 34;
+  int64 bonus_last_paid = 35;
+  int64 allowance_transport = 36;
+  int64 allowance_meal = 37;
+  string tax_id = 38;
+  string bank_account_last4 = 39;
+  string salary_review_date = 40;
+
+  // -- performa (10) --
+  double performance_score = 41;
+  string performance_rating = 42;
+  string last_review_date = 43;
+  string next_review_date = 44;
+  int32 goals_completed = 45;
+  int32 goals_total = 46;
+  double peer_review_score = 47;
+  bool promotion_eligible = 48;
+  int32 disciplinary_actions_count = 49;
+  int32 commendations_count = 50;
+
+  // -- kehadiran (10) --
+  double attendance_rate = 51;
+  int32 leave_balance_days = 52;
+  int32 sick_days_used = 53;
+  int32 vacation_days_used = 54;
+  int32 unpaid_leave_days = 55;
+  int32 late_arrivals_count = 56;
+  int32 remote_days_per_week = 57;
+  double overtime_hours_ytd = 58;
+  string shift_pattern = 59;
+  string timezone = 60;
+
+  // -- skill/edukasi (10) --
+  string primary_skill = 61;
+  string secondary_skill = 62;
+  int32 certification_count = 63;
+  double training_hours_ytd = 64;
+  string language_primary = 65;
+  string education_level = 66;
+  string university_name = 67;
+  int32 graduation_year = 68;
+  string degree_field = 69;
+  double gpa = 70;
+
+  // -- proyek (10) --
+  int32 project_count_active = 71;
+  int32 project_count_completed = 72;
+  string current_project_name = 73;
+  string current_project_role = 74;
+  double utilization_rate = 75;
+  double billable_hours_ytd = 76;
+  bool client_facing = 77;
+  bool travel_required = 78;
+  bool on_call_rotation = 79;
+  string system_access_level = 80;
+
+  // -- admin hr (10) --
+  string probation_status = 81;
+  string visa_status = 82;
+  string visa_expiry_date = 83;
+  string background_check_status = 84;
+  bool nda_signed = 85;
+  string insurance_plan = 86;
+  int32 dependents_count = 87;
+  bool retirement_plan_enrolled = 88;
+  double retirement_contribution_pct = 89;
+  string referral_source = 90;
+
+  // -- lain-lain (10) --
+  double years_of_service = 91;
+  string previous_company = 92;
+  string previous_job_title = 93;
+  string mentor_name = 94;
+  int32 mentee_count = 95;
+  int32 committee_memberships = 96;
+  double volunteer_hours = 97;
+  bool wellness_program_enrolled = 98;
+  double commute_distance_km = 99;
+  double engagement_score = 100;
+}
+
+message ShapeDepth0Response {
+  repeated EmployeeFlat employees = 1;
+}
+
+// ============================================================
+// Depth 1, Wide — Company -> Employee[] (scalar, no further nesting)
+// ============================================================
+
+// EmployeeThin is a minimal-field record used inside CompanyDepth1Wide.
+// Its narrow field count is intentional: the structural weight of this
+// variant comes from a large element count, not from per-element depth.
+message EmployeeThin {
+  string employee_id = 1;
+  string full_name = 2;
+  string job_title = 3;
+  string hire_date = 4;
+  double performance_score = 5;
+}
+
+message CompanyDepth1Wide {
+  string company_id = 1;
+  string company_name = 2;
+  string industry = 3;
+  int32 founded_year = 4;
+  string headquarters_city = 5;
+  int32 employee_count_total = 6;
+  int64 annual_revenue = 7;
+  string ceo_name = 8;
+  repeated EmployeeThin employees = 9;
+}
+
+message ShapeDepth1WideResponse {
+  repeated CompanyDepth1Wide companies = 1;
+}
+
+// ============================================================
+// Depth 3, Narrow — Company -> Department[] -> Team[] -> Employee[]
+// ============================================================
+
+// EmployeeRich carries the bulk of this variant's per-element weight
+// (26 fields), paired deliberately with a small element count per Team.
+message EmployeeRich {
+  string employee_id = 1;
+  string full_name = 2;
+  string job_title = 3;
+  string email = 4;
+  string phone = 5;
+  string hire_date = 6;
+  string employment_status = 7;
+  string currency = 8;
+  string work_location = 9;
+  string manager_name = 10;
+  string last_review_date = 11;
+  string birth_date = 12;
+  string gender = 13;
+  string nationality = 14;
+  string emergency_contact_name = 15;
+  string emergency_contact_phone = 16;
+  string badge_number = 17;
+  string contract_end_date = 18;
+  int64 base_salary = 19;
+  double performance_score = 20;
+  double attendance_rate = 21;
+  double bonus_target_pct = 22;
+  double overtime_rate = 23;
+  double training_hours_ytd = 24;
+  int32 leave_balance_days = 25;
+  int32 project_count_active = 26;
+}
+
+message TeamNarrow {
+  string team_id = 1;
+  string team_name = 2;
+  string team_lead = 3;
+  string focus_area = 4;
+  string formed_date = 5;
+  repeated EmployeeRich employees = 6;
+}
+
+message DepartmentNarrow {
+  string department_id = 1;
+  string department_name = 2;
+  int32 headcount = 3;
+  int64 budget_annual = 4;
+  string location = 5;
+  repeated TeamNarrow teams = 6;
+}
+
+message CompanyDepth3Narrow {
+  string company_id = 1;
+  string company_name = 2;
+  string industry = 3;
+  int32 founded_year = 4;
+  string headquarters_city = 5;
+  int32 employee_count_total = 6;
+  int64 annual_revenue = 7;
+  string ceo_name = 8;
+  repeated DepartmentNarrow departments = 9;
+}
+
+message ShapeDepth3NarrowResponse {
+  repeated CompanyDepth3Narrow companies = 1;
+}
+
+// ============================================================
+// Depth 4, Wide — Company -> Department[] -> Team[] -> Employee[] -> Certification[]
+// ============================================================
+
+// EmployeeSlim is identity-only at this depth; the structural weight of
+// this variant is pushed one level further, into Certification.
+message EmployeeSlim {
+  string employee_id = 1;
+  string full_name = 2;
+  string job_title = 3;
+  string hire_date = 4;
+  string team_role = 5;
+  repeated Certification certifications = 6;
+}
+
+// Certification is the innermost, widest array element in this variant.
+message Certification {
+  string certification_id = 1;
+  string certification_name = 2;
+  string issuing_body = 3;
+  string issued_date = 4;
+  double score = 5;
+}
+
+message TeamWide {
+  string team_id = 1;
+  string team_name = 2;
+  string team_lead = 3;
+  string focus_area = 4;
+  string formed_date = 5;
+  repeated EmployeeSlim employees = 6;
+}
+
+message DepartmentWide {
+  string department_id = 1;
+  string department_name = 2;
+  int32 headcount = 3;
+  int64 budget_annual = 4;
+  string location = 5;
+  repeated TeamWide teams = 6;
+}
+
+message CompanyDepth4Wide {
+  string company_id = 1;
+  string company_name = 2;
+  string industry = 3;
+  int32 founded_year = 4;
+  string headquarters_city = 5;
+  int32 employee_count_total = 6;
+  int64 annual_revenue = 7;
+  string ceo_name = 8;
+  repeated DepartmentWide departments = 9;
+}
+
+message ShapeDepth4WideResponse {
+  repeated CompanyDepth4Wide companies = 1;
+}
+
+// ============================================================
+// Service definition
+// ============================================================
+
+// ShapeExperimentService exposes GET-only unary RPCs for the structural-
+// depth investigation. Each structural variant (depth0, depth1-wide,
+// depth3-narrow, depth4-wide) has two size tiers (compact, large),
+// calibrated via a separate offline tool so that the Protobuf-serialized
+// response size approximates ~100 KB (compact) and ~500 KB (large)
+// respectively. POST is intentionally out of scope for this experiment.
+service ShapeExperimentService {
+  rpc GetShapeDepth0Compact(Empty) returns (ShapeDepth0Response);
+  rpc GetShapeDepth0Large(Empty) returns (ShapeDepth0Response);
+
+  rpc GetShapeDepth1WideCompact(Empty) returns (ShapeDepth1WideResponse);
+  rpc GetShapeDepth1WideLarge(Empty) returns (ShapeDepth1WideResponse);
+
+  rpc GetShapeDepth3NarrowCompact(Empty) returns (ShapeDepth3NarrowResponse);
+  rpc GetShapeDepth3NarrowLarge(Empty) returns (ShapeDepth3NarrowResponse);
+
+  rpc GetShapeDepth4WideCompact(Empty) returns (ShapeDepth4WideResponse);
+  rpc GetShapeDepth4WideLarge(Empty) returns (ShapeDepth4WideResponse);
+}
