@@ -44,12 +44,18 @@ func main() {
 		os.Exit(1)
 	}
 
+	shapeCached := cache.NewShape()
+	if err := shapeCached.LoadFromRedis(context.Background(), client); err != nil {
+		slog.Error("failed to load shape experiment dataset from redis", "error", err)
+		os.Exit(1)
+	}
+
 	go func() {
 		slog.Info("pprof endpoint started", "addr", pprofAddr)
 		http.ListenAndServe(pprofAddr, nil)
 	}()
 
-	server := grpc.NewServer(cached)
+	server := grpc.NewServer(cached, shapeCached)
 
 	lis, err := net.Listen("tcp", listenAddr)
 	if err != nil {

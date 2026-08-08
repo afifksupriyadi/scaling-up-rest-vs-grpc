@@ -38,7 +38,13 @@ func main() {
 		slog.Warn("dataset not seeded yet")
 	}
 
-	http1Server, http2Server := rest.NewServers(http1Addr, http2Addr, cached)
+	shapeCached := cache.NewShape()
+	if err := shapeCached.LoadFromRedis(context.Background(), client); err != nil {
+		slog.Error("failed to load shape experiment dataset from redis", "error", err)
+		os.Exit(1)
+	}
+
+	http1Server, http2Server := rest.NewServers(http1Addr, http2Addr, cached, shapeCached)
 
 	errCh := make(chan error, 2)
 

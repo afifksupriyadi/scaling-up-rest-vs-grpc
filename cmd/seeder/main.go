@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 
 	"scaling-up-rest-vs-grpc/internal/data/constant"
 	"scaling-up-rest-vs-grpc/internal/lib/redis"
@@ -39,6 +40,11 @@ func main() {
 		os.Exit(1)
 	}
 
+	if err := seedShapeExperiment(client); err != nil {
+		slog.Error("failed to seed shape experiment datasets", "error", err)
+		os.Exit(1)
+	}
+
 	slog.Info("seeding completed", "redis_addr", addr)
 }
 
@@ -49,6 +55,47 @@ func seedDataset(client *redis.Client, key string, n int) error {
 		return err
 	}
 	b, err := protojson.Marshal(resp)
+	if err != nil {
+		return err
+	}
+	return client.Set(context.Background(), key, string(b))
+}
+
+// seedShapeExperiment seeds all eight datasets (four structural-depth
+// variants x two calibrated size tiers) used by the shape-experiment
+// investigation. Document counts per key were derived from cmd/calibrate-shape,
+// which measures actual Protobuf-marshaled size rather than estimating it.
+func seedShapeExperiment(client *redis.Client) error {
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth0Compact, seeder.ToShapeDepth0Response(87)); err != nil {
+		return err
+	}
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth0Large, seeder.ToShapeDepth0Response(437)); err != nil {
+		return err
+	}
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth1WideCompact, seeder.ToShapeDepth1WideResponse(33)); err != nil {
+		return err
+	}
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth1WideLarge, seeder.ToShapeDepth1WideResponse(163)); err != nil {
+		return err
+	}
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth3NarrowCompact, seeder.ToShapeDepth3NarrowResponse(11)); err != nil {
+		return err
+	}
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth3NarrowLarge, seeder.ToShapeDepth3NarrowResponse(57)); err != nil {
+		return err
+	}
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth4WideCompact, seeder.ToShapeDepth4WideResponse(6)); err != nil {
+		return err
+	}
+	if err := seedShapeDataset(client, constant.RedisKeyShapeDepth4WideLarge, seeder.ToShapeDepth4WideResponse(28)); err != nil {
+		return err
+	}
+	return nil
+}
+
+// seedShapeDataset encodes a single shape-experiment message as protojson and writes it to Redis under key.
+func seedShapeDataset(client *redis.Client, key string, msg proto.Message) error {
+	b, err := protojson.Marshal(msg)
 	if err != nil {
 		return err
 	}

@@ -4,9 +4,9 @@ package shapeexperiment;
 
 option go_package = "scaling-up-rest-vs-grpc/internal/data/model";
 
-// Empty is a placeholder request message for all RPC methods in this
+// ShapeEmpty is a placeholder request message for all RPC methods in this
 // experiment, since none of them require input parameters.
-message Empty {}
+message ShapeEmpty {}
 
 // ============================================================
 // Shared wrapper entities (Company, Department, Team)
@@ -349,15 +349,15 @@ message ShapeDepth4WideResponse {
 // response size approximates ~100 KB (compact) and ~500 KB (large)
 // respectively. POST is intentionally out of scope for this experiment.
 service ShapeExperimentService {
-  rpc GetShapeDepth0Compact(Empty) returns (ShapeDepth0Response);
-  rpc GetShapeDepth0Large(Empty) returns (ShapeDepth0Response);
+  rpc GetShapeDepth0Compact(ShapeEmpty) returns (ShapeDepth0Response);
+  rpc GetShapeDepth0Large(ShapeEmpty) returns (ShapeDepth0Response);
 
-  rpc GetShapeDepth1WideCompact(Empty) returns (ShapeDepth1WideResponse);
-  rpc GetShapeDepth1WideLarge(Empty) returns (ShapeDepth1WideResponse);
+  rpc GetShapeDepth1WideCompact(ShapeEmpty) returns (ShapeDepth1WideResponse);
+  rpc GetShapeDepth1WideLarge(ShapeEmpty) returns (ShapeDepth1WideResponse);
 
-  rpc GetShapeDepth3NarrowCompact(Empty) returns (ShapeDepth3NarrowResponse);
-  rpc GetShapeDepth3NarrowLarge(Empty) returns (ShapeDepth3NarrowResponse);
+  rpc GetShapeDepth3NarrowCompact(ShapeEmpty) returns (ShapeDepth3NarrowResponse);
+  rpc GetShapeDepth3NarrowLarge(ShapeEmpty) returns (ShapeDepth3NarrowResponse);
 
-  rpc GetShapeDepth4WideCompact(Empty) returns (ShapeDepth4WideResponse);
-  rpc GetShapeDepth4WideLarge(Empty) returns (ShapeDepth4WideResponse);
+  rpc GetShapeDepth4WideCompact(ShapeEmpty) returns (ShapeDepth4WideResponse);
+  rpc GetShapeDepth4WideLarge(ShapeEmpty) returns (ShapeDepth4WideResponse);
 }
