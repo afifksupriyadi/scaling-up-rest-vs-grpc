@@ -41,19 +41,22 @@ def load_fortio_point(c: int) -> dict:
 
 def load_k6_point(vu: int) -> dict:
     """Load one k6 CSV result (gRPC) and compute mean response time (ms) and throughput (req/s).
-    - Throughput is derived from raw whole-second timestamps, which can be imprecise at low VU
-      counts where the whole test finishes in well under a second (notably vu=1) - treat that
-      specific point with some caution."""
+    - Throughput is derived as vu / mean_latency_seconds, NOT from raw CSV timestamps.
+      k6's CSV timestamp column only has whole-second precision, which is far too coarse for
+      these short-duration runs (many complete in well under a few seconds) - using it directly
+      previously produced a flat, wrong ~25 req/s reading across most concurrency levels.
+    - This formula assumes the executor is per-vu-iterations (closed model: each VU runs its
+      iterations strictly sequentially, no artificial pacing), which matches how these tests
+      were actually configured - so one VU's own throughput is 1/mean_latency_seconds, and the
+      combined throughput across vu identical parallel VUs is vu times that."""
     path = K6_DIR / f"grpc-depth0-large-vu{vu}.csv"
     df = pd.read_csv(path, low_memory=False)
     dur = df[df["metric_name"] == "grpc_req_duration"]["metric_value"]
-    iters = df[df["metric_name"] == "iterations"]
-    total_iterations = iters["metric_value"].sum()
-    duration_s = max(iters["timestamp"].max() - iters["timestamp"].min(), 1)
+    mean_ms = dur.mean()
     return {
         "concurrency": vu,
-        "mean_ms": dur.mean(),
-        "throughput": total_iterations / duration_s,
+        "mean_ms": mean_ms,
+        "throughput": vu / (mean_ms / 1000),
     }
 
 

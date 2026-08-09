@@ -3,7 +3,10 @@ package main
 import (
 	"context"
 	"log/slog"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
+	"runtime"
 	"time"
 
 	"scaling-up-rest-vs-grpc/internal/data/cache"
@@ -14,9 +17,17 @@ import (
 const (
 	http1Addr = ":8080"
 	http2Addr = ":8081"
+	pprofAddr = ":6061"
 )
 
 func main() {
+	// Enables the block profiler, sampling every blocking event (channel,
+	// mutex, etc.), so /debug/pprof/block returns meaningful data instead
+	// of an empty profile, which is Go's default when this is unset.
+	// Mirrors grpc-server's own setting, so the two servers' block
+	// profiles are directly comparable.
+	runtime.SetBlockProfileRate(1)
+
 	addr := os.Getenv("REDIS_ADDR")
 	if addr == "" {
 		slog.Error("REDIS_ADDR is not set")
@@ -45,6 +56,11 @@ func main() {
 	}
 
 	http1Server, http2Server := rest.NewServers(http1Addr, http2Addr, cached, shapeCached)
+
+	go func() {
+		slog.Info("pprof endpoint started", "addr", pprofAddr)
+		http.ListenAndServe(pprofAddr, nil)
+	}()
 
 	errCh := make(chan error, 2)
 
