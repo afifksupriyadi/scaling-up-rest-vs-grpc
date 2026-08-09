@@ -2,9 +2,9 @@
 localhost_visualize.py (shape experiment)
 
 Reads raw JMeter sample results (shape-experiment-report_localhost.csv,
-containing one row per request across all 45 Thread Groups: 40 structural
-shape/size-tier combinations + 5 Student baseline combinations, GET only)
-and produces:
+containing one row per request across all 50 Thread Groups: 40
+structural shape/size-tier combinations + 5 Student baseline + 5 ping
+reference-point combinations, GET only) and produces:
   1. Per-shape response time overlay charts (4 for compact, 5 for large,
      including students-large), one line per protocol/format combination.
   2. Two throughput bar charts (compact, large), x-axis = protocol/format
@@ -13,6 +13,11 @@ and produces:
   4. Two "gradation" charts (response time, throughput), showing gRPC's
      ratio against REST HTTP/2+Protobuf across the nesting-depth spectrum,
      for both compact and large tiers on the same axes.
+  5. Two "ping" diagnostic charts (bar, overlay) for the empty-payload
+     reference point, isolating fixed per-call overhead from
+     serialization cost. These are a diagnostic aid, not part of the
+     structural-shape comparison, and are saved to diagnostic/ rather
+     than compact/large/gradation.
 
 Run with: python3 localhost_visualize.py
 Expects shape-experiment-report_localhost.csv to sit in ../results/
@@ -29,16 +34,26 @@ RESULTS_CSV = SCRIPT_DIR.parent / "results" / "shape-experiment-report_localhost
 OUTPUT_COMPACT_DIR = SCRIPT_DIR / "compact"
 OUTPUT_LARGE_DIR = SCRIPT_DIR / "large"
 OUTPUT_GRADATION_DIR = SCRIPT_DIR / "gradation"
+OUTPUT_DIAGNOSTIC_DIR = SCRIPT_DIR / "diagnostic"
 
 SCENARIO_LABEL = "Lingkungan Pengujian: Localhost (Shape Experiment via JMeter)"
+
+
+def _apply_title(fig, title):
+    """Draw the chart title and SCENARIO_LABEL subtitle with vertical spacing that scales with the number of lines in SCENARIO_LABEL, so a multi-line scenario label never collides with the title above or the plot area below.
+    - Must be called AFTER fig.tight_layout(), not before — tight_layout() recalculates all margins including the top one, so calling it beforehand would silently undo the spacing set here."""
+    n_lines = SCENARIO_LABEL.count("\n") + 1
+    top_margin = 0.99 - (0.08 + n_lines * 0.055)
+    fig.suptitle(title, fontsize=13, fontweight="bold", y=0.99)
+    fig.text(0.5, 0.99 - 0.075, SCENARIO_LABEL, fontsize=9, color="black",
+              style="italic", ha="center", va="top")
+    fig.subplots_adjust(top=top_margin)
+
 
 # ---------------------------------------------------------------------------
 # Label vocabulary
 # ---------------------------------------------------------------------------
 
-# Same five combinations, same colors as the Student dataset's own scripts,
-# so the two sets of charts read consistently when placed side by side in
-# the thesis document.
 COMBO_NAMES = {
     "rest-http1-json": "REST HTTP/1.1 + JSON",
     "rest-http1-protobuf": "REST HTTP/1.1 + Protobuf",
@@ -55,10 +70,6 @@ COMBO_COLORS = {
     "gRPC": "#4F9D8C",
 }
 
-# The four structural variants, ordered by nesting depth (used for compact,
-# and as the first four positions in large/gradation charts). "students" is
-# always handled as a separate external baseline, never merged into this
-# ordering, and only ever appears at the large tier.
 SHAPE_ORDER_COMPACT = ["depth0", "depth1-wide", "depth3-narrow", "depth4-wide"]
 SHAPE_ORDER_LARGE = ["depth0", "depth1-wide", "depth3-narrow", "depth4-wide", "students"]
 
@@ -70,10 +81,6 @@ SHAPE_LABELS = {
     "students": "Student (Baseline Luar)",
 }
 
-# x-axis positions for the gradation charts: depth0..depth4-wide sit at 0-3,
-# students-large sits at 5 (skipping 4), so the dashed break drawn at x=4
-# visually separates it from the depth progression rather than implying
-# it is a fifth step in the same sequence.
 GRADATION_X_POS = {
     "depth0": 0, "depth1-wide": 1, "depth3-narrow": 2, "depth4-wide": 3, "students": 5,
 }
@@ -126,11 +133,11 @@ def _exclude_negative_elapsed(group: pd.DataFrame, label: str) -> tuple[pd.Serie
 
 
 def compute_summary(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute mean/median/p90/p95/p99/min/max/throughput per label, across all 45 Thread Groups."""
+    """Compute mean/median/p90/p95/p99/min/max/throughput per label, across the 45 shape/Student Thread Groups. The 5 ping labels are skipped here, handled separately by compute_ping_summary since they have no shape/tier dimension."""
     rows = []
     for label, group in df.groupby("label"):
         if label.endswith("-ping"):
-            continue  # handled separately by compute_ping_summary, has no shape/tier dimension
+            continue
         combo, shape, tier = parse_label(label)
         elapsed, excluded = _exclude_negative_elapsed(group, label)
         total_count = len(group)
@@ -173,7 +180,7 @@ def print_response_time_table(summary: pd.DataFrame, tier: str):
 
 
 def plot_response_time_overlay(df: pd.DataFrame, shape: str, tier: str):
-    """Overlay chart for one (shape, tier) combination: one line per protocol/format combination, x-axis = time since that Thread Group's own execution started (500ms buckets), y-axis = mean response time. Same bucketing/style as the Student dataset's overlay charts."""
+    """Overlay chart for one (shape, tier) combination: one line per protocol/format combination, x-axis = time since that Thread Group's own execution started (500ms buckets), y-axis = mean response time."""
     fig, ax = plt.subplots(figsize=(10, 6))
 
     for prefix, combo in COMBO_NAMES.items():
@@ -193,12 +200,11 @@ def plot_response_time_overlay(df: pd.DataFrame, shape: str, tier: str):
     ax.set_xlabel("Waktu Sejak Pengujian Dimulai (detik)")
     ax.set_ylabel("Response Time Rata-rata (ms)")
     tier_title = "Compact (~100 KB)" if tier == "compact" else "Large (~500 KB)"
-    fig.suptitle(f"Response Time - {SHAPE_LABELS[shape]} ({tier_title})", fontsize=13, fontweight="bold", y=0.98)
-    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.legend(title="Kombinasi")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     fig.tight_layout()
+    _apply_title(fig, f"Response Time - {SHAPE_LABELS[shape]} ({tier_title})")
 
     out_dir = OUTPUT_COMPACT_DIR if tier == "compact" else OUTPUT_LARGE_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -229,12 +235,11 @@ def plot_throughput_bar(summary: pd.DataFrame, tier: str):
     ax.set_xticklabels(combos, rotation=15, ha="right")
     ax.set_ylabel("Throughput (request/detik)")
     tier_title = "Compact (~100 KB)" if tier == "compact" else "Large (~500 KB)"
-    fig.suptitle(f"Throughput - Tingkat {tier_title}", fontsize=13, fontweight="bold", y=0.98)
-    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.legend(title="Variasi Struktur", fontsize=8)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     fig.tight_layout()
+    _apply_title(fig, f"Throughput - Tingkat {tier_title}")
 
     out_dir = OUTPUT_COMPACT_DIR if tier == "compact" else OUTPUT_LARGE_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -277,19 +282,29 @@ def _plot_gradation(summary: pd.DataFrame, metric: str, ylabel: str, title: str,
     ax.set_xticklabels([SHAPE_LABELS[s] for s in SHAPE_ORDER_LARGE], rotation=15, ha="right")
     ax.set_xlabel("Variasi Struktur (diurutkan berdasarkan kedalaman bersarang)")
     ax.set_ylabel(ylabel)
-    fig.suptitle(title, fontsize=13, fontweight="bold", y=0.98)
-    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.legend(title="Tingkat Ukuran")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     fig.tight_layout()
+    _apply_title(fig, title)
 
     OUTPUT_GRADATION_DIR.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUTPUT_GRADATION_DIR / filename, dpi=150)
     print(f"Saved {OUTPUT_GRADATION_DIR / filename}")
 
+
+def plot_gradation_response_time(summary: pd.DataFrame):
+    _plot_gradation(summary, metric="mean", ylabel="Rasio Mean Response Time (gRPC ÷ REST HTTP/2+Protobuf)",
+                    title="Gradasi Kedalaman Struktur - Response Time", filename="response_time_gradation.png")
+
+
+def plot_gradation_throughput(summary: pd.DataFrame):
+    _plot_gradation(summary, metric="throughput", ylabel="Rasio Throughput (gRPC ÷ REST HTTP/2+Protobuf)",
+                    title="Gradasi Kedalaman Struktur - Throughput", filename="throughput_gradation.png")
+
+
 def compute_ping_summary(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute stats for the 5 'ping' labels (empty request/response), used as a fixed-cost reference point. Handled separately from parse_label/compute_summary since ping has no shape/tier dimension at all."""
+    """Compute stats for the 5 'ping' labels (empty request/response), used as a diagnostic fixed-cost reference point — NOT part of the shape/tier comparison. Handled separately from parse_label/compute_summary since ping has no shape/tier dimension at all."""
     rows = []
     for prefix, combo in COMBO_NAMES.items():
         label = f"{prefix}-ping"
@@ -297,30 +312,28 @@ def compute_ping_summary(df: pd.DataFrame) -> pd.DataFrame:
             continue
         group = df[df["label"] == label]
         elapsed, excluded = _exclude_negative_elapsed(group, label)
-        duration_s = (group["timeStamp"] + group["elapsed"].clip(lower=0)).max() - group["timeStamp"].min()
-        duration_s = max(duration_s, 1) / 1000
         rows.append({
             "label": label, "combo": combo,
             "mean": elapsed.mean(), "median": elapsed.median(),
             "p99": elapsed.quantile(0.99), "min": elapsed.min(), "max": elapsed.max(),
-            "throughput": len(group) / duration_s,
         })
     return pd.DataFrame(rows)
 
 
 def print_ping_table(summary: pd.DataFrame):
-    """Print (and save as CSV) the ping reference-point table."""
+    """Print (and save as CSV) the ping diagnostic reference-point table."""
     table = summary[["combo", "mean", "p99", "min", "max"]].sort_values("combo").copy()
     table.columns = ["Kombinasi", "Mean (ms)", "P99 (ms)", "Min (ms)", "Max (ms)"]
     for col in ["Mean (ms)", "P99 (ms)", "Min (ms)", "Max (ms)"]:
         table[col] = table[col].round(2)
-    print("\nRingkasan Response Time - Ping (referensi biaya tetap):")
+    print("\nRingkasan Response Time - Ping (referensi diagnostik, bukan bagian dari perbandingan):")
     print(table.to_string(index=False))
-    table.to_csv(SCRIPT_DIR / "response_time_summary_ping.csv", index=False)
+    OUTPUT_DIAGNOSTIC_DIR.mkdir(parents=True, exist_ok=True)
+    table.to_csv(OUTPUT_DIAGNOSTIC_DIR / "response_time_summary_ping.csv", index=False)
 
 
 def plot_ping_bar(summary: pd.DataFrame):
-    """Bar chart: one bar per protocol/format combination, mean response time for the empty ping payload. This is the actual payoff chart for the fixed-cost hypothesis: differences here can't be explained by serialization cost, since there's essentially nothing to serialize."""
+    """Bar chart: one bar per protocol/format combination, mean response time for the empty ping payload. Diagnostic reference point only — deliberately kept out of compact/large/gradation, since it isn't a structural-shape variant to be compared against the others."""
     combos = list(COMBO_NAMES.values())
     vals = [summary[summary.combo == c]["mean"].sum() for c in combos]
     colors = [COMBO_COLORS[c] for c in combos]
@@ -332,19 +345,19 @@ def plot_ping_bar(summary: pd.DataFrame):
     ax.set_xticks(range(len(combos)))
     ax.set_xticklabels(combos, rotation=20, ha="right")
     ax.set_ylabel("Response Time Rata-rata (ms)")
-    fig.suptitle("Ping - Response Time (Referensi Biaya Tetap)", fontsize=13, fontweight="bold", y=0.98)
-    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.set_ylim(top=max(vals) * 1.2)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     fig.tight_layout()
+    _apply_title(fig, "Ping — Titik Referensi Diagnostik (Bukan Bagian dari Perbandingan Variasi Struktur)")
 
-    fig.savefig(SCRIPT_DIR / "ping_response_time.png", dpi=150)
-    print(f"Saved {SCRIPT_DIR / 'ping_response_time.png'}")
+    OUTPUT_DIAGNOSTIC_DIR.mkdir(parents=True, exist_ok=True)
+    fig.savefig(OUTPUT_DIAGNOSTIC_DIR / "ping_response_time.png", dpi=150)
+    print(f"Saved {OUTPUT_DIAGNOSTIC_DIR / 'ping_response_time.png'}")
 
 
 def plot_ping_overlay(df: pd.DataFrame):
-    """Overlay chart: one line per combination, x-axis = time since test start. Useful to check whether any gap is stable throughout the run (consistent with a true fixed per-call cost) or decays over time (suggesting a one-time warmup cost instead)."""
+    """Overlay chart: one line per combination, x-axis = time since test start. Useful to check whether any gap is stable throughout the run or decays over time. Diagnostic reference point only, same reasoning as plot_ping_bar."""
     fig, ax = plt.subplots(figsize=(10, 6))
 
     for prefix, combo in COMBO_NAMES.items():
@@ -361,25 +374,15 @@ def plot_ping_overlay(df: pd.DataFrame):
 
     ax.set_xlabel("Waktu Sejak Pengujian Dimulai (detik)")
     ax.set_ylabel("Response Time Rata-rata (ms)")
-    fig.suptitle("Ping - Response Time Sepanjang Waktu", fontsize=13, fontweight="bold", y=0.98)
-    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
     ax.legend(title="Kombinasi")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     fig.tight_layout()
+    _apply_title(fig, "Ping — Titik Referensi Diagnostik Sepanjang Waktu")
 
-    fig.savefig(SCRIPT_DIR / "ping_response_time_overlay.png", dpi=150)
-    print(f"Saved {SCRIPT_DIR / 'ping_response_time_overlay.png'}")
-
-
-def plot_gradation_response_time(summary: pd.DataFrame):
-    _plot_gradation(summary, metric="mean", ylabel="Rasio Mean Response Time (gRPC ÷ REST HTTP/2+Protobuf)",
-                    title="Gradasi Kedalaman Struktur - Response Time", filename="response_time_gradation.png")
-
-
-def plot_gradation_throughput(summary: pd.DataFrame):
-    _plot_gradation(summary, metric="throughput", ylabel="Rasio Throughput (gRPC ÷ REST HTTP/2+Protobuf)",
-                    title="Gradasi Kedalaman Struktur - Throughput", filename="throughput_gradation.png")
+    OUTPUT_DIAGNOSTIC_DIR.mkdir(parents=True, exist_ok=True)
+    fig.savefig(OUTPUT_DIAGNOSTIC_DIR / "ping_response_time_overlay.png", dpi=150)
+    print(f"Saved {OUTPUT_DIAGNOSTIC_DIR / 'ping_response_time_overlay.png'}")
 
 
 def main():

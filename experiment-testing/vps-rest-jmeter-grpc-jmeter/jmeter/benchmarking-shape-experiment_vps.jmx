@@ -97,7 +97,7 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
@@ -117,18 +117,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 02 - REST HTTP/1.1+JSON (depth0-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 02 - REST HTTP/1.1+JSON (depth0-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth0-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth0-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -143,18 +143,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 03 - REST HTTP/1.1+JSON (depth1-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 03 - REST HTTP/1.1+JSON (depth1-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth1-wide-compact">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth1-wide-compact" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -169,18 +169,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 04 - REST HTTP/1.1+JSON (depth1-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 04 - REST HTTP/1.1+JSON (depth1-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth1-wide-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth1-wide-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -195,18 +195,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 05 - REST HTTP/1.1+JSON (depth3-narrow-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 05 - REST HTTP/1.1+JSON (depth3-narrow-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth3-narrow-compact">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth3-narrow-compact" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -227,12 +227,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth3-narrow-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth3-narrow-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -247,18 +247,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 07 - REST HTTP/1.1+JSON (depth4-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 07 - REST HTTP/1.1+JSON (depth4-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth4-wide-compact">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth4-wide-compact" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -273,18 +273,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 08 - REST HTTP/1.1+JSON (depth4-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 08 - REST HTTP/1.1+JSON (depth4-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth4-wide-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-depth4-wide-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -299,18 +299,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 09 - REST HTTP/1.1+Protobuf (depth0-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 09 - REST HTTP/1.1+Protobuf (depth0-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth0-compact">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth0-compact" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -325,18 +325,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 10 - REST HTTP/1.1+Protobuf (depth0-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 10 - REST HTTP/1.1+Protobuf (depth0-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth0-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth0-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -351,18 +351,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 11 - REST HTTP/1.1+Protobuf (depth1-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 11 - REST HTTP/1.1+Protobuf (depth1-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth1-wide-compact">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth1-wide-compact" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -377,18 +377,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 12 - REST HTTP/1.1+Protobuf (depth1-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 12 - REST HTTP/1.1+Protobuf (depth1-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth1-wide-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth1-wide-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -409,12 +409,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth3-narrow-compact">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth3-narrow-compact" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -429,18 +429,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 14 - REST HTTP/1.1+Protobuf (depth3-narrow-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 14 - REST HTTP/1.1+Protobuf (depth3-narrow-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth3-narrow-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth3-narrow-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -455,18 +455,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 15 - REST HTTP/1.1+Protobuf (depth4-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 15 - REST HTTP/1.1+Protobuf (depth4-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth4-wide-compact">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth4-wide-compact" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -487,12 +487,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth4-wide-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-depth4-wide-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -513,12 +513,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth0-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth0-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -560,18 +560,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 18 - REST HTTP/2+JSON (depth0-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 18 - REST HTTP/2+JSON (depth0-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth0-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth0-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -619,12 +619,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth1-wide-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth1-wide-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -666,18 +666,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 20 - REST HTTP/2+JSON (depth1-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 20 - REST HTTP/2+JSON (depth1-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth1-wide-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth1-wide-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -719,18 +719,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 21 - REST HTTP/2+JSON (depth3-narrow-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 21 - REST HTTP/2+JSON (depth3-narrow-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth3-narrow-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth3-narrow-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -772,18 +772,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 22 - REST HTTP/2+JSON (depth3-narrow-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 22 - REST HTTP/2+JSON (depth3-narrow-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth3-narrow-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth3-narrow-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -825,18 +825,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 23 - REST HTTP/2+JSON (depth4-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 23 - REST HTTP/2+JSON (depth4-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth4-wide-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth4-wide-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -878,18 +878,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 24 - REST HTTP/2+JSON (depth4-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 24 - REST HTTP/2+JSON (depth4-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth4-wide-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-depth4-wide-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -931,18 +931,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 25 - REST HTTP/2+Protobuf (depth0-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 25 - REST HTTP/2+Protobuf (depth0-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth0-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth0-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -984,18 +984,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 26 - REST HTTP/2+Protobuf (depth0-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 26 - REST HTTP/2+Protobuf (depth0-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth0-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth0-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1037,18 +1037,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 27 - REST HTTP/2+Protobuf (depth1-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 27 - REST HTTP/2+Protobuf (depth1-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth1-wide-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth1-wide-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1090,18 +1090,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 28 - REST HTTP/2+Protobuf (depth1-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 28 - REST HTTP/2+Protobuf (depth1-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth1-wide-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth1-wide-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1143,18 +1143,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 29 - REST HTTP/2+Protobuf (depth3-narrow-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 29 - REST HTTP/2+Protobuf (depth3-narrow-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth3-narrow-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth3-narrow-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1196,18 +1196,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 30 - REST HTTP/2+Protobuf (depth3-narrow-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 30 - REST HTTP/2+Protobuf (depth3-narrow-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth3-narrow-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth3-narrow-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1249,18 +1249,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 31 - REST HTTP/2+Protobuf (depth4-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 31 - REST HTTP/2+Protobuf (depth4-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth4-wide-compact">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth4-wide-compact" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1308,12 +1308,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth4-wide-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-depth4-wide-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1361,12 +1361,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth0-compact">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth0-compact" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1392,12 +1392,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth0-large">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth0-large" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1417,18 +1417,18 @@
         </vn.zalopay.benchmark.GRPCSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 35 - gRPC (depth1-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 35 - gRPC (depth1-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth1-wide-compact">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth1-wide-compact" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1448,18 +1448,18 @@
         </vn.zalopay.benchmark.GRPCSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 36 - gRPC (depth1-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 36 - gRPC (depth1-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth1-wide-large">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth1-wide-large" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1479,18 +1479,18 @@
         </vn.zalopay.benchmark.GRPCSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 37 - gRPC (depth3-narrow-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 37 - gRPC (depth3-narrow-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth3-narrow-compact">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth3-narrow-compact" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1516,12 +1516,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth3-narrow-large">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth3-narrow-large" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1541,18 +1541,18 @@
         </vn.zalopay.benchmark.GRPCSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 39 - gRPC (depth4-wide-compact)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 39 - gRPC (depth4-wide-compact)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth4-wide-compact">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth4-wide-compact" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1572,18 +1572,18 @@
         </vn.zalopay.benchmark.GRPCSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 40 - gRPC (depth4-wide-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 40 - gRPC (depth4-wide-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth4-wide-large">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-depth4-wide-large" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1603,18 +1603,18 @@
         </vn.zalopay.benchmark.GRPCSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 41 - REST HTTP/1.1+JSON (students-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 41 - REST HTTP/1.1+JSON (students-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-students-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-students-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1629,18 +1629,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 42 - REST HTTP/1.1+Protobuf (students-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 42 - REST HTTP/1.1+Protobuf (students-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-students-large">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-students-large" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1655,18 +1655,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 43 - REST HTTP/2+JSON (students-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 43 - REST HTTP/2+JSON (students-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-students-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-students-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1708,18 +1708,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 44 - REST HTTP/2+Protobuf (students-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 44 - REST HTTP/2+Protobuf (students-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-students-large">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-students-large" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1761,18 +1761,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 45 - gRPC (students-large)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 45 - gRPC (students-large)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-students-large">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-students-large" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
@@ -1792,18 +1792,18 @@
         </vn.zalopay.benchmark.GRPCSampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 46 - REST HTTP/1.1+JSON (ping)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 46 - REST HTTP/1.1+JSON (ping)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-ping">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-json-ping" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1824,12 +1824,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-ping">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="rest-http1-protobuf-ping" enabled="true">
           <stringProp name="HTTPSampler.domain">10.184.0.2</stringProp>
           <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
@@ -1844,18 +1844,18 @@
         </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 48 - REST HTTP/2+JSON (ping)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 48 - REST HTTP/2+JSON (ping)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-ping">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-json-ping" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1897,18 +1897,18 @@
         </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 49 - REST HTTP/2+Protobuf (ping)" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="TG 49 - REST HTTP/2+Protobuf (ping)">
         <intProp name="ThreadGroup.num_threads">100</intProp>
         <intProp name="ThreadGroup.ramp_time">10</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-ping">
+        <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="rest-http2-protobuf-ping" enabled="true">
           <boolProp name="HTTPSampler.image_parser">false</boolProp>
           <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
@@ -1956,12 +1956,12 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">10</stringProp>
+          <stringProp name="LoopController.loops">50</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-ping">
+        <vn.zalopay.benchmark.GRPCSampler guiclass="vn.zalopay.benchmark.GRPCSamplerGui" testclass="vn.zalopay.benchmark.GRPCSampler" testname="grpc-ping" enabled="true">
           <stringProp name="GRPCSampler.protoFolder">/home/afiffks/scaling-up-rest-vs-grpc/proto</stringProp>
           <stringProp name="GRPCSampler.libFolder"></stringProp>
           <stringProp name="GRPCSampler.metadata"></stringProp>
