@@ -1,0 +1,263 @@
+{
+  "RunType": "HTTP",
+  "Labels": "10.184.0.2:8080/rest/protobuf/http1/shape/depth0/large , bench-load-client-01",
+  "StartTime": "2026-08-09T21:46:23.348334811Z",
+  "RequestedQPS": "max",
+  "RequestedDuration": "exactly 100 calls",
+  "ActualQPS": 1472.8414010651265,
+  "ActualDuration": 67895973,
+  "NumThreads": 10,
+  "Version": "1.75.2",
+  "DurationHistogram": {
+    "Count": 100,
+    "Min": 0.00209642,
+    "Max": 0.015050864,
+    "Sum": 0.6106371519999999,
+    "Avg": 0.006106371519999999,
+    "StdDev": 0.002836499779087711,
+    "Data": [
+      {
+        "Start": 0.00209642,
+        "End": 0.003,
+        "Percent": 7,
+        "Count": 7
+      },
+      {
+        "Start": 0.003,
+        "End": 0.004,
+        "Percent": 28,
+        "Count": 21
+      },
+      {
+        "Start": 0.004,
+        "End": 0.005,
+        "Percent": 46,
+        "Count": 18
+      },
+      {
+        "Start": 0.005,
+        "End": 0.006,
+        "Percent": 59,
+        "Count": 13
+      },
+      {
+        "Start": 0.006,
+        "End": 0.007,
+        "Percent": 66,
+        "Count": 7
+      },
+      {
+        "Start": 0.007,
+        "End": 0.008,
+        "Percent": 74,
+        "Count": 8
+      },
+      {
+        "Start": 0.008,
+        "End": 0.009000000000000001,
+        "Percent": 84,
+        "Count": 10
+      },
+      {
+        "Start": 0.009000000000000001,
+        "End": 0.01,
+        "Percent": 88,
+        "Count": 4
+      },
+      {
+        "Start": 0.01,
+        "End": 0.011,
+        "Percent": 96,
+        "Count": 8
+      },
+      {
+        "Start": 0.011,
+        "End": 0.012,
+        "Percent": 97,
+        "Count": 1
+      },
+      {
+        "Start": 0.012,
+        "End": 0.014,
+        "Percent": 98,
+        "Count": 1
+      },
+      {
+        "Start": 0.014,
+        "End": 0.015050864,
+        "Percent": 100,
+        "Count": 2
+      }
+    ],
+    "Percentiles": [
+      {
+        "Percentile": 50,
+        "Value": 0.0053076923076923075
+      },
+      {
+        "Percentile": 75,
+        "Value": 0.0081
+      },
+      {
+        "Percentile": 90,
+        "Value": 0.01025
+      },
+      {
+        "Percentile": 99,
+        "Value": 0.014525432000000001
+      },
+      {
+        "Percentile": 99.9,
+        "Value": 0.014998320800000003
+      }
+    ]
+  },
+  "ErrorsDurationHistogram": {
+    "Count": 0,
+    "Min": 0,
+    "Max": 0,
+    "Sum": 0,
+    "Avg": 0,
+    "StdDev": 0,
+    "Data": null
+  },
+  "Exactly": 100,
+  "Jitter": false,
+  "Uniform": false,
+  "NoCatchUp": false,
+  "RunID": 0,
+  "AccessLoggerInfo": "",
+  "ID": "2026-08-09-214623_10_184_0_2_8080_rest_protobuf_http1_shape_depth0_large_bench_load_client_01",
+  "RetCodes": {
+    "200": 100
+  },
+  "IPCountMap": {
+    "10.184.0.2:8080": 10
+  },
+  "Insecure": false,
+  "MTLS": false,
+  "CACert": "",
+  "Cert": "",
+  "Key": "",
+  "UnixDomainSocket": "",
+  "URL": "http://10.184.0.2:8080/rest/protobuf/http1/shape/depth0/large",
+  "NumConnections": 1,
+  "Compression": false,
+  "DisableFastClient": false,
+  "HTTP10": false,
+  "H2": false,
+  "DisableKeepAlive": false,
+  "AllowHalfClose": false,
+  "FollowRedirects": false,
+  "Resolve": "",
+  "HTTPReqTimeOut": 3000000000,
+  "UserCredentials": "",
+  "ContentType": "",
+  "Payload": "",
+  "MethodOverride": "",
+  "LogErrors": true,
+  "SequentialWarmup": false,
+  "ConnReuseRange": [
+    0,
+    0
+  ],
+  "NoResolveEachConn": false,
+  "Offset": 0,
+  "Resolution": 0.001,
+  "Sizes": {
+    "Count": 100,
+    "Min": 499842,
+    "Max": 499842,
+    "Sum": 49984200,
+    "Avg": 499842,
+    "StdDev": 0,
+    "Data": [
+      {
+        "Start": 499842,
+        "End": 499842,
+        "Percent": 100,
+        "Count": 100
+      }
+    ]
+  },
+  "HeaderSizes": {
+    "Count": 100,
+    "Min": 122,
+    "Max": 122,
+    "Sum": 12200,
+    "Avg": 122,
+    "StdDev": 0,
+    "Data": [
+      {
+        "Start": 122,
+        "End": 122,
+        "Percent": 100,
+        "Count": 100
+      }
+    ]
+  },
+  "Sockets": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "SocketCount": 10,
+  "ConnectionStats": {
+    "Count": 10,
+    "Min": 0.001298694,
+    "Max": 0.003068184,
+    "Sum": 0.022083675000000004,
+    "Avg": 0.0022083675000000003,
+    "StdDev": 0.0007701092283689694,
+    "Data": [
+      {
+        "Start": 0.001298694,
+        "End": 0.002,
+        "Percent": 50,
+        "Count": 5
+      },
+      {
+        "Start": 0.002,
+        "End": 0.003,
+        "Percent": 80,
+        "Count": 3
+      },
+      {
+        "Start": 0.003,
+        "End": 0.003068184,
+        "Percent": 100,
+        "Count": 2
+      }
+    ],
+    "Percentiles": [
+      {
+        "Percentile": 50,
+        "Value": 0.002
+      },
+      {
+        "Percentile": 75,
+        "Value": 0.0028333333333333335
+      },
+      {
+        "Percentile": 90,
+        "Value": 0.003034092
+      },
+      {
+        "Percentile": 99,
+        "Value": 0.0030647748
+      },
+      {
+        "Percentile": 99.9,
+        "Value": 0.00306784308
+      }
+    ]
+  },
+  "AbortOn": 0
+}
