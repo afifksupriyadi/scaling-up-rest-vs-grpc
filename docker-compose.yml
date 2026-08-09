@@ -28,6 +28,7 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
+      - "6061:6061"
     depends_on:
       redis:
         condition: service_healthy
