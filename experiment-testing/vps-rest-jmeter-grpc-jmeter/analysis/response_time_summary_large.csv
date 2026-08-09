@@ -1,0 +1,26 @@
+Kombinasi,Variasi Struktur,Mean (ms),P99 (ms),Min (ms),Max (ms)
+REST HTTP/1.1 + JSON,Depth 0 (Flat),14.2,23.0,9,26
+REST HTTP/1.1 + JSON,Depth 1 (Wide),14.9,21.0,10,24
+REST HTTP/1.1 + JSON,Depth 3 (Narrow),14.6,23.0,9,25
+REST HTTP/1.1 + JSON,Depth 4 (Wide),13.4,21.0,9,31
+REST HTTP/1.1 + JSON,Student (Baseline Luar),17.1,24.0,11,38
+REST HTTP/1.1 + Protobuf,Depth 0 (Flat),3.3,6.0,2,8
+REST HTTP/1.1 + Protobuf,Depth 1 (Wide),3.3,6.0,2,7
+REST HTTP/1.1 + Protobuf,Depth 3 (Narrow),3.3,6.0,2,7
+REST HTTP/1.1 + Protobuf,Depth 4 (Wide),3.2,6.0,2,8
+REST HTTP/1.1 + Protobuf,Student (Baseline Luar),3.2,5.0,2,8
+REST HTTP/2 + JSON,Depth 0 (Flat),15.5,25.0,10,41
+REST HTTP/2 + JSON,Depth 1 (Wide),15.8,24.0,10,36
+REST HTTP/2 + JSON,Depth 3 (Narrow),15.9,25.0,10,45
+REST HTTP/2 + JSON,Depth 4 (Wide),14.9,28.0,9,233
+REST HTTP/2 + JSON,Student (Baseline Luar),18.7,26.0,13,37
+REST HTTP/2 + Protobuf,Depth 0 (Flat),3.5,7.0,2,9
+REST HTTP/2 + Protobuf,Depth 1 (Wide),4.1,8.0,2,11
+REST HTTP/2 + Protobuf,Depth 3 (Narrow),3.5,7.0,2,24
+REST HTTP/2 + Protobuf,Depth 4 (Wide),3.6,7.0,2,10
+REST HTTP/2 + Protobuf,Student (Baseline Luar),3.4,6.0,1,9
+gRPC,Depth 0 (Flat),2748.4,5672.0,52,6699
+gRPC,Depth 1 (Wide),2421.7,5763.0,32,6977
+gRPC,Depth 3 (Narrow),2317.4,5147.0,34,7018
+gRPC,Depth 4 (Wide),1816.0,4697.4,28,6394
+gRPC,Student (Baseline Luar),4030.4,8629.8,104,10073

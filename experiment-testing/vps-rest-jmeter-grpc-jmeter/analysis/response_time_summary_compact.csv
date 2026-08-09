@@ -1,0 +1,21 @@
+Kombinasi,Variasi Struktur,Mean (ms),P99 (ms),Min (ms),Max (ms)
+REST HTTP/1.1 + JSON,Depth 0 (Flat),4.0,8.0,2,42
+REST HTTP/1.1 + JSON,Depth 1 (Wide),3.6,7.0,2,12
+REST HTTP/1.1 + JSON,Depth 3 (Narrow),3.4,6.0,2,8
+REST HTTP/1.1 + JSON,Depth 4 (Wide),3.4,6.0,2,11
+REST HTTP/1.1 + Protobuf,Depth 0 (Flat),1.3,3.0,0,3
+REST HTTP/1.1 + Protobuf,Depth 1 (Wide),1.3,3.0,0,4
+REST HTTP/1.1 + Protobuf,Depth 3 (Narrow),1.2,3.0,0,3
+REST HTTP/1.1 + Protobuf,Depth 4 (Wide),1.2,3.0,0,3
+REST HTTP/2 + JSON,Depth 0 (Flat),6.1,27.0,2,201
+REST HTTP/2 + JSON,Depth 1 (Wide),4.0,8.0,2,23
+REST HTTP/2 + JSON,Depth 3 (Narrow),4.0,8.0,2,16
+REST HTTP/2 + JSON,Depth 4 (Wide),3.7,8.0,2,10
+REST HTTP/2 + Protobuf,Depth 0 (Flat),1.9,5.0,0,28
+REST HTTP/2 + Protobuf,Depth 1 (Wide),1.3,4.0,0,5
+REST HTTP/2 + Protobuf,Depth 3 (Narrow),1.2,4.0,0,7
+REST HTTP/2 + Protobuf,Depth 4 (Wide),2.2,5.0,0,14
+gRPC,Depth 0 (Flat),103.1,267.0,10,566
+gRPC,Depth 1 (Wide),10.2,43.0,6,54
+gRPC,Depth 3 (Narrow),9.4,19.0,7,30
+gRPC,Depth 4 (Wide),8.0,17.0,6,38
