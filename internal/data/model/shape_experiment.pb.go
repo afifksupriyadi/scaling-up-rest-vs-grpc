@@ -2760,7 +2760,7 @@ const file_shape_experiment_proto_rawDesc = "" +
 	"\bceo_name\x18\b \x01(\tR\aceoName\x12A\n" +
 	"\vdepartments\x18\t \x03(\v2\x1f.shapeexperiment.DepartmentWideR\vdepartments\"[\n" +
 	"\x17ShapeDepth4WideResponse\x12@\n" +
-	"\tcompanies\x18\x01 \x03(\v2\".shapeexperiment.CompanyDepth4WideR\tcompanies2\xa8\x06\n" +
+	"\tcompanies\x18\x01 \x03(\v2\".shapeexperiment.CompanyDepth4WideR\tcompanies2\xea\x06\n" +
 	"\x16ShapeExperimentService\x12Z\n" +
 	"\x15GetShapeDepth0Compact\x12\x1b.shapeexperiment.ShapeEmpty\x1a$.shapeexperiment.ShapeDepth0Response\x12X\n" +
 	"\x13GetShapeDepth0Large\x12\x1b.shapeexperiment.ShapeEmpty\x1a$.shapeexperiment.ShapeDepth0Response\x12b\n" +
@@ -2769,7 +2769,8 @@ const file_shape_experiment_proto_rawDesc = "" +
 	"\x1bGetShapeDepth3NarrowCompact\x12\x1b.shapeexperiment.ShapeEmpty\x1a*.shapeexperiment.ShapeDepth3NarrowResponse\x12d\n" +
 	"\x19GetShapeDepth3NarrowLarge\x12\x1b.shapeexperiment.ShapeEmpty\x1a*.shapeexperiment.ShapeDepth3NarrowResponse\x12b\n" +
 	"\x19GetShapeDepth4WideCompact\x12\x1b.shapeexperiment.ShapeEmpty\x1a(.shapeexperiment.ShapeDepth4WideResponse\x12`\n" +
-	"\x17GetShapeDepth4WideLarge\x12\x1b.shapeexperiment.ShapeEmpty\x1a(.shapeexperiment.ShapeDepth4WideResponseB-Z+scaling-up-rest-vs-grpc/internal/data/modelb\x06proto3"
+	"\x17GetShapeDepth4WideLarge\x12\x1b.shapeexperiment.ShapeEmpty\x1a(.shapeexperiment.ShapeDepth4WideResponse\x12@\n" +
+	"\x04Ping\x12\x1b.shapeexperiment.ShapeEmpty\x1a\x1b.shapeexperiment.ShapeEmptyB-Z+scaling-up-rest-vs-grpc/internal/data/modelb\x06proto3"
 
 var (
 	file_shape_experiment_proto_rawDescOnce sync.Once
@@ -2827,16 +2828,18 @@ var file_shape_experiment_proto_depIdxs = []int32{
 	0,  // 17: shapeexperiment.ShapeExperimentService.GetShapeDepth3NarrowLarge:input_type -> shapeexperiment.ShapeEmpty
 	0,  // 18: shapeexperiment.ShapeExperimentService.GetShapeDepth4WideCompact:input_type -> shapeexperiment.ShapeEmpty
 	0,  // 19: shapeexperiment.ShapeExperimentService.GetShapeDepth4WideLarge:input_type -> shapeexperiment.ShapeEmpty
-	5,  // 20: shapeexperiment.ShapeExperimentService.GetShapeDepth0Compact:output_type -> shapeexperiment.ShapeDepth0Response
-	5,  // 21: shapeexperiment.ShapeExperimentService.GetShapeDepth0Large:output_type -> shapeexperiment.ShapeDepth0Response
-	8,  // 22: shapeexperiment.ShapeExperimentService.GetShapeDepth1WideCompact:output_type -> shapeexperiment.ShapeDepth1WideResponse
-	8,  // 23: shapeexperiment.ShapeExperimentService.GetShapeDepth1WideLarge:output_type -> shapeexperiment.ShapeDepth1WideResponse
-	13, // 24: shapeexperiment.ShapeExperimentService.GetShapeDepth3NarrowCompact:output_type -> shapeexperiment.ShapeDepth3NarrowResponse
-	13, // 25: shapeexperiment.ShapeExperimentService.GetShapeDepth3NarrowLarge:output_type -> shapeexperiment.ShapeDepth3NarrowResponse
-	19, // 26: shapeexperiment.ShapeExperimentService.GetShapeDepth4WideCompact:output_type -> shapeexperiment.ShapeDepth4WideResponse
-	19, // 27: shapeexperiment.ShapeExperimentService.GetShapeDepth4WideLarge:output_type -> shapeexperiment.ShapeDepth4WideResponse
-	20, // [20:28] is the sub-list for method output_type
-	12, // [12:20] is the sub-list for method input_type
+	0,  // 20: shapeexperiment.ShapeExperimentService.Ping:input_type -> shapeexperiment.ShapeEmpty
+	5,  // 21: shapeexperiment.ShapeExperimentService.GetShapeDepth0Compact:output_type -> shapeexperiment.ShapeDepth0Response
+	5,  // 22: shapeexperiment.ShapeExperimentService.GetShapeDepth0Large:output_type -> shapeexperiment.ShapeDepth0Response
+	8,  // 23: shapeexperiment.ShapeExperimentService.GetShapeDepth1WideCompact:output_type -> shapeexperiment.ShapeDepth1WideResponse
+	8,  // 24: shapeexperiment.ShapeExperimentService.GetShapeDepth1WideLarge:output_type -> shapeexperiment.ShapeDepth1WideResponse
+	13, // 25: shapeexperiment.ShapeExperimentService.GetShapeDepth3NarrowCompact:output_type -> shapeexperiment.ShapeDepth3NarrowResponse
+	13, // 26: shapeexperiment.ShapeExperimentService.GetShapeDepth3NarrowLarge:output_type -> shapeexperiment.ShapeDepth3NarrowResponse
+	19, // 27: shapeexperiment.ShapeExperimentService.GetShapeDepth4WideCompact:output_type -> shapeexperiment.ShapeDepth4WideResponse
+	19, // 28: shapeexperiment.ShapeExperimentService.GetShapeDepth4WideLarge:output_type -> shapeexperiment.ShapeDepth4WideResponse
+	0,  // 29: shapeexperiment.ShapeExperimentService.Ping:output_type -> shapeexperiment.ShapeEmpty
+	21, // [21:30] is the sub-list for method output_type
+	12, // [12:21] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name

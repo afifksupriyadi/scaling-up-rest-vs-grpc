@@ -68,6 +68,11 @@ func NewServers(http1Addr, http2Addr string, cached *cache.Cache, shapeCached *c
 	mux.HandleFunc("GET /rest/protobuf/http2/shape/depth4-wide/compact", shapeH.ServeProtobufDepth4WideCompact)
 	mux.HandleFunc("GET /rest/protobuf/http2/shape/depth4-wide/large", shapeH.ServeProtobufDepth4WideLarge)
 
+	mux.HandleFunc("GET /rest/json/http1/shape/ping", shapeH.ServePingJSON)
+	mux.HandleFunc("GET /rest/json/http2/shape/ping", shapeH.ServePingJSON)
+	mux.HandleFunc("GET /rest/protobuf/http1/shape/ping", shapeH.ServePingProtobuf)
+	mux.HandleFunc("GET /rest/protobuf/http2/shape/ping", shapeH.ServePingProtobuf)
+
 	http1Server = &http.Server{
 		Addr:    http1Addr,
 		Handler: mux,

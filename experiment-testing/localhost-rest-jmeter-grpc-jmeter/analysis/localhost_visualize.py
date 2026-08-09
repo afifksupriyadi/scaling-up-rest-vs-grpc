@@ -129,6 +129,8 @@ def compute_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Compute mean/median/p90/p95/p99/min/max/throughput per label, across all 45 Thread Groups."""
     rows = []
     for label, group in df.groupby("label"):
+        if label.endswith("-ping"):
+            continue  # handled separately by compute_ping_summary, has no shape/tier dimension
         combo, shape, tier = parse_label(label)
         elapsed, excluded = _exclude_negative_elapsed(group, label)
         total_count = len(group)
@@ -286,6 +288,89 @@ def _plot_gradation(summary: pd.DataFrame, metric: str, ylabel: str, title: str,
     fig.savefig(OUTPUT_GRADATION_DIR / filename, dpi=150)
     print(f"Saved {OUTPUT_GRADATION_DIR / filename}")
 
+def compute_ping_summary(df: pd.DataFrame) -> pd.DataFrame:
+    """Compute stats for the 5 'ping' labels (empty request/response), used as a fixed-cost reference point. Handled separately from parse_label/compute_summary since ping has no shape/tier dimension at all."""
+    rows = []
+    for prefix, combo in COMBO_NAMES.items():
+        label = f"{prefix}-ping"
+        if label not in df["label"].values:
+            continue
+        group = df[df["label"] == label]
+        elapsed, excluded = _exclude_negative_elapsed(group, label)
+        duration_s = (group["timeStamp"] + group["elapsed"].clip(lower=0)).max() - group["timeStamp"].min()
+        duration_s = max(duration_s, 1) / 1000
+        rows.append({
+            "label": label, "combo": combo,
+            "mean": elapsed.mean(), "median": elapsed.median(),
+            "p99": elapsed.quantile(0.99), "min": elapsed.min(), "max": elapsed.max(),
+            "throughput": len(group) / duration_s,
+        })
+    return pd.DataFrame(rows)
+
+
+def print_ping_table(summary: pd.DataFrame):
+    """Print (and save as CSV) the ping reference-point table."""
+    table = summary[["combo", "mean", "p99", "min", "max"]].sort_values("combo").copy()
+    table.columns = ["Kombinasi", "Mean (ms)", "P99 (ms)", "Min (ms)", "Max (ms)"]
+    for col in ["Mean (ms)", "P99 (ms)", "Min (ms)", "Max (ms)"]:
+        table[col] = table[col].round(2)
+    print("\nRingkasan Response Time - Ping (referensi biaya tetap):")
+    print(table.to_string(index=False))
+    table.to_csv(SCRIPT_DIR / "response_time_summary_ping.csv", index=False)
+
+
+def plot_ping_bar(summary: pd.DataFrame):
+    """Bar chart: one bar per protocol/format combination, mean response time for the empty ping payload. This is the actual payoff chart for the fixed-cost hypothesis: differences here can't be explained by serialization cost, since there's essentially nothing to serialize."""
+    combos = list(COMBO_NAMES.values())
+    vals = [summary[summary.combo == c]["mean"].sum() for c in combos]
+    colors = [COMBO_COLORS[c] for c in combos]
+
+    fig, ax = plt.subplots(figsize=(9, 6))
+    bars = ax.bar(range(len(combos)), vals, color=colors, alpha=0.88, edgecolor="#E5E5E5", linewidth=0.8)
+    ax.bar_label(bars, fmt="%.2f", fontsize=9, padding=3)
+
+    ax.set_xticks(range(len(combos)))
+    ax.set_xticklabels(combos, rotation=20, ha="right")
+    ax.set_ylabel("Response Time Rata-rata (ms)")
+    fig.suptitle("Ping - Response Time (Referensi Biaya Tetap)", fontsize=13, fontweight="bold", y=0.98)
+    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
+    ax.set_ylim(top=max(vals) * 1.2)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+
+    fig.savefig(SCRIPT_DIR / "ping_response_time.png", dpi=150)
+    print(f"Saved {SCRIPT_DIR / 'ping_response_time.png'}")
+
+
+def plot_ping_overlay(df: pd.DataFrame):
+    """Overlay chart: one line per combination, x-axis = time since test start. Useful to check whether any gap is stable throughout the run (consistent with a true fixed per-call cost) or decays over time (suggesting a one-time warmup cost instead)."""
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    for prefix, combo in COMBO_NAMES.items():
+        label = f"{prefix}-ping"
+        subset = df[df["label"] == label].copy()
+        subset = subset[subset["elapsed"] >= 0]
+        if subset.empty:
+            continue
+        start = subset["timeStamp"].min()
+        subset["bucket_s"] = (subset["timeStamp"] - start) // 500 / 2
+        bucketed = subset.groupby("bucket_s")["elapsed"].mean()
+        ax.plot(bucketed.index, bucketed.values, label=combo, color=COMBO_COLORS[combo],
+                linewidth=1.5, marker="o", markersize=4)
+
+    ax.set_xlabel("Waktu Sejak Pengujian Dimulai (detik)")
+    ax.set_ylabel("Response Time Rata-rata (ms)")
+    fig.suptitle("Ping - Response Time Sepanjang Waktu", fontsize=13, fontweight="bold", y=0.98)
+    fig.text(0.5, 0.925, SCENARIO_LABEL, fontsize=9, color="black", style="italic", ha="center")
+    ax.legend(title="Kombinasi")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+
+    fig.savefig(SCRIPT_DIR / "ping_response_time_overlay.png", dpi=150)
+    print(f"Saved {SCRIPT_DIR / 'ping_response_time_overlay.png'}")
+
 
 def plot_gradation_response_time(summary: pd.DataFrame):
     _plot_gradation(summary, metric="mean", ylabel="Rasio Mean Response Time (gRPC ÷ REST HTTP/2+Protobuf)",
@@ -314,6 +399,11 @@ def main():
 
     plot_gradation_response_time(summary)
     plot_gradation_throughput(summary)
+
+    ping_summary = compute_ping_summary(df)
+    print_ping_table(ping_summary)
+    plot_ping_bar(ping_summary)
+    plot_ping_overlay(df)
 
 
 if __name__ == "__main__":

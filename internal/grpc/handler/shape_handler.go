@@ -59,3 +59,8 @@ func (h *ShapeHandler) GetShapeDepth4WideCompact(ctx context.Context, _ *model.S
 func (h *ShapeHandler) GetShapeDepth4WideLarge(ctx context.Context, _ *model.ShapeEmpty) (*model.ShapeDepth4WideResponse, error) {
 	return h.service.GetDepth4WideLarge(), nil
 }
+
+// Ping returns an empty response immediately, used as a near-zero-cost reference point to isolate fixed per-call overhead from serialization cost.
+func (h *ShapeHandler) Ping(ctx context.Context, _ *model.ShapeEmpty) (*model.ShapeEmpty, error) {
+	return &model.ShapeEmpty{}, nil
+}

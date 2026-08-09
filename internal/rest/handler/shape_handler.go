@@ -7,6 +7,7 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 
+	"scaling-up-rest-vs-grpc/internal/data/model"
 	"scaling-up-rest-vs-grpc/internal/rest/service"
 )
 
@@ -100,6 +101,16 @@ func (h *ShapeHandler) ServeProtobufDepth4WideCompact(w http.ResponseWriter, r *
 // ServeProtobufDepth4WideLarge writes the ~500 KB depth-4-wide dataset as Protobuf binary.
 func (h *ShapeHandler) ServeProtobufDepth4WideLarge(w http.ResponseWriter, r *http.Request) {
 	writeShapeProtobuf(w, h.service.GetDepth4WideLarge())
+}
+
+// ServePingJSON writes an empty ShapeEmpty response as JSON, used as a near-zero-cost reference point to isolate fixed per-call overhead from serialization cost.
+func (h *ShapeHandler) ServePingJSON(w http.ResponseWriter, r *http.Request) {
+	writeShapeJSON(w, &model.ShapeEmpty{})
+}
+
+// ServePingProtobuf writes an empty ShapeEmpty response as Protobuf binary, used as a near-zero-cost reference point to isolate fixed per-call overhead from serialization cost.
+func (h *ShapeHandler) ServePingProtobuf(w http.ResponseWriter, r *http.Request) {
+	writeShapeProtobuf(w, &model.ShapeEmpty{})
 }
 
 // writeShapeJSON marshals a shape-experiment response message as JSON and writes it to w.

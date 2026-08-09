@@ -27,6 +27,7 @@ const (
 	ShapeExperimentService_GetShapeDepth3NarrowLarge_FullMethodName   = "/shapeexperiment.ShapeExperimentService/GetShapeDepth3NarrowLarge"
 	ShapeExperimentService_GetShapeDepth4WideCompact_FullMethodName   = "/shapeexperiment.ShapeExperimentService/GetShapeDepth4WideCompact"
 	ShapeExperimentService_GetShapeDepth4WideLarge_FullMethodName     = "/shapeexperiment.ShapeExperimentService/GetShapeDepth4WideLarge"
+	ShapeExperimentService_Ping_FullMethodName                        = "/shapeexperiment.ShapeExperimentService/Ping"
 )
 
 // ShapeExperimentServiceClient is the client API for ShapeExperimentService service.
@@ -48,6 +49,7 @@ type ShapeExperimentServiceClient interface {
 	GetShapeDepth3NarrowLarge(ctx context.Context, in *ShapeEmpty, opts ...grpc.CallOption) (*ShapeDepth3NarrowResponse, error)
 	GetShapeDepth4WideCompact(ctx context.Context, in *ShapeEmpty, opts ...grpc.CallOption) (*ShapeDepth4WideResponse, error)
 	GetShapeDepth4WideLarge(ctx context.Context, in *ShapeEmpty, opts ...grpc.CallOption) (*ShapeDepth4WideResponse, error)
+	Ping(ctx context.Context, in *ShapeEmpty, opts ...grpc.CallOption) (*ShapeEmpty, error)
 }
 
 type shapeExperimentServiceClient struct {
@@ -138,6 +140,16 @@ func (c *shapeExperimentServiceClient) GetShapeDepth4WideLarge(ctx context.Conte
 	return out, nil
 }
 
+func (c *shapeExperimentServiceClient) Ping(ctx context.Context, in *ShapeEmpty, opts ...grpc.CallOption) (*ShapeEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShapeEmpty)
+	err := c.cc.Invoke(ctx, ShapeExperimentService_Ping_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ShapeExperimentServiceServer is the server API for ShapeExperimentService service.
 // All implementations must embed UnimplementedShapeExperimentServiceServer
 // for forward compatibility.
@@ -157,6 +169,7 @@ type ShapeExperimentServiceServer interface {
 	GetShapeDepth3NarrowLarge(context.Context, *ShapeEmpty) (*ShapeDepth3NarrowResponse, error)
 	GetShapeDepth4WideCompact(context.Context, *ShapeEmpty) (*ShapeDepth4WideResponse, error)
 	GetShapeDepth4WideLarge(context.Context, *ShapeEmpty) (*ShapeDepth4WideResponse, error)
+	Ping(context.Context, *ShapeEmpty) (*ShapeEmpty, error)
 	mustEmbedUnimplementedShapeExperimentServiceServer()
 }
 
@@ -190,6 +203,9 @@ func (UnimplementedShapeExperimentServiceServer) GetShapeDepth4WideCompact(conte
 }
 func (UnimplementedShapeExperimentServiceServer) GetShapeDepth4WideLarge(context.Context, *ShapeEmpty) (*ShapeDepth4WideResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetShapeDepth4WideLarge not implemented")
+}
+func (UnimplementedShapeExperimentServiceServer) Ping(context.Context, *ShapeEmpty) (*ShapeEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method Ping not implemented")
 }
 func (UnimplementedShapeExperimentServiceServer) mustEmbedUnimplementedShapeExperimentServiceServer() {
 }
@@ -357,6 +373,24 @@ func _ShapeExperimentService_GetShapeDepth4WideLarge_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ShapeExperimentService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShapeEmpty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShapeExperimentServiceServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShapeExperimentService_Ping_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShapeExperimentServiceServer).Ping(ctx, req.(*ShapeEmpty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ShapeExperimentService_ServiceDesc is the grpc.ServiceDesc for ShapeExperimentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -395,6 +429,10 @@ var ShapeExperimentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetShapeDepth4WideLarge",
 			Handler:    _ShapeExperimentService_GetShapeDepth4WideLarge_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _ShapeExperimentService_Ping_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
