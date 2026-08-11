@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package orderexperiment;
+
+option go_package = "scaling-up-rest-vs-grpc/internal/data/model";
+
+// OrderEmpty is a placeholder request message for all RPC methods in this
+// experiment, since none of them require input parameters.
+message OrderEmpty {}
+
+// ============================================================
+// Depth 0 — flat, single entity, 15 fields, no nesting.
+// Shared by four methods (DepthZero, One, Hundred, Thousand),
+// which differ only in array length, not shape.
+// ============================================================
+
+message OrderDepthZero {
+  string order_id = 1;
+  string order_number = 2;
+  string order_date = 3;
+  string order_status = 4;
+  string payment_method = 5;
+  string payment_status = 6;
+  double subtotal_amount = 7;
+  double shipping_fee = 8;
+  double total_amount = 9;
+  string promo_code = 10;
+  string shipping_method = 11;
+  string tracking_number = 12;
+  string estimated_delivery_date = 13;
+  int32 item_count = 14;
+  string order_notes = 15;
+}
+
+message OrderDepthZeroResponse {
+  repeated OrderDepthZero orders = 1;
+}
+
+// ============================================================
+// Depth 2 — Order -> Customer -> Address, 5 fields each, single
+// object chain (no array nesting inside a document).
+// ============================================================
+
+message OrderDepthTwo {
+  string order_id = 1;
+  string order_number = 2;
+  string order_date = 3;
+  string order_status = 4;
+  double total_amount = 5;
+}
+
+message CustomerDepthTwo {
+  string customer_id = 1;
+  string full_name = 2;
+  string email = 3;
+  string phone = 4;
+  string loyalty_tier = 5;
+}
+
+message AddressDepthTwo {
+  string address_id = 1;
+  string recipient_name = 2;
+  string address_line1 = 3;
+  string postal_code = 4;
+  string address_type = 5;
+}
+
+message OrderDepthTwoDocument {
+  OrderDepthTwo order = 1;
+  CustomerDepthTwo customer = 2;
+  AddressDepthTwo address = 3;
+}
+
+message OrderDepthTwoResponse {
+  repeated OrderDepthTwoDocument orders = 1;
+}
+
+// ============================================================
+// Depth 4 — Order -> Customer -> Address -> Region -> Country,
+// 3 fields each, single object chain.
+// ============================================================
+
+message OrderDepthFour {
+  string order_id = 1;
+  string order_date = 2;
+  double total_amount = 3;
+}
+
+message CustomerDepthFour {
+  string customer_id = 1;
+  string full_name = 2;
+  string email = 3;
+}
+
+message AddressDepthFour {
+  string address_id = 1;
+  string address_line1 = 2;
+  string postal_code = 3;
+}
+
+message RegionDepthFour {
+  string region_id = 1;
+  string region_name = 2;
+  string timezone = 3;
+}
+
+message CountryDepthFour {
+  string country_id = 1;
+  string country_name = 2;
+  string country_code = 3;
+}
+
+message OrderDepthFourDocument {
+  OrderDepthFour order = 1;
+  CustomerDepthFour customer = 2;
+  AddressDepthFour address = 3;
+  RegionDepthFour region = 4;
+  CountryDepthFour country = 5;
+}
+
+message OrderDepthFourResponse {
+  repeated OrderDepthFourDocument orders = 1;
+}
+
+// ============================================================
+// Service definition
+// ============================================================
+
+// OrderExperimentService exposes GET-only unary RPCs for the
+// depth-scenario and element-count-scenario investigation.
+// GetOrderDepthZero, GetOrderOne, GetOrderHundred, and
+// GetOrderThousand all share the same flat (depth-0) shape and
+// differ only in seeded array length; GetOrderDepthTwo and
+// GetOrderDepthFour use progressively deeper single-object chains
+// at a fixed array length of 1.
+service OrderExperimentService {
+  rpc GetOrderDepthZero(OrderEmpty) returns (OrderDepthZeroResponse);
+  rpc GetOrderDepthTwo(OrderEmpty) returns (OrderDepthTwoResponse);
+  rpc GetOrderDepthFour(OrderEmpty) returns (OrderDepthFourResponse);
+  rpc GetOrderOne(OrderEmpty) returns (OrderDepthZeroResponse);
+  rpc GetOrderHundred(OrderEmpty) returns (OrderDepthZeroResponse);
+  rpc GetOrderThousand(OrderEmpty) returns (OrderDepthZeroResponse);
+}

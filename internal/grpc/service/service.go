@@ -5,7 +5,7 @@ import (
 	"scaling-up-rest-vs-grpc/internal/data/model"
 )
 
-// Service exposes read-only access to the seeded student dataset for the gRPC handler, and contains no logic beyond delegating to Cache.
+// Service exposes read-only access to the seeded order dataset for the gRPC handler, and contains no logic beyond delegating to Cache.
 type Service struct {
 	cache *cache.Cache
 }
@@ -15,22 +15,32 @@ func New(c *cache.Cache) *Service {
 	return &Service{cache: c}
 }
 
-// GetSmallDataset returns the 1-entry dataset from the cache.
-func (s *Service) GetSmallDataset() *model.StudentResponse {
-	return s.cache.GetSmallDataset()
+// GetDepthZero returns the depth-0 dataset from the cache.
+func (s *Service) GetDepthZero() *model.OrderDepthZeroResponse {
+	return s.cache.GetDepthZero()
 }
 
-// GetMediumDataset returns the 100-entry dataset from the cache.
-func (s *Service) GetMediumDataset() *model.StudentResponse {
-	return s.cache.GetMediumDataset()
+// GetDepthTwo returns the depth-2 dataset from the cache.
+func (s *Service) GetDepthTwo() *model.OrderDepthTwoResponse {
+	return s.cache.GetDepthTwo()
 }
 
-// GetLargeDataset returns the 1000-entry dataset from the cache.
-func (s *Service) GetLargeDataset() *model.StudentResponse {
-	return s.cache.GetLargeDataset()
+// GetDepthFour returns the depth-4 dataset from the cache.
+func (s *Service) GetDepthFour() *model.OrderDepthFourResponse {
+	return s.cache.GetDepthFour()
 }
 
-// CreateStudent appends a new student record to the cache, the write-path counterpart of the three GetXDataset methods above.
-func (s *Service) CreateStudent(student *model.Student) {
-	s.cache.AddStudent(student)
+// GetOne returns the 1-element dataset from the cache.
+func (s *Service) GetOne() *model.OrderDepthZeroResponse {
+	return s.cache.GetOne()
+}
+
+// GetHundred returns the 100-element dataset from the cache.
+func (s *Service) GetHundred() *model.OrderDepthZeroResponse {
+	return s.cache.GetHundred()
+}
+
+// GetThousand returns the 1000-element dataset from the cache.
+func (s *Service) GetThousand() *model.OrderDepthZeroResponse {
+	return s.cache.GetThousand()
 }

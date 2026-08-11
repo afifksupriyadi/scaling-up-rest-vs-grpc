@@ -26,7 +26,7 @@ func NewServer(cached *cache.Cache, shapeCached *cache.ShapeCache) *grpc.Server 
 		grpc.InitialWindowSize(initialWindowSize),
 		grpc.InitialConnWindowSize(initialWindowSize),
 	)
-	model.RegisterStudentServiceServer(s, h)
+	model.RegisterOrderExperimentServiceServer(s, h)
 	model.RegisterShapeExperimentServiceServer(s, shapeH)
 	return s
 }

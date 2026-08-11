@@ -27,16 +27,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := seedDataset(client, constant.RedisKeySmallDataset, 1); err != nil {
-		slog.Error("failed to seed small dataset", "error", err)
-		os.Exit(1)
-	}
-	if err := seedDataset(client, constant.RedisKeyMediumDataset, 100); err != nil {
-		slog.Error("failed to seed medium dataset", "error", err)
-		os.Exit(1)
-	}
-	if err := seedDataset(client, constant.RedisKeyLargeDataset, 1000); err != nil {
-		slog.Error("failed to seed large dataset", "error", err)
+	if err := seedOrderExperiment(client); err != nil {
+		slog.Error("failed to seed order experiment datasets", "error", err)
 		os.Exit(1)
 	}
 
@@ -48,13 +40,64 @@ func main() {
 	slog.Info("seeding completed", "redis_addr", addr)
 }
 
-// seedDataset generates n fake students, encodes them as a single StudentResponse, and writes the result to Redis under key.
-func seedDataset(client *redis.Client, key string, n int) error {
-	resp, err := seeder.ToStudentResponse(n)
+// seedOrderExperiment seeds all six datasets used by the depth-scenario
+// and element-count-scenario investigation, in two groups: depth
+// (DepthZero, DepthTwo, DepthFour) followed by element count
+// (One, Hundred, Thousand). Every dataset follows the same
+// generate-then-write pattern, regardless of which group it belongs to.
+func seedOrderExperiment(client *redis.Client) error {
+	// Depth scenario.
+	depthZero, err := seeder.ToOrderDepthZeroResponse(1)
 	if err != nil {
 		return err
 	}
-	b, err := protojson.Marshal(resp)
+	if err := writeOrderDataset(client, constant.RedisKeyOrderDepthZero, depthZero); err != nil {
+		return err
+	}
+
+	depthTwo, err := seeder.ToOrderDepthTwoResponse(1)
+	if err != nil {
+		return err
+	}
+	if err := writeOrderDataset(client, constant.RedisKeyOrderDepthTwo, depthTwo); err != nil {
+		return err
+	}
+
+	depthFour, err := seeder.ToOrderDepthFourResponse(1)
+	if err != nil {
+		return err
+	}
+	if err := writeOrderDataset(client, constant.RedisKeyOrderDepthFour, depthFour); err != nil {
+		return err
+	}
+
+	// Element-count scenario.
+	one, err := seeder.ToOrderDepthZeroResponse(1)
+	if err != nil {
+		return err
+	}
+	if err := writeOrderDataset(client, constant.RedisKeyOrderOne, one); err != nil {
+		return err
+	}
+
+	hundred, err := seeder.ToOrderDepthZeroResponse(100)
+	if err != nil {
+		return err
+	}
+	if err := writeOrderDataset(client, constant.RedisKeyOrderHundred, hundred); err != nil {
+		return err
+	}
+
+	thousand, err := seeder.ToOrderDepthZeroResponse(1000)
+	if err != nil {
+		return err
+	}
+	return writeOrderDataset(client, constant.RedisKeyOrderThousand, thousand)
+}
+
+// writeOrderDataset encodes a single order-experiment message as protojson and writes it to Redis under key.
+func writeOrderDataset(client *redis.Client, key string, msg proto.Message) error {
+	b, err := protojson.Marshal(msg)
 	if err != nil {
 		return err
 	}

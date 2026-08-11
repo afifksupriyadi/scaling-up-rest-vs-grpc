@@ -1,18 +1,18 @@
 package handler
 
 import (
-	"io"
 	"log/slog"
 	"net/http"
 
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 
-	"scaling-up-rest-vs-grpc/internal/data/model"
 	"scaling-up-rest-vs-grpc/internal/rest/service"
 )
 
-// Handler serves student data over REST in either JSON or Protobuf binary format, and contains no business logic beyond asking the service for data and writing the response.
+// Handler serves order data over REST in either JSON or Protobuf binary
+// format, and contains no business logic beyond asking the service for
+// data and writing the response.
 type Handler struct {
 	service *service.Service
 }
@@ -22,78 +22,69 @@ func New(s *service.Service) *Handler {
 	return &Handler{service: s}
 }
 
-// ServeJSONSmall writes the 1-entry dataset as JSON.
-func (h *Handler) ServeJSONSmall(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, h.service.GetSmallDataset())
+// ServeJSONDepthZero writes the depth-0 dataset as JSON.
+func (h *Handler) ServeJSONDepthZero(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, h.service.GetDepthZero())
 }
 
-// ServeJSONMedium writes the 100-entry dataset as JSON.
-func (h *Handler) ServeJSONMedium(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, h.service.GetMediumDataset())
+// ServeJSONDepthTwo writes the depth-2 dataset as JSON.
+func (h *Handler) ServeJSONDepthTwo(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, h.service.GetDepthTwo())
 }
 
-// ServeJSONLarge writes the 1000-entry dataset as JSON.
-func (h *Handler) ServeJSONLarge(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, h.service.GetLargeDataset())
+// ServeJSONDepthFour writes the depth-4 dataset as JSON.
+func (h *Handler) ServeJSONDepthFour(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, h.service.GetDepthFour())
 }
 
-// ServeProtobufSmall writes the 1-entry dataset as Protobuf binary.
-func (h *Handler) ServeProtobufSmall(w http.ResponseWriter, r *http.Request) {
-	writeProtobuf(w, h.service.GetSmallDataset())
+// ServeJSONOne writes the 1-element dataset as JSON.
+func (h *Handler) ServeJSONOne(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, h.service.GetOne())
 }
 
-// ServeProtobufMedium writes the 100-entry dataset as Protobuf binary.
-func (h *Handler) ServeProtobufMedium(w http.ResponseWriter, r *http.Request) {
-	writeProtobuf(w, h.service.GetMediumDataset())
+// ServeJSONHundred writes the 100-element dataset as JSON.
+func (h *Handler) ServeJSONHundred(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, h.service.GetHundred())
 }
 
-// ServeProtobufLarge writes the 1000-entry dataset as Protobuf binary.
-func (h *Handler) ServeProtobufLarge(w http.ResponseWriter, r *http.Request) {
-	writeProtobuf(w, h.service.GetLargeDataset())
+// ServeJSONThousand writes the 1000-element dataset as JSON.
+func (h *Handler) ServeJSONThousand(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, h.service.GetThousand())
 }
 
-// CreateStudentJSON reads a single Student record from the request body, encoded as JSON, and appends it to the cache, the reverse of what the ServeJSON* handlers above measure.
-func (h *Handler) CreateStudentJSON(w http.ResponseWriter, r *http.Request) {
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, "failed to read request body", http.StatusBadRequest)
-		return
-	}
-
-	var student model.Student
-	if err := protojson.Unmarshal(body, &student); err != nil {
-		http.Error(w, "invalid JSON body", http.StatusBadRequest)
-		return
-	}
-
-	h.service.CreateStudent(&student)
-	writeCreated(w)
+// ServeProtobufDepthZero writes the depth-0 dataset as Protobuf binary.
+func (h *Handler) ServeProtobufDepthZero(w http.ResponseWriter, r *http.Request) {
+	writeProtobuf(w, h.service.GetDepthZero())
 }
 
-// CreateStudentProtobuf reads a single Student record from the request body, encoded as Protobuf binary, and appends it to the cache, the reverse of what the ServeProtobuf* handlers above measure.
-func (h *Handler) CreateStudentProtobuf(w http.ResponseWriter, r *http.Request) {
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, "failed to read request body", http.StatusBadRequest)
-		return
-	}
-
-	var student model.Student
-	if err := proto.Unmarshal(body, &student); err != nil {
-		http.Error(w, "invalid protobuf body", http.StatusBadRequest)
-		return
-	}
-
-	h.service.CreateStudent(&student)
-	writeCreated(w)
+// ServeProtobufDepthTwo writes the depth-2 dataset as Protobuf binary.
+func (h *Handler) ServeProtobufDepthTwo(w http.ResponseWriter, r *http.Request) {
+	writeProtobuf(w, h.service.GetDepthTwo())
 }
 
-// writeJSON marshals data as JSON and writes it to w, or responds with an error if data is nil or marshaling fails.
-func writeJSON(w http.ResponseWriter, data *model.StudentResponse) {
-	if data == nil {
-		http.Error(w, "dataset not seeded yet", http.StatusServiceUnavailable)
-		return
-	}
+// ServeProtobufDepthFour writes the depth-4 dataset as Protobuf binary.
+func (h *Handler) ServeProtobufDepthFour(w http.ResponseWriter, r *http.Request) {
+	writeProtobuf(w, h.service.GetDepthFour())
+}
+
+// ServeProtobufOne writes the 1-element dataset as Protobuf binary.
+func (h *Handler) ServeProtobufOne(w http.ResponseWriter, r *http.Request) {
+	writeProtobuf(w, h.service.GetOne())
+}
+
+// ServeProtobufHundred writes the 100-element dataset as Protobuf binary.
+func (h *Handler) ServeProtobufHundred(w http.ResponseWriter, r *http.Request) {
+	writeProtobuf(w, h.service.GetHundred())
+}
+
+// ServeProtobufThousand writes the 1000-element dataset as Protobuf binary.
+func (h *Handler) ServeProtobufThousand(w http.ResponseWriter, r *http.Request) {
+	writeProtobuf(w, h.service.GetThousand())
+}
+
+// writeJSON marshals a response message as JSON and writes it to w.
+// - Takes proto.Message (an interface) instead of a concrete type, since the three depth points are three distinct generated Go types.
+func writeJSON(w http.ResponseWriter, data proto.Message) {
 	b, err := protojson.Marshal(data)
 	if err != nil {
 		slog.Error("failed to marshal response as json", "error", err)
@@ -104,12 +95,9 @@ func writeJSON(w http.ResponseWriter, data *model.StudentResponse) {
 	w.Write(b)
 }
 
-// writeProtobuf marshals data as Protobuf binary and writes it to w, or responds with an error if data is nil or marshaling fails.
-func writeProtobuf(w http.ResponseWriter, data *model.StudentResponse) {
-	if data == nil {
-		http.Error(w, "dataset not seeded yet", http.StatusServiceUnavailable)
-		return
-	}
+// writeProtobuf marshals a response message as Protobuf binary and writes it to w.
+// - Takes proto.Message (an interface) instead of a concrete type, since the three depth points are three distinct generated Go types.
+func writeProtobuf(w http.ResponseWriter, data proto.Message) {
 	b, err := proto.Marshal(data)
 	if err != nil {
 		slog.Error("failed to marshal response as protobuf", "error", err)
@@ -118,11 +106,4 @@ func writeProtobuf(w http.ResponseWriter, data *model.StudentResponse) {
 	}
 	w.Header().Set("Content-Type", "application/x-protobuf")
 	w.Write(b)
-}
-
-// writeCreated writes the minimal 201 Created acknowledgement shared by both CreateStudentJSON and CreateStudentProtobuf.
-func writeCreated(w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte(`{"status":"created"}`))
 }

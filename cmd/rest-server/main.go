@@ -45,8 +45,8 @@ func main() {
 		slog.Error("failed to load dataset from redis", "error", err)
 		os.Exit(1)
 	}
-	if cached.GetSmallDataset() == nil || cached.GetLargeDataset() == nil {
-		slog.Warn("dataset not seeded yet")
+	if cached.GetDepthZero() == nil || cached.GetDepthTwo() == nil || cached.GetDepthFour() == nil {
+		slog.Warn("order dataset not seeded yet")
 	}
 
 	shapeCached := cache.NewShape()

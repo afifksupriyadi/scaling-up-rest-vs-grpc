@@ -1,10 +1,14 @@
 package constant
 
-// RedisKeySmallDataset, RedisKeyMediumDataset, and RedisKeyLargeDataset are the Redis keys used to persist the three seeded datasets.
+// Order-experiment Redis keys (depth-scenario and element-count-scenario
+// investigation, replacing the retired Student dataset).
 const (
-	RedisKeySmallDataset  = "student:small"
-	RedisKeyMediumDataset = "student:medium"
-	RedisKeyLargeDataset  = "student:large"
+	RedisKeyOrderDepthZero = "order:depth-zero"
+	RedisKeyOrderDepthTwo  = "order:depth-two"
+	RedisKeyOrderDepthFour = "order:depth-four"
+	RedisKeyOrderOne       = "order:one"
+	RedisKeyOrderHundred   = "order:hundred"
+	RedisKeyOrderThousand  = "order:thousand"
 )
 
 // Shape-experiment Redis keys (structural-depth investigation, separate
