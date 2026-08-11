@@ -14,8 +14,8 @@ import (
 // - net/http's REST server does not need this adjustment, since it uses a large static window from the very first request instead of growing dynamically.
 const initialWindowSize = 1024 * 1024 * 4 // 4 MB
 
-// NewServer builds a *grpc.Server without TLS (plaintext), consistent with grpc-go's own default behavior when grpc.Creds() is not called.
-func NewServer(cached *cache.Cache, shapeCached *cache.ShapeCache) *grpc.Server {
+// NewServer builds a *grpc.Server using creds for TLS, loaded by the caller.
+func NewServer(cached *cache.Cache, shapeCached *cache.ShapeCache, creds grpc.ServerOption) *grpc.Server {
 	svc := service.New(cached)
 	h := handler.New(svc)
 
@@ -23,6 +23,7 @@ func NewServer(cached *cache.Cache, shapeCached *cache.ShapeCache) *grpc.Server 
 	shapeH := handler.NewShape(shapeSvc)
 
 	s := grpc.NewServer(
+		creds,
 		grpc.InitialWindowSize(initialWindowSize),
 		grpc.InitialConnWindowSize(initialWindowSize),
 	)

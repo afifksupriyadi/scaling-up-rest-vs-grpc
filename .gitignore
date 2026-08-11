@@ -7,4 +7,6 @@ bin/
 # Data volume Docker lokal
 .docker-data/
 
-*:Zone.Identifier
+*:Zone.Identifiercerts/
+
+certs/

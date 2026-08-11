@@ -94,7 +94,7 @@ func NewServers(http1Addr, http2Addr string, cached *cache.Cache, shapeCached *c
 		Handler: mux,
 	}
 	http2Server.Protocols = new(http.Protocols)
-	http2Server.Protocols.SetUnencryptedHTTP2(true)
+	http2Server.Protocols.SetHTTP2(true)
 
 	return http1Server, http2Server
 }

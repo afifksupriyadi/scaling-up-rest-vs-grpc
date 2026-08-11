@@ -18,6 +18,8 @@ const (
 	http1Addr = ":8080"
 	http2Addr = ":8081"
 	pprofAddr = ":6061"
+	certFile  = "/certs/server.crt"
+	keyFile   = "/certs/server.key"
 )
 
 func main() {
@@ -66,12 +68,12 @@ func main() {
 
 	go func() {
 		slog.Info("rest-server (HTTP/1.1) started", "addr", http1Addr)
-		errCh <- http1Server.ListenAndServe()
+		errCh <- http1Server.ListenAndServeTLS(certFile, keyFile)
 	}()
 
 	go func() {
-		slog.Info("rest-server (HTTP/2 cleartext) started", "addr", http2Addr)
-		errCh <- http2Server.ListenAndServe()
+		slog.Info("rest-server (HTTP/2) started", "addr", http2Addr)
+		errCh <- http2Server.ListenAndServeTLS(certFile, keyFile)
 	}()
 
 	if err := <-errCh; err != nil {

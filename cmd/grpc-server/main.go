@@ -10,14 +10,19 @@ import (
 	"runtime"
 	"time"
 
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+
 	"scaling-up-rest-vs-grpc/internal/data/cache"
-	"scaling-up-rest-vs-grpc/internal/grpc"
+	grpcserver "scaling-up-rest-vs-grpc/internal/grpc"
 	"scaling-up-rest-vs-grpc/internal/lib/redis"
 )
 
 const (
 	listenAddr = ":50051"
 	pprofAddr  = ":6060"
+	certFile   = "/certs/server.crt"
+	keyFile    = "/certs/server.key"
 )
 
 func main() {
@@ -55,7 +60,13 @@ func main() {
 		http.ListenAndServe(pprofAddr, nil)
 	}()
 
-	server := grpc.NewServer(cached, shapeCached)
+	creds, err := credentials.NewServerTLSFromFile(certFile, keyFile)
+	if err != nil {
+		slog.Error("failed to load TLS credentials", "error", err)
+		os.Exit(1)
+	}
+
+	server := grpcserver.NewServer(cached, shapeCached, grpc.Creds(creds))
 
 	lis, err := net.Listen("tcp", listenAddr)
 	if err != nil {
