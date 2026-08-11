@@ -43,88 +43,84 @@ func ToOrderDepthZeroResponse(n int) (*model.OrderDepthZeroResponse, error) {
 
 // ---------- Depth 2 ----------
 
-func (f fakeOrderDepthTwoDocument) toProto() *model.OrderDepthTwoDocument {
-	return &model.OrderDepthTwoDocument{
-		Order: &model.OrderDepthTwo{
-			OrderId:     f.Order.OrderID,
-			OrderNumber: f.Order.OrderNumber,
-			OrderDate:   f.Order.OrderDate,
-			OrderStatus: f.Order.OrderStatus,
-			TotalAmount: float64(f.Order.TotalAmount),
-		},
+func (f fakeOrderDepthTwo) toProto() *model.OrderDepthTwo {
+	return &model.OrderDepthTwo{
+		OrderId:     f.OrderID,
+		OrderNumber: f.OrderNumber,
+		OrderDate:   f.OrderDate,
+		OrderStatus: f.OrderStatus,
+		TotalAmount: float64(f.TotalAmount),
 		Customer: &model.CustomerDepthTwo{
 			CustomerId:  f.Customer.CustomerID,
 			FullName:    f.Customer.FullName,
 			Email:       f.Customer.Email,
 			Phone:       f.Customer.Phone,
 			LoyaltyTier: f.Customer.LoyaltyTier,
-		},
-		Address: &model.AddressDepthTwo{
-			AddressId:     f.Address.AddressID,
-			RecipientName: f.Address.RecipientName,
-			AddressLine1:  f.Address.AddressLine1,
-			PostalCode:    f.Address.PostalCode,
-			AddressType:   f.Address.AddressType,
+			Address: &model.AddressDepthTwo{
+				AddressId:     f.Customer.Address.AddressID,
+				RecipientName: f.Customer.Address.RecipientName,
+				AddressLine1:  f.Customer.Address.AddressLine1,
+				PostalCode:    f.Customer.Address.PostalCode,
+				AddressType:   f.Customer.Address.AddressType,
+			},
 		},
 	}
 }
 
-// ToOrderDepthTwoResponse generates n fake depth-2 order documents and
+// ToOrderDepthTwoResponse generates n fake depth-2 order records and
 // wraps them into a model.OrderDepthTwoResponse.
 func ToOrderDepthTwoResponse(n int) (*model.OrderDepthTwoResponse, error) {
-	docs, err := GenerateOrdersDepthTwo(n)
+	orders, err := GenerateOrdersDepthTwo(n)
 	if err != nil {
 		return nil, err
 	}
-	data := make([]*model.OrderDepthTwoDocument, len(docs))
-	for i, d := range docs {
-		data[i] = d.toProto()
+	data := make([]*model.OrderDepthTwo, len(orders))
+	for i, o := range orders {
+		data[i] = o.toProto()
 	}
 	return &model.OrderDepthTwoResponse{Orders: data}, nil
 }
 
 // ---------- Depth 4 ----------
 
-func (f fakeOrderDepthFourDocument) toProto() *model.OrderDepthFourDocument {
-	return &model.OrderDepthFourDocument{
-		Order: &model.OrderDepthFour{
-			OrderId:     f.Order.OrderID,
-			OrderDate:   f.Order.OrderDate,
-			TotalAmount: float64(f.Order.TotalAmount),
-		},
+func (f fakeOrderDepthFour) toProto() *model.OrderDepthFour {
+	return &model.OrderDepthFour{
+		OrderId:     f.OrderID,
+		OrderDate:   f.OrderDate,
+		TotalAmount: float64(f.TotalAmount),
 		Customer: &model.CustomerDepthFour{
 			CustomerId: f.Customer.CustomerID,
 			FullName:   f.Customer.FullName,
 			Email:      f.Customer.Email,
-		},
-		Address: &model.AddressDepthFour{
-			AddressId:    f.Address.AddressID,
-			AddressLine1: f.Address.AddressLine1,
-			PostalCode:   f.Address.PostalCode,
-		},
-		Region: &model.RegionDepthFour{
-			RegionId:   f.Region.RegionID,
-			RegionName: f.Region.RegionName,
-			Timezone:   f.Region.Timezone,
-		},
-		Country: &model.CountryDepthFour{
-			CountryId:   f.Country.CountryID,
-			CountryName: f.Country.CountryName,
-			CountryCode: f.Country.CountryCode,
+			Address: &model.AddressDepthFour{
+				AddressId:    f.Customer.Address.AddressID,
+				AddressLine1: f.Customer.Address.AddressLine1,
+				PostalCode:   f.Customer.Address.PostalCode,
+				Region: &model.RegionDepthFour{
+					RegionId:   f.Customer.Address.Region.RegionID,
+					RegionName: f.Customer.Address.Region.RegionName,
+					Timezone:   f.Customer.Address.Region.Timezone,
+					Country: &model.CountryDepthFour{
+						CountryId:   f.Customer.Address.Region.Country.CountryID,
+						CountryName: f.Customer.Address.Region.Country.CountryName,
+						CountryCode: f.Customer.Address.Region.Country.CountryCode,
+					},
+				},
+			},
 		},
 	}
 }
 
-// ToOrderDepthFourResponse generates n fake depth-4 order documents and
+// ToOrderDepthFourResponse generates n fake depth-4 order records and
 // wraps them into a model.OrderDepthFourResponse.
 func ToOrderDepthFourResponse(n int) (*model.OrderDepthFourResponse, error) {
-	docs, err := GenerateOrdersDepthFour(n)
+	orders, err := GenerateOrdersDepthFour(n)
 	if err != nil {
 		return nil, err
 	}
-	data := make([]*model.OrderDepthFourDocument, len(docs))
-	for i, d := range docs {
-		data[i] = d.toProto()
+	data := make([]*model.OrderDepthFour, len(orders))
+	for i, o := range orders {
+		data[i] = o.toProto()
 	}
 	return &model.OrderDepthFourResponse{Orders: data}, nil
 }

@@ -51,27 +51,10 @@ func GenerateOrdersDepthZero(n int) ([]fakeOrderDepthZero, error) {
 	return orders, nil
 }
 
-// ---------- Depth 2 ----------
+// ---------- Depth 2 — true nested chain: Order -> Customer -> Address ----------
 
-// fakeOrderDepthTwo is the gofakeit template for the Order entity at depth 2.
-type fakeOrderDepthTwo struct {
-	OrderID     string
-	OrderNumber string
-	OrderDate   string
-	OrderStatus string  `fake:"{randomstring:[pending,processing,shipped,delivered,cancelled]}"`
-	TotalAmount float32 `fake:"{float32range:11,5050}"`
-}
-
-// fakeCustomerDepthTwo is the gofakeit template for the Customer entity at depth 2.
-type fakeCustomerDepthTwo struct {
-	CustomerID  string
-	FullName    string `fake:"{name}"`
-	Email       string `fake:"{email}"`
-	Phone       string `fake:"{phone}"`
-	LoyaltyTier string `fake:"{randomstring:[bronze,silver,gold,platinum]}"`
-}
-
-// fakeAddressDepthTwo is the gofakeit template for the Address entity at depth 2.
+// fakeAddressDepthTwo is the gofakeit template for the Address entity at
+// depth 2, the end of the chain.
 type fakeAddressDepthTwo struct {
 	AddressID     string
 	RecipientName string `fake:"{name}"`
@@ -80,92 +63,111 @@ type fakeAddressDepthTwo struct {
 	AddressType   string `fake:"{randomstring:[home,office,warehouse]}"`
 }
 
-// fakeOrderDepthTwoDocument bundles the three depth-2 entities into one
-// single-object chain, matching the OrderDepthTwoDocument proto message.
-type fakeOrderDepthTwoDocument struct {
-	Order    fakeOrderDepthTwo
-	Customer fakeCustomerDepthTwo
-	Address  fakeAddressDepthTwo
+// fakeCustomerDepthTwo is the gofakeit template for the Customer entity at
+// depth 2, nesting Address inside it.
+type fakeCustomerDepthTwo struct {
+	CustomerID  string
+	FullName    string `fake:"{name}"`
+	Email       string `fake:"{email}"`
+	Phone       string `fake:"{phone}"`
+	LoyaltyTier string `fake:"{randomstring:[bronze,silver,gold,platinum]}"`
+	Address     fakeAddressDepthTwo
 }
 
-// GenerateOrdersDepthTwo produces n fake depth-2 order documents.
-func GenerateOrdersDepthTwo(n int) ([]fakeOrderDepthTwoDocument, error) {
-	docs := make([]fakeOrderDepthTwoDocument, n)
+// fakeOrderDepthTwo is the gofakeit template for the Order entity at depth
+// 2, nesting Customer inside it.
+//   - gofakeit.Struct() fills nested struct fields recursively, so a single
+//     call below populates Customer and Address too, not just Order itself.
+type fakeOrderDepthTwo struct {
+	OrderID     string
+	OrderNumber string
+	OrderDate   string
+	OrderStatus string  `fake:"{randomstring:[pending,processing,shipped,delivered,cancelled]}"`
+	TotalAmount float32 `fake:"{float32range:11,5050}"`
+	Customer    fakeCustomerDepthTwo
+}
+
+// GenerateOrdersDepthTwo produces n fake depth-2 order records, each a
+// nested chain of Order -> Customer -> Address.
+func GenerateOrdersDepthTwo(n int) ([]fakeOrderDepthTwo, error) {
+	orders := make([]fakeOrderDepthTwo, n)
 	now := time.Now()
-	for i := range docs {
-		if err := gofakeit.Struct(&docs[i]); err != nil {
+	for i := range orders {
+		if err := gofakeit.Struct(&orders[i]); err != nil {
 			return nil, fmt.Errorf("generate order depth-two %d: %w", i, err)
 		}
-		docs[i].Order.OrderID = fmt.Sprintf("ORD-%08d", i+1)
-		docs[i].Order.OrderNumber = fmt.Sprintf("ORDNUM-%08d", i+1)
-		docs[i].Order.OrderDate = now.AddDate(0, 0, -i).Format("2006-01-02")
-		docs[i].Customer.CustomerID = fmt.Sprintf("CUST-%08d", i+1)
-		docs[i].Address.AddressID = fmt.Sprintf("ADDR-%08d", i+1)
+		orders[i].OrderID = fmt.Sprintf("ORD-%08d", i+1)
+		orders[i].OrderNumber = fmt.Sprintf("ORDNUM-%08d", i+1)
+		orders[i].OrderDate = now.AddDate(0, 0, -i).Format("2006-01-02")
+		orders[i].Customer.CustomerID = fmt.Sprintf("CUST-%08d", i+1)
+		orders[i].Customer.Address.AddressID = fmt.Sprintf("ADDR-%08d", i+1)
 	}
-	return docs, nil
+	return orders, nil
 }
 
-// ---------- Depth 4 ----------
+// ---------- Depth 4 — true nested chain: Order -> Customer -> Address -> Region -> Country ----------
 
-// fakeOrderDepthFour is the gofakeit template for the Order entity at depth 4.
-type fakeOrderDepthFour struct {
-	OrderID     string
-	OrderDate   string
-	TotalAmount float32 `fake:"{float32range:11,5050}"`
-}
-
-// fakeCustomerDepthFour is the gofakeit template for the Customer entity at depth 4.
-type fakeCustomerDepthFour struct {
-	CustomerID string
-	FullName   string `fake:"{name}"`
-	Email      string `fake:"{email}"`
-}
-
-// fakeAddressDepthFour is the gofakeit template for the Address entity at depth 4.
-type fakeAddressDepthFour struct {
-	AddressID    string
-	AddressLine1 string `fake:"{street}"`
-	PostalCode   string `fake:"{zip}"`
-}
-
-// fakeRegionDepthFour is the gofakeit template for the Region entity at depth 4.
-type fakeRegionDepthFour struct {
-	RegionID   string
-	RegionName string `fake:"{state}"`
-	Timezone   string `fake:"{timezone}"`
-}
-
-// fakeCountryDepthFour is the gofakeit template for the Country entity at depth 4.
+// fakeCountryDepthFour is the gofakeit template for the Country entity at
+// depth 4, the end of the chain.
 type fakeCountryDepthFour struct {
 	CountryID   string
 	CountryName string `fake:"{country}"`
 	CountryCode string `fake:"{countryabr}"`
 }
 
-// fakeOrderDepthFourDocument bundles the five depth-4 entities into one
-// single-object chain, matching the OrderDepthFourDocument proto message.
-type fakeOrderDepthFourDocument struct {
-	Order    fakeOrderDepthFour
-	Customer fakeCustomerDepthFour
-	Address  fakeAddressDepthFour
-	Region   fakeRegionDepthFour
-	Country  fakeCountryDepthFour
+// fakeRegionDepthFour is the gofakeit template for the Region entity at
+// depth 4, nesting Country inside it.
+type fakeRegionDepthFour struct {
+	RegionID   string
+	RegionName string `fake:"{state}"`
+	Timezone   string `fake:"{timezone}"`
+	Country    fakeCountryDepthFour
 }
 
-// GenerateOrdersDepthFour produces n fake depth-4 order documents.
-func GenerateOrdersDepthFour(n int) ([]fakeOrderDepthFourDocument, error) {
-	docs := make([]fakeOrderDepthFourDocument, n)
+// fakeAddressDepthFour is the gofakeit template for the Address entity at
+// depth 4, nesting Region inside it.
+type fakeAddressDepthFour struct {
+	AddressID    string
+	AddressLine1 string `fake:"{street}"`
+	PostalCode   string `fake:"{zip}"`
+	Region       fakeRegionDepthFour
+}
+
+// fakeCustomerDepthFour is the gofakeit template for the Customer entity
+// at depth 4, nesting Address inside it.
+type fakeCustomerDepthFour struct {
+	CustomerID string
+	FullName   string `fake:"{name}"`
+	Email      string `fake:"{email}"`
+	Address    fakeAddressDepthFour
+}
+
+// fakeOrderDepthFour is the gofakeit template for the Order entity at
+// depth 4, nesting Customer inside it.
+//   - gofakeit.Struct() fills the entire chain recursively in one call,
+//     down through Customer, Address, Region, and Country.
+type fakeOrderDepthFour struct {
+	OrderID     string
+	OrderDate   string
+	TotalAmount float32 `fake:"{float32range:11,5050}"`
+	Customer    fakeCustomerDepthFour
+}
+
+// GenerateOrdersDepthFour produces n fake depth-4 order records, each a
+// nested chain of Order -> Customer -> Address -> Region -> Country.
+func GenerateOrdersDepthFour(n int) ([]fakeOrderDepthFour, error) {
+	orders := make([]fakeOrderDepthFour, n)
 	now := time.Now()
-	for i := range docs {
-		if err := gofakeit.Struct(&docs[i]); err != nil {
+	for i := range orders {
+		if err := gofakeit.Struct(&orders[i]); err != nil {
 			return nil, fmt.Errorf("generate order depth-four %d: %w", i, err)
 		}
-		docs[i].Order.OrderID = fmt.Sprintf("ORD-%08d", i+1)
-		docs[i].Order.OrderDate = now.AddDate(0, 0, -i).Format("2006-01-02")
-		docs[i].Customer.CustomerID = fmt.Sprintf("CUST-%08d", i+1)
-		docs[i].Address.AddressID = fmt.Sprintf("ADDR-%08d", i+1)
-		docs[i].Region.RegionID = fmt.Sprintf("REG-%08d", i+1)
-		docs[i].Country.CountryID = fmt.Sprintf("CTY-%08d", i+1)
+		orders[i].OrderID = fmt.Sprintf("ORD-%08d", i+1)
+		orders[i].OrderDate = now.AddDate(0, 0, -i).Format("2006-01-02")
+		orders[i].Customer.CustomerID = fmt.Sprintf("CUST-%08d", i+1)
+		orders[i].Customer.Address.AddressID = fmt.Sprintf("ADDR-%08d", i+1)
+		orders[i].Customer.Address.Region.RegionID = fmt.Sprintf("REG-%08d", i+1)
+		orders[i].Customer.Address.Region.Country.CountryID = fmt.Sprintf("CTY-%08d", i+1)
 	}
-	return docs, nil
+	return orders, nil
 }

@@ -259,31 +259,31 @@ func (x *OrderDepthZeroResponse) GetOrders() []*OrderDepthZero {
 	return nil
 }
 
-type OrderDepthTwo struct {
+type AddressDepthTwo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderNumber   string                 `protobuf:"bytes,2,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
-	OrderDate     string                 `protobuf:"bytes,3,opt,name=order_date,json=orderDate,proto3" json:"order_date,omitempty"`
-	OrderStatus   string                 `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`
-	TotalAmount   float64                `protobuf:"fixed64,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	AddressId     string                 `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
+	RecipientName string                 `protobuf:"bytes,2,opt,name=recipient_name,json=recipientName,proto3" json:"recipient_name,omitempty"`
+	AddressLine1  string                 `protobuf:"bytes,3,opt,name=address_line1,json=addressLine1,proto3" json:"address_line1,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,4,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	AddressType   string                 `protobuf:"bytes,5,opt,name=address_type,json=addressType,proto3" json:"address_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OrderDepthTwo) Reset() {
-	*x = OrderDepthTwo{}
+func (x *AddressDepthTwo) Reset() {
+	*x = AddressDepthTwo{}
 	mi := &file_order_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrderDepthTwo) String() string {
+func (x *AddressDepthTwo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrderDepthTwo) ProtoMessage() {}
+func (*AddressDepthTwo) ProtoMessage() {}
 
-func (x *OrderDepthTwo) ProtoReflect() protoreflect.Message {
+func (x *AddressDepthTwo) ProtoReflect() protoreflect.Message {
 	mi := &file_order_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -295,44 +295,44 @@ func (x *OrderDepthTwo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OrderDepthTwo.ProtoReflect.Descriptor instead.
-func (*OrderDepthTwo) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddressDepthTwo.ProtoReflect.Descriptor instead.
+func (*AddressDepthTwo) Descriptor() ([]byte, []int) {
 	return file_order_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *OrderDepthTwo) GetOrderId() string {
+func (x *AddressDepthTwo) GetAddressId() string {
 	if x != nil {
-		return x.OrderId
+		return x.AddressId
 	}
 	return ""
 }
 
-func (x *OrderDepthTwo) GetOrderNumber() string {
+func (x *AddressDepthTwo) GetRecipientName() string {
 	if x != nil {
-		return x.OrderNumber
+		return x.RecipientName
 	}
 	return ""
 }
 
-func (x *OrderDepthTwo) GetOrderDate() string {
+func (x *AddressDepthTwo) GetAddressLine1() string {
 	if x != nil {
-		return x.OrderDate
+		return x.AddressLine1
 	}
 	return ""
 }
 
-func (x *OrderDepthTwo) GetOrderStatus() string {
+func (x *AddressDepthTwo) GetPostalCode() string {
 	if x != nil {
-		return x.OrderStatus
+		return x.PostalCode
 	}
 	return ""
 }
 
-func (x *OrderDepthTwo) GetTotalAmount() float64 {
+func (x *AddressDepthTwo) GetAddressType() string {
 	if x != nil {
-		return x.TotalAmount
+		return x.AddressType
 	}
-	return 0
+	return ""
 }
 
 type CustomerDepthTwo struct {
@@ -342,6 +342,7 @@ type CustomerDepthTwo struct {
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Phone         string                 `protobuf:"bytes,4,opt,name=phone,proto3" json:"phone,omitempty"`
 	LoyaltyTier   string                 `protobuf:"bytes,5,opt,name=loyalty_tier,json=loyaltyTier,proto3" json:"loyalty_tier,omitempty"`
+	Address       *AddressDepthTwo       `protobuf:"bytes,6,opt,name=address,proto3" json:"address,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -411,152 +412,107 @@ func (x *CustomerDepthTwo) GetLoyaltyTier() string {
 	return ""
 }
 
-type AddressDepthTwo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AddressId     string                 `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	RecipientName string                 `protobuf:"bytes,2,opt,name=recipient_name,json=recipientName,proto3" json:"recipient_name,omitempty"`
-	AddressLine1  string                 `protobuf:"bytes,3,opt,name=address_line1,json=addressLine1,proto3" json:"address_line1,omitempty"`
-	PostalCode    string                 `protobuf:"bytes,4,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
-	AddressType   string                 `protobuf:"bytes,5,opt,name=address_type,json=addressType,proto3" json:"address_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddressDepthTwo) Reset() {
-	*x = AddressDepthTwo{}
-	mi := &file_order_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddressDepthTwo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddressDepthTwo) ProtoMessage() {}
-
-func (x *AddressDepthTwo) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddressDepthTwo.ProtoReflect.Descriptor instead.
-func (*AddressDepthTwo) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *AddressDepthTwo) GetAddressId() string {
-	if x != nil {
-		return x.AddressId
-	}
-	return ""
-}
-
-func (x *AddressDepthTwo) GetRecipientName() string {
-	if x != nil {
-		return x.RecipientName
-	}
-	return ""
-}
-
-func (x *AddressDepthTwo) GetAddressLine1() string {
-	if x != nil {
-		return x.AddressLine1
-	}
-	return ""
-}
-
-func (x *AddressDepthTwo) GetPostalCode() string {
-	if x != nil {
-		return x.PostalCode
-	}
-	return ""
-}
-
-func (x *AddressDepthTwo) GetAddressType() string {
-	if x != nil {
-		return x.AddressType
-	}
-	return ""
-}
-
-type OrderDepthTwoDocument struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Order         *OrderDepthTwo         `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
-	Customer      *CustomerDepthTwo      `protobuf:"bytes,2,opt,name=customer,proto3" json:"customer,omitempty"`
-	Address       *AddressDepthTwo       `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OrderDepthTwoDocument) Reset() {
-	*x = OrderDepthTwoDocument{}
-	mi := &file_order_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OrderDepthTwoDocument) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OrderDepthTwoDocument) ProtoMessage() {}
-
-func (x *OrderDepthTwoDocument) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OrderDepthTwoDocument.ProtoReflect.Descriptor instead.
-func (*OrderDepthTwoDocument) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *OrderDepthTwoDocument) GetOrder() *OrderDepthTwo {
-	if x != nil {
-		return x.Order
-	}
-	return nil
-}
-
-func (x *OrderDepthTwoDocument) GetCustomer() *CustomerDepthTwo {
-	if x != nil {
-		return x.Customer
-	}
-	return nil
-}
-
-func (x *OrderDepthTwoDocument) GetAddress() *AddressDepthTwo {
+func (x *CustomerDepthTwo) GetAddress() *AddressDepthTwo {
 	if x != nil {
 		return x.Address
 	}
 	return nil
 }
 
+type OrderDepthTwo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderNumber   string                 `protobuf:"bytes,2,opt,name=order_number,json=orderNumber,proto3" json:"order_number,omitempty"`
+	OrderDate     string                 `protobuf:"bytes,3,opt,name=order_date,json=orderDate,proto3" json:"order_date,omitempty"`
+	OrderStatus   string                 `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`
+	TotalAmount   float64                `protobuf:"fixed64,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	Customer      *CustomerDepthTwo      `protobuf:"bytes,6,opt,name=customer,proto3" json:"customer,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderDepthTwo) Reset() {
+	*x = OrderDepthTwo{}
+	mi := &file_order_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderDepthTwo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderDepthTwo) ProtoMessage() {}
+
+func (x *OrderDepthTwo) ProtoReflect() protoreflect.Message {
+	mi := &file_order_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderDepthTwo.ProtoReflect.Descriptor instead.
+func (*OrderDepthTwo) Descriptor() ([]byte, []int) {
+	return file_order_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *OrderDepthTwo) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *OrderDepthTwo) GetOrderNumber() string {
+	if x != nil {
+		return x.OrderNumber
+	}
+	return ""
+}
+
+func (x *OrderDepthTwo) GetOrderDate() string {
+	if x != nil {
+		return x.OrderDate
+	}
+	return ""
+}
+
+func (x *OrderDepthTwo) GetOrderStatus() string {
+	if x != nil {
+		return x.OrderStatus
+	}
+	return ""
+}
+
+func (x *OrderDepthTwo) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *OrderDepthTwo) GetCustomer() *CustomerDepthTwo {
+	if x != nil {
+		return x.Customer
+	}
+	return nil
+}
+
 type OrderDepthTwoResponse struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Orders        []*OrderDepthTwoDocument `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Orders        []*OrderDepthTwo       `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OrderDepthTwoResponse) Reset() {
 	*x = OrderDepthTwoResponse{}
-	mi := &file_order_proto_msgTypes[7]
+	mi := &file_order_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -568,7 +524,7 @@ func (x *OrderDepthTwoResponse) String() string {
 func (*OrderDepthTwoResponse) ProtoMessage() {}
 
 func (x *OrderDepthTwoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[7]
+	mi := &file_order_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,254 +537,14 @@ func (x *OrderDepthTwoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDepthTwoResponse.ProtoReflect.Descriptor instead.
 func (*OrderDepthTwoResponse) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{7}
+	return file_order_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *OrderDepthTwoResponse) GetOrders() []*OrderDepthTwoDocument {
+func (x *OrderDepthTwoResponse) GetOrders() []*OrderDepthTwo {
 	if x != nil {
 		return x.Orders
 	}
 	return nil
-}
-
-type OrderDepthFour struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderDate     string                 `protobuf:"bytes,2,opt,name=order_date,json=orderDate,proto3" json:"order_date,omitempty"`
-	TotalAmount   float64                `protobuf:"fixed64,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OrderDepthFour) Reset() {
-	*x = OrderDepthFour{}
-	mi := &file_order_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OrderDepthFour) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OrderDepthFour) ProtoMessage() {}
-
-func (x *OrderDepthFour) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OrderDepthFour.ProtoReflect.Descriptor instead.
-func (*OrderDepthFour) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *OrderDepthFour) GetOrderId() string {
-	if x != nil {
-		return x.OrderId
-	}
-	return ""
-}
-
-func (x *OrderDepthFour) GetOrderDate() string {
-	if x != nil {
-		return x.OrderDate
-	}
-	return ""
-}
-
-func (x *OrderDepthFour) GetTotalAmount() float64 {
-	if x != nil {
-		return x.TotalAmount
-	}
-	return 0
-}
-
-type CustomerDepthFour struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerId    string                 `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	FullName      string                 `protobuf:"bytes,2,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
-	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CustomerDepthFour) Reset() {
-	*x = CustomerDepthFour{}
-	mi := &file_order_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CustomerDepthFour) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CustomerDepthFour) ProtoMessage() {}
-
-func (x *CustomerDepthFour) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CustomerDepthFour.ProtoReflect.Descriptor instead.
-func (*CustomerDepthFour) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *CustomerDepthFour) GetCustomerId() string {
-	if x != nil {
-		return x.CustomerId
-	}
-	return ""
-}
-
-func (x *CustomerDepthFour) GetFullName() string {
-	if x != nil {
-		return x.FullName
-	}
-	return ""
-}
-
-func (x *CustomerDepthFour) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-type AddressDepthFour struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AddressId     string                 `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	AddressLine1  string                 `protobuf:"bytes,2,opt,name=address_line1,json=addressLine1,proto3" json:"address_line1,omitempty"`
-	PostalCode    string                 `protobuf:"bytes,3,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddressDepthFour) Reset() {
-	*x = AddressDepthFour{}
-	mi := &file_order_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddressDepthFour) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddressDepthFour) ProtoMessage() {}
-
-func (x *AddressDepthFour) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddressDepthFour.ProtoReflect.Descriptor instead.
-func (*AddressDepthFour) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *AddressDepthFour) GetAddressId() string {
-	if x != nil {
-		return x.AddressId
-	}
-	return ""
-}
-
-func (x *AddressDepthFour) GetAddressLine1() string {
-	if x != nil {
-		return x.AddressLine1
-	}
-	return ""
-}
-
-func (x *AddressDepthFour) GetPostalCode() string {
-	if x != nil {
-		return x.PostalCode
-	}
-	return ""
-}
-
-type RegionDepthFour struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RegionId      string                 `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	RegionName    string                 `protobuf:"bytes,2,opt,name=region_name,json=regionName,proto3" json:"region_name,omitempty"`
-	Timezone      string                 `protobuf:"bytes,3,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegionDepthFour) Reset() {
-	*x = RegionDepthFour{}
-	mi := &file_order_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegionDepthFour) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegionDepthFour) ProtoMessage() {}
-
-func (x *RegionDepthFour) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegionDepthFour.ProtoReflect.Descriptor instead.
-func (*RegionDepthFour) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *RegionDepthFour) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
-func (x *RegionDepthFour) GetRegionName() string {
-	if x != nil {
-		return x.RegionName
-	}
-	return ""
-}
-
-func (x *RegionDepthFour) GetTimezone() string {
-	if x != nil {
-		return x.Timezone
-	}
-	return ""
 }
 
 type CountryDepthFour struct {
@@ -842,7 +558,7 @@ type CountryDepthFour struct {
 
 func (x *CountryDepthFour) Reset() {
 	*x = CountryDepthFour{}
-	mi := &file_order_proto_msgTypes[12]
+	mi := &file_order_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -854,7 +570,7 @@ func (x *CountryDepthFour) String() string {
 func (*CountryDepthFour) ProtoMessage() {}
 
 func (x *CountryDepthFour) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[12]
+	mi := &file_order_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -867,7 +583,7 @@ func (x *CountryDepthFour) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountryDepthFour.ProtoReflect.Descriptor instead.
 func (*CountryDepthFour) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{12}
+	return file_order_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CountryDepthFour) GetCountryId() string {
@@ -891,32 +607,31 @@ func (x *CountryDepthFour) GetCountryCode() string {
 	return ""
 }
 
-type OrderDepthFourDocument struct {
+type RegionDepthFour struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Order         *OrderDepthFour        `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
-	Customer      *CustomerDepthFour     `protobuf:"bytes,2,opt,name=customer,proto3" json:"customer,omitempty"`
-	Address       *AddressDepthFour      `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	Region        *RegionDepthFour       `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
-	Country       *CountryDepthFour      `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
+	RegionId      string                 `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	RegionName    string                 `protobuf:"bytes,2,opt,name=region_name,json=regionName,proto3" json:"region_name,omitempty"`
+	Timezone      string                 `protobuf:"bytes,3,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Country       *CountryDepthFour      `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OrderDepthFourDocument) Reset() {
-	*x = OrderDepthFourDocument{}
-	mi := &file_order_proto_msgTypes[13]
+func (x *RegionDepthFour) Reset() {
+	*x = RegionDepthFour{}
+	mi := &file_order_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrderDepthFourDocument) String() string {
+func (x *RegionDepthFour) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrderDepthFourDocument) ProtoMessage() {}
+func (*RegionDepthFour) ProtoMessage() {}
 
-func (x *OrderDepthFourDocument) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[13]
+func (x *RegionDepthFour) ProtoReflect() protoreflect.Message {
+	mi := &file_order_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -927,56 +642,253 @@ func (x *OrderDepthFourDocument) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OrderDepthFourDocument.ProtoReflect.Descriptor instead.
-func (*OrderDepthFourDocument) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{13}
+// Deprecated: Use RegionDepthFour.ProtoReflect.Descriptor instead.
+func (*RegionDepthFour) Descriptor() ([]byte, []int) {
+	return file_order_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *OrderDepthFourDocument) GetOrder() *OrderDepthFour {
+func (x *RegionDepthFour) GetRegionId() string {
 	if x != nil {
-		return x.Order
+		return x.RegionId
 	}
-	return nil
+	return ""
 }
 
-func (x *OrderDepthFourDocument) GetCustomer() *CustomerDepthFour {
+func (x *RegionDepthFour) GetRegionName() string {
 	if x != nil {
-		return x.Customer
+		return x.RegionName
 	}
-	return nil
+	return ""
 }
 
-func (x *OrderDepthFourDocument) GetAddress() *AddressDepthFour {
+func (x *RegionDepthFour) GetTimezone() string {
 	if x != nil {
-		return x.Address
+		return x.Timezone
 	}
-	return nil
+	return ""
 }
 
-func (x *OrderDepthFourDocument) GetRegion() *RegionDepthFour {
-	if x != nil {
-		return x.Region
-	}
-	return nil
-}
-
-func (x *OrderDepthFourDocument) GetCountry() *CountryDepthFour {
+func (x *RegionDepthFour) GetCountry() *CountryDepthFour {
 	if x != nil {
 		return x.Country
 	}
 	return nil
 }
 
+type AddressDepthFour struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AddressId     string                 `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
+	AddressLine1  string                 `protobuf:"bytes,2,opt,name=address_line1,json=addressLine1,proto3" json:"address_line1,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,3,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	Region        *RegionDepthFour       `protobuf:"bytes,4,opt,name=region,proto3" json:"region,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddressDepthFour) Reset() {
+	*x = AddressDepthFour{}
+	mi := &file_order_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddressDepthFour) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddressDepthFour) ProtoMessage() {}
+
+func (x *AddressDepthFour) ProtoReflect() protoreflect.Message {
+	mi := &file_order_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddressDepthFour.ProtoReflect.Descriptor instead.
+func (*AddressDepthFour) Descriptor() ([]byte, []int) {
+	return file_order_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *AddressDepthFour) GetAddressId() string {
+	if x != nil {
+		return x.AddressId
+	}
+	return ""
+}
+
+func (x *AddressDepthFour) GetAddressLine1() string {
+	if x != nil {
+		return x.AddressLine1
+	}
+	return ""
+}
+
+func (x *AddressDepthFour) GetPostalCode() string {
+	if x != nil {
+		return x.PostalCode
+	}
+	return ""
+}
+
+func (x *AddressDepthFour) GetRegion() *RegionDepthFour {
+	if x != nil {
+		return x.Region
+	}
+	return nil
+}
+
+type CustomerDepthFour struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	FullName      string                 `protobuf:"bytes,2,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Address       *AddressDepthFour      `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CustomerDepthFour) Reset() {
+	*x = CustomerDepthFour{}
+	mi := &file_order_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerDepthFour) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerDepthFour) ProtoMessage() {}
+
+func (x *CustomerDepthFour) ProtoReflect() protoreflect.Message {
+	mi := &file_order_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerDepthFour.ProtoReflect.Descriptor instead.
+func (*CustomerDepthFour) Descriptor() ([]byte, []int) {
+	return file_order_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CustomerDepthFour) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
+	}
+	return ""
+}
+
+func (x *CustomerDepthFour) GetFullName() string {
+	if x != nil {
+		return x.FullName
+	}
+	return ""
+}
+
+func (x *CustomerDepthFour) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *CustomerDepthFour) GetAddress() *AddressDepthFour {
+	if x != nil {
+		return x.Address
+	}
+	return nil
+}
+
+type OrderDepthFour struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderDate     string                 `protobuf:"bytes,2,opt,name=order_date,json=orderDate,proto3" json:"order_date,omitempty"`
+	TotalAmount   float64                `protobuf:"fixed64,3,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	Customer      *CustomerDepthFour     `protobuf:"bytes,4,opt,name=customer,proto3" json:"customer,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderDepthFour) Reset() {
+	*x = OrderDepthFour{}
+	mi := &file_order_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderDepthFour) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderDepthFour) ProtoMessage() {}
+
+func (x *OrderDepthFour) ProtoReflect() protoreflect.Message {
+	mi := &file_order_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderDepthFour.ProtoReflect.Descriptor instead.
+func (*OrderDepthFour) Descriptor() ([]byte, []int) {
+	return file_order_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *OrderDepthFour) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *OrderDepthFour) GetOrderDate() string {
+	if x != nil {
+		return x.OrderDate
+	}
+	return ""
+}
+
+func (x *OrderDepthFour) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *OrderDepthFour) GetCustomer() *CustomerDepthFour {
+	if x != nil {
+		return x.Customer
+	}
+	return nil
+}
+
 type OrderDepthFourResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Orders        []*OrderDepthFourDocument `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Orders        []*OrderDepthFour      `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OrderDepthFourResponse) Reset() {
 	*x = OrderDepthFourResponse{}
-	mi := &file_order_proto_msgTypes[14]
+	mi := &file_order_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -988,7 +900,7 @@ func (x *OrderDepthFourResponse) String() string {
 func (*OrderDepthFourResponse) ProtoMessage() {}
 
 func (x *OrderDepthFourResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_proto_msgTypes[14]
+	mi := &file_order_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1001,10 +913,10 @@ func (x *OrderDepthFourResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDepthFourResponse.ProtoReflect.Descriptor instead.
 func (*OrderDepthFourResponse) Descriptor() ([]byte, []int) {
-	return file_order_proto_rawDescGZIP(), []int{14}
+	return file_order_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *OrderDepthFourResponse) GetOrders() []*OrderDepthFourDocument {
+func (x *OrderDepthFourResponse) GetOrders() []*OrderDepthFour {
 	if x != nil {
 		return x.Orders
 	}
@@ -1040,21 +952,7 @@ const file_order_proto_rawDesc = "" +
 	"\vorder_notes\x18\x0f \x01(\tR\n" +
 	"orderNotes\"Q\n" +
 	"\x16OrderDepthZeroResponse\x127\n" +
-	"\x06orders\x18\x01 \x03(\v2\x1f.orderexperiment.OrderDepthZeroR\x06orders\"\xb2\x01\n" +
-	"\rOrderDepthTwo\x12\x19\n" +
-	"\border_id\x18\x01 \x01(\tR\aorderId\x12!\n" +
-	"\forder_number\x18\x02 \x01(\tR\vorderNumber\x12\x1d\n" +
-	"\n" +
-	"order_date\x18\x03 \x01(\tR\torderDate\x12!\n" +
-	"\forder_status\x18\x04 \x01(\tR\vorderStatus\x12!\n" +
-	"\ftotal_amount\x18\x05 \x01(\x01R\vtotalAmount\"\x9f\x01\n" +
-	"\x10CustomerDepthTwo\x12\x1f\n" +
-	"\vcustomer_id\x18\x01 \x01(\tR\n" +
-	"customerId\x12\x1b\n" +
-	"\tfull_name\x18\x02 \x01(\tR\bfullName\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\x12\x14\n" +
-	"\x05phone\x18\x04 \x01(\tR\x05phone\x12!\n" +
-	"\floyalty_tier\x18\x05 \x01(\tR\vloyaltyTier\"\xc0\x01\n" +
+	"\x06orders\x18\x01 \x03(\v2\x1f.orderexperiment.OrderDepthZeroR\x06orders\"\xc0\x01\n" +
 	"\x0fAddressDepthTwo\x12\x1d\n" +
 	"\n" +
 	"address_id\x18\x01 \x01(\tR\taddressId\x12%\n" +
@@ -1062,47 +960,57 @@ const file_order_proto_rawDesc = "" +
 	"\raddress_line1\x18\x03 \x01(\tR\faddressLine1\x12\x1f\n" +
 	"\vpostal_code\x18\x04 \x01(\tR\n" +
 	"postalCode\x12!\n" +
-	"\faddress_type\x18\x05 \x01(\tR\vaddressType\"\xc8\x01\n" +
-	"\x15OrderDepthTwoDocument\x124\n" +
-	"\x05order\x18\x01 \x01(\v2\x1e.orderexperiment.OrderDepthTwoR\x05order\x12=\n" +
-	"\bcustomer\x18\x02 \x01(\v2!.orderexperiment.CustomerDepthTwoR\bcustomer\x12:\n" +
-	"\aaddress\x18\x03 \x01(\v2 .orderexperiment.AddressDepthTwoR\aaddress\"W\n" +
-	"\x15OrderDepthTwoResponse\x12>\n" +
-	"\x06orders\x18\x01 \x03(\v2&.orderexperiment.OrderDepthTwoDocumentR\x06orders\"m\n" +
-	"\x0eOrderDepthFour\x12\x19\n" +
-	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x1d\n" +
-	"\n" +
-	"order_date\x18\x02 \x01(\tR\torderDate\x12!\n" +
-	"\ftotal_amount\x18\x03 \x01(\x01R\vtotalAmount\"g\n" +
-	"\x11CustomerDepthFour\x12\x1f\n" +
+	"\faddress_type\x18\x05 \x01(\tR\vaddressType\"\xdb\x01\n" +
+	"\x10CustomerDepthTwo\x12\x1f\n" +
 	"\vcustomer_id\x18\x01 \x01(\tR\n" +
 	"customerId\x12\x1b\n" +
 	"\tfull_name\x18\x02 \x01(\tR\bfullName\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\"w\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12\x14\n" +
+	"\x05phone\x18\x04 \x01(\tR\x05phone\x12!\n" +
+	"\floyalty_tier\x18\x05 \x01(\tR\vloyaltyTier\x12:\n" +
+	"\aaddress\x18\x06 \x01(\v2 .orderexperiment.AddressDepthTwoR\aaddress\"\xf1\x01\n" +
+	"\rOrderDepthTwo\x12\x19\n" +
+	"\border_id\x18\x01 \x01(\tR\aorderId\x12!\n" +
+	"\forder_number\x18\x02 \x01(\tR\vorderNumber\x12\x1d\n" +
+	"\n" +
+	"order_date\x18\x03 \x01(\tR\torderDate\x12!\n" +
+	"\forder_status\x18\x04 \x01(\tR\vorderStatus\x12!\n" +
+	"\ftotal_amount\x18\x05 \x01(\x01R\vtotalAmount\x12=\n" +
+	"\bcustomer\x18\x06 \x01(\v2!.orderexperiment.CustomerDepthTwoR\bcustomer\"O\n" +
+	"\x15OrderDepthTwoResponse\x126\n" +
+	"\x06orders\x18\x01 \x03(\v2\x1e.orderexperiment.OrderDepthTwoR\x06orders\"w\n" +
+	"\x10CountryDepthFour\x12\x1d\n" +
+	"\n" +
+	"country_id\x18\x01 \x01(\tR\tcountryId\x12!\n" +
+	"\fcountry_name\x18\x02 \x01(\tR\vcountryName\x12!\n" +
+	"\fcountry_code\x18\x03 \x01(\tR\vcountryCode\"\xa8\x01\n" +
+	"\x0fRegionDepthFour\x12\x1b\n" +
+	"\tregion_id\x18\x01 \x01(\tR\bregionId\x12\x1f\n" +
+	"\vregion_name\x18\x02 \x01(\tR\n" +
+	"regionName\x12\x1a\n" +
+	"\btimezone\x18\x03 \x01(\tR\btimezone\x12;\n" +
+	"\acountry\x18\x04 \x01(\v2!.orderexperiment.CountryDepthFourR\acountry\"\xb1\x01\n" +
 	"\x10AddressDepthFour\x12\x1d\n" +
 	"\n" +
 	"address_id\x18\x01 \x01(\tR\taddressId\x12#\n" +
 	"\raddress_line1\x18\x02 \x01(\tR\faddressLine1\x12\x1f\n" +
 	"\vpostal_code\x18\x03 \x01(\tR\n" +
-	"postalCode\"k\n" +
-	"\x0fRegionDepthFour\x12\x1b\n" +
-	"\tregion_id\x18\x01 \x01(\tR\bregionId\x12\x1f\n" +
-	"\vregion_name\x18\x02 \x01(\tR\n" +
-	"regionName\x12\x1a\n" +
-	"\btimezone\x18\x03 \x01(\tR\btimezone\"w\n" +
-	"\x10CountryDepthFour\x12\x1d\n" +
+	"postalCode\x128\n" +
+	"\x06region\x18\x04 \x01(\v2 .orderexperiment.RegionDepthFourR\x06region\"\xa4\x01\n" +
+	"\x11CustomerDepthFour\x12\x1f\n" +
+	"\vcustomer_id\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x1b\n" +
+	"\tfull_name\x18\x02 \x01(\tR\bfullName\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12;\n" +
+	"\aaddress\x18\x04 \x01(\v2!.orderexperiment.AddressDepthFourR\aaddress\"\xad\x01\n" +
+	"\x0eOrderDepthFour\x12\x19\n" +
+	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x1d\n" +
 	"\n" +
-	"country_id\x18\x01 \x01(\tR\tcountryId\x12!\n" +
-	"\fcountry_name\x18\x02 \x01(\tR\vcountryName\x12!\n" +
-	"\fcountry_code\x18\x03 \x01(\tR\vcountryCode\"\xc3\x02\n" +
-	"\x16OrderDepthFourDocument\x125\n" +
-	"\x05order\x18\x01 \x01(\v2\x1f.orderexperiment.OrderDepthFourR\x05order\x12>\n" +
-	"\bcustomer\x18\x02 \x01(\v2\".orderexperiment.CustomerDepthFourR\bcustomer\x12;\n" +
-	"\aaddress\x18\x03 \x01(\v2!.orderexperiment.AddressDepthFourR\aaddress\x128\n" +
-	"\x06region\x18\x04 \x01(\v2 .orderexperiment.RegionDepthFourR\x06region\x12;\n" +
-	"\acountry\x18\x05 \x01(\v2!.orderexperiment.CountryDepthFourR\acountry\"Y\n" +
-	"\x16OrderDepthFourResponse\x12?\n" +
-	"\x06orders\x18\x01 \x03(\v2'.orderexperiment.OrderDepthFourDocumentR\x06orders2\xaf\x04\n" +
+	"order_date\x18\x02 \x01(\tR\torderDate\x12!\n" +
+	"\ftotal_amount\x18\x03 \x01(\x01R\vtotalAmount\x12>\n" +
+	"\bcustomer\x18\x04 \x01(\v2\".orderexperiment.CustomerDepthFourR\bcustomer\"Q\n" +
+	"\x16OrderDepthFourResponse\x127\n" +
+	"\x06orders\x18\x01 \x03(\v2\x1f.orderexperiment.OrderDepthFourR\x06orders2\xaf\x04\n" +
 	"\x16OrderExperimentService\x12Y\n" +
 	"\x11GetOrderDepthZero\x12\x1b.orderexperiment.OrderEmpty\x1a'.orderexperiment.OrderDepthZeroResponse\x12W\n" +
 	"\x10GetOrderDepthTwo\x12\x1b.orderexperiment.OrderEmpty\x1a&.orderexperiment.OrderDepthTwoResponse\x12Y\n" +
@@ -1123,53 +1031,49 @@ func file_order_proto_rawDescGZIP() []byte {
 	return file_order_proto_rawDescData
 }
 
-var file_order_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_order_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_order_proto_goTypes = []any{
 	(*OrderEmpty)(nil),             // 0: orderexperiment.OrderEmpty
 	(*OrderDepthZero)(nil),         // 1: orderexperiment.OrderDepthZero
 	(*OrderDepthZeroResponse)(nil), // 2: orderexperiment.OrderDepthZeroResponse
-	(*OrderDepthTwo)(nil),          // 3: orderexperiment.OrderDepthTwo
+	(*AddressDepthTwo)(nil),        // 3: orderexperiment.AddressDepthTwo
 	(*CustomerDepthTwo)(nil),       // 4: orderexperiment.CustomerDepthTwo
-	(*AddressDepthTwo)(nil),        // 5: orderexperiment.AddressDepthTwo
-	(*OrderDepthTwoDocument)(nil),  // 6: orderexperiment.OrderDepthTwoDocument
-	(*OrderDepthTwoResponse)(nil),  // 7: orderexperiment.OrderDepthTwoResponse
-	(*OrderDepthFour)(nil),         // 8: orderexperiment.OrderDepthFour
-	(*CustomerDepthFour)(nil),      // 9: orderexperiment.CustomerDepthFour
-	(*AddressDepthFour)(nil),       // 10: orderexperiment.AddressDepthFour
-	(*RegionDepthFour)(nil),        // 11: orderexperiment.RegionDepthFour
-	(*CountryDepthFour)(nil),       // 12: orderexperiment.CountryDepthFour
-	(*OrderDepthFourDocument)(nil), // 13: orderexperiment.OrderDepthFourDocument
-	(*OrderDepthFourResponse)(nil), // 14: orderexperiment.OrderDepthFourResponse
+	(*OrderDepthTwo)(nil),          // 5: orderexperiment.OrderDepthTwo
+	(*OrderDepthTwoResponse)(nil),  // 6: orderexperiment.OrderDepthTwoResponse
+	(*CountryDepthFour)(nil),       // 7: orderexperiment.CountryDepthFour
+	(*RegionDepthFour)(nil),        // 8: orderexperiment.RegionDepthFour
+	(*AddressDepthFour)(nil),       // 9: orderexperiment.AddressDepthFour
+	(*CustomerDepthFour)(nil),      // 10: orderexperiment.CustomerDepthFour
+	(*OrderDepthFour)(nil),         // 11: orderexperiment.OrderDepthFour
+	(*OrderDepthFourResponse)(nil), // 12: orderexperiment.OrderDepthFourResponse
 }
 var file_order_proto_depIdxs = []int32{
 	1,  // 0: orderexperiment.OrderDepthZeroResponse.orders:type_name -> orderexperiment.OrderDepthZero
-	3,  // 1: orderexperiment.OrderDepthTwoDocument.order:type_name -> orderexperiment.OrderDepthTwo
-	4,  // 2: orderexperiment.OrderDepthTwoDocument.customer:type_name -> orderexperiment.CustomerDepthTwo
-	5,  // 3: orderexperiment.OrderDepthTwoDocument.address:type_name -> orderexperiment.AddressDepthTwo
-	6,  // 4: orderexperiment.OrderDepthTwoResponse.orders:type_name -> orderexperiment.OrderDepthTwoDocument
-	8,  // 5: orderexperiment.OrderDepthFourDocument.order:type_name -> orderexperiment.OrderDepthFour
-	9,  // 6: orderexperiment.OrderDepthFourDocument.customer:type_name -> orderexperiment.CustomerDepthFour
-	10, // 7: orderexperiment.OrderDepthFourDocument.address:type_name -> orderexperiment.AddressDepthFour
-	11, // 8: orderexperiment.OrderDepthFourDocument.region:type_name -> orderexperiment.RegionDepthFour
-	12, // 9: orderexperiment.OrderDepthFourDocument.country:type_name -> orderexperiment.CountryDepthFour
-	13, // 10: orderexperiment.OrderDepthFourResponse.orders:type_name -> orderexperiment.OrderDepthFourDocument
-	0,  // 11: orderexperiment.OrderExperimentService.GetOrderDepthZero:input_type -> orderexperiment.OrderEmpty
-	0,  // 12: orderexperiment.OrderExperimentService.GetOrderDepthTwo:input_type -> orderexperiment.OrderEmpty
-	0,  // 13: orderexperiment.OrderExperimentService.GetOrderDepthFour:input_type -> orderexperiment.OrderEmpty
-	0,  // 14: orderexperiment.OrderExperimentService.GetOrderOne:input_type -> orderexperiment.OrderEmpty
-	0,  // 15: orderexperiment.OrderExperimentService.GetOrderHundred:input_type -> orderexperiment.OrderEmpty
-	0,  // 16: orderexperiment.OrderExperimentService.GetOrderThousand:input_type -> orderexperiment.OrderEmpty
-	2,  // 17: orderexperiment.OrderExperimentService.GetOrderDepthZero:output_type -> orderexperiment.OrderDepthZeroResponse
-	7,  // 18: orderexperiment.OrderExperimentService.GetOrderDepthTwo:output_type -> orderexperiment.OrderDepthTwoResponse
-	14, // 19: orderexperiment.OrderExperimentService.GetOrderDepthFour:output_type -> orderexperiment.OrderDepthFourResponse
-	2,  // 20: orderexperiment.OrderExperimentService.GetOrderOne:output_type -> orderexperiment.OrderDepthZeroResponse
-	2,  // 21: orderexperiment.OrderExperimentService.GetOrderHundred:output_type -> orderexperiment.OrderDepthZeroResponse
-	2,  // 22: orderexperiment.OrderExperimentService.GetOrderThousand:output_type -> orderexperiment.OrderDepthZeroResponse
-	17, // [17:23] is the sub-list for method output_type
-	11, // [11:17] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	3,  // 1: orderexperiment.CustomerDepthTwo.address:type_name -> orderexperiment.AddressDepthTwo
+	4,  // 2: orderexperiment.OrderDepthTwo.customer:type_name -> orderexperiment.CustomerDepthTwo
+	5,  // 3: orderexperiment.OrderDepthTwoResponse.orders:type_name -> orderexperiment.OrderDepthTwo
+	7,  // 4: orderexperiment.RegionDepthFour.country:type_name -> orderexperiment.CountryDepthFour
+	8,  // 5: orderexperiment.AddressDepthFour.region:type_name -> orderexperiment.RegionDepthFour
+	9,  // 6: orderexperiment.CustomerDepthFour.address:type_name -> orderexperiment.AddressDepthFour
+	10, // 7: orderexperiment.OrderDepthFour.customer:type_name -> orderexperiment.CustomerDepthFour
+	11, // 8: orderexperiment.OrderDepthFourResponse.orders:type_name -> orderexperiment.OrderDepthFour
+	0,  // 9: orderexperiment.OrderExperimentService.GetOrderDepthZero:input_type -> orderexperiment.OrderEmpty
+	0,  // 10: orderexperiment.OrderExperimentService.GetOrderDepthTwo:input_type -> orderexperiment.OrderEmpty
+	0,  // 11: orderexperiment.OrderExperimentService.GetOrderDepthFour:input_type -> orderexperiment.OrderEmpty
+	0,  // 12: orderexperiment.OrderExperimentService.GetOrderOne:input_type -> orderexperiment.OrderEmpty
+	0,  // 13: orderexperiment.OrderExperimentService.GetOrderHundred:input_type -> orderexperiment.OrderEmpty
+	0,  // 14: orderexperiment.OrderExperimentService.GetOrderThousand:input_type -> orderexperiment.OrderEmpty
+	2,  // 15: orderexperiment.OrderExperimentService.GetOrderDepthZero:output_type -> orderexperiment.OrderDepthZeroResponse
+	6,  // 16: orderexperiment.OrderExperimentService.GetOrderDepthTwo:output_type -> orderexperiment.OrderDepthTwoResponse
+	12, // 17: orderexperiment.OrderExperimentService.GetOrderDepthFour:output_type -> orderexperiment.OrderDepthFourResponse
+	2,  // 18: orderexperiment.OrderExperimentService.GetOrderOne:output_type -> orderexperiment.OrderDepthZeroResponse
+	2,  // 19: orderexperiment.OrderExperimentService.GetOrderHundred:output_type -> orderexperiment.OrderDepthZeroResponse
+	2,  // 20: orderexperiment.OrderExperimentService.GetOrderThousand:output_type -> orderexperiment.OrderDepthZeroResponse
+	15, // [15:21] is the sub-list for method output_type
+	9,  // [9:15] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_order_proto_init() }
@@ -1183,7 +1087,7 @@ func file_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_order_proto_rawDesc), len(file_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

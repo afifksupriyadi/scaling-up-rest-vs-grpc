@@ -36,8 +36,8 @@ const (
 // GetOrderDepthZero, GetOrderOne, GetOrderHundred, and
 // GetOrderThousand all share the same flat (depth-0) shape and
 // differ only in seeded array length; GetOrderDepthTwo and
-// GetOrderDepthFour use progressively deeper single-object chains
-// at a fixed array length of 1.
+// GetOrderDepthFour use progressively deeper nested chains at a
+// fixed array length of 1.
 type OrderExperimentServiceClient interface {
 	GetOrderDepthZero(ctx context.Context, in *OrderEmpty, opts ...grpc.CallOption) (*OrderDepthZeroResponse, error)
 	GetOrderDepthTwo(ctx context.Context, in *OrderEmpty, opts ...grpc.CallOption) (*OrderDepthTwoResponse, error)
@@ -124,8 +124,8 @@ func (c *orderExperimentServiceClient) GetOrderThousand(ctx context.Context, in 
 // GetOrderDepthZero, GetOrderOne, GetOrderHundred, and
 // GetOrderThousand all share the same flat (depth-0) shape and
 // differ only in seeded array length; GetOrderDepthTwo and
-// GetOrderDepthFour use progressively deeper single-object chains
-// at a fixed array length of 1.
+// GetOrderDepthFour use progressively deeper nested chains at a
+// fixed array length of 1.
 type OrderExperimentServiceServer interface {
 	GetOrderDepthZero(context.Context, *OrderEmpty) (*OrderDepthZeroResponse, error)
 	GetOrderDepthTwo(context.Context, *OrderEmpty) (*OrderDepthTwoResponse, error)
