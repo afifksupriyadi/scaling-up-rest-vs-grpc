@@ -10,9 +10,10 @@ import (
 // ---------- Depth 0 (shared by DepthZero, One, Hundred, Thousand) ----------
 
 // fakeOrderDepthZero is the gofakeit template for a flat, 15-field order
-// record. OrderID, OrderNumber, OrderDate, and EstimatedDeliveryDate are
-// overwritten manually in GenerateOrdersDepthZero, since date/ID formatting
-// needs to be deterministic rather than random.
+// record. OrderID, OrderNumber, OrderDate, TrackingNumber, and
+// EstimatedDeliveryDate are overwritten manually in
+// GenerateOrdersDepthZero, since date/ID/tracking-number formatting needs
+// to be deterministic rather than random.
 type fakeOrderDepthZero struct {
 	OrderID               string
 	OrderNumber           string
@@ -25,7 +26,7 @@ type fakeOrderDepthZero struct {
 	TotalAmount           float32 `fake:"{float32range:11,5050}"`
 	PromoCode             string  `fake:"{randomstring:[NEWYEAR10,FREESHIP,SAVE20,WELCOME5,NONE]}"`
 	ShippingMethod        string  `fake:"{randomstring:[standard,express,same_day,pickup]}"`
-	TrackingNumber        string  `fake:"{letterн:2}{number:8,8}"`
+	TrackingNumber        string
 	EstimatedDeliveryDate string
 	ItemCount             int32  `fake:"{number:1,10}"`
 	OrderNotes            string `fake:"{sentence:6}"`
@@ -43,6 +44,7 @@ func GenerateOrdersDepthZero(n int) ([]fakeOrderDepthZero, error) {
 		}
 		orders[i].OrderID = fmt.Sprintf("ORD-%08d", i+1)
 		orders[i].OrderNumber = fmt.Sprintf("ORDNUM-%08d", i+1)
+		orders[i].TrackingNumber = fmt.Sprintf("TRK%08d", i+1)
 		orders[i].OrderDate = now.AddDate(0, 0, -i).Format("2006-01-02")
 		orders[i].EstimatedDeliveryDate = now.AddDate(0, 0, 7-i%7).Format("2006-01-02")
 	}
