@@ -14,12 +14,12 @@ GRPC_CALL="orderexperiment.OrderExperimentService/GetOrderHundred"
 
 run_h2load_h1() {
   local url="$1" m="$2" outfile="$3"
-  h2load -h1 -c 1 -n 5000 -m "${m}" --log-file="${outfile}" "${url}" > /dev/null
+  h2load --h1 -c 1 -n 5000 -m "${m}" --log-file="${outfile}" "${url}"
 }
 
 run_h2load_h2() {
   local url="$1" m="$2" outfile="$3"
-  h2load -c 1 -n 5000 -m "${m}" --log-file="${outfile}" "${url}" > /dev/null
+  h2load -c 1 -n 5000 -m "${m}" --log-file="${outfile}" "${url}"
 }
 
 run_ghz() {
@@ -44,4 +44,4 @@ for m in 10 50 100 500 1000; do
   run_ghz "${m}" "${RESULTS_DIR}/grpc-m${m}.csv"
 done
 
-echo "Skenario Tingkat Multiplexing selesai — 25 file dihasilkan."
+echo "Skenario Tingkat Multiplexing Selesai — 25 file dihasilkan."
