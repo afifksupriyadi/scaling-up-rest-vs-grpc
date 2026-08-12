@@ -30,7 +30,7 @@ run_ghz() {
     --connections 1 \
     --concurrency "${m}" \
     --total 5000 \
-    --format csv \
+    --format json \
     --output "${outfile}" \
     "${GRPC_TARGET}"
 }
@@ -41,7 +41,7 @@ for m in 10 50 100 500 1000; do
   run_h2load_h1 "${REST_H1_URL_PROTOBUF}" "${m}" "${RESULTS_DIR}/rest-h1-protobuf-m${m}.log"
   run_h2load_h2 "${REST_H2_URL_JSON}"     "${m}" "${RESULTS_DIR}/rest-h2-json-m${m}.log"
   run_h2load_h2 "${REST_H2_URL_PROTOBUF}" "${m}" "${RESULTS_DIR}/rest-h2-protobuf-m${m}.log"
-  run_ghz "${m}" "${RESULTS_DIR}/grpc-m${m}.csv"
+  run_ghz "${m}" "${RESULTS_DIR}/grpc-m${m}.json"
 done
 
 echo "Skenario Tingkat Multiplexing Selesai — 25 file dihasilkan."
