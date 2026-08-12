@@ -1,23 +1,32 @@
 """
-element_count_visualize.py
+multiplexing_visualize.py
 
-Reads k6 CSV results (all 5 protocol combinations: REST HTTP/1.1
-JSON/Protobuf, REST HTTP/2 JSON/Protobuf, gRPC) across three element
-counts (1, 100, 1000), and produces:
-  1. Three response-time CDF charts (one per element count), showing
-     what fraction of requests completed within a given response
-     time, one curve per protocol combination.
+Reads h2load per-request log files (REST HTTP/1.1 and HTTP/2, both
+JSON and Protobuf) and ghz JSON result files (gRPC) across five
+concurrent-request levels (10, 50, 100, 500, 1000), and produces:
+  1. Five response-time CDF charts (one per level), showing what
+     fraction of requests completed within a given response time,
+     one curve per protocol combination.
   2. One throughput bar chart, x-axis = protocol combination,
-     grouped bars = one per element count.
-  3. One data_received summary table (average bytes per response),
+     grouped bars = one per concurrent-request level.
+  3. One response-time summary table (mean/median/P90/P95/P99/min/max),
      saved as CSV.
 
-Expects files named rest-h1-json-{one,hundred,thousand}.csv etc. in
-../../results/element-count/.
+REST combinations are read from h2load's --log-file output: tab-
+separated, no header, columns are (start time in microseconds,
+HTTP status code, duration in microseconds).
 
-Run with: python3 element_count_visualize.py
+The gRPC combination is read from ghz's --format json output: a
+JSON object whose "details" key holds a list of per-request records
+with timestamp, latency (nanoseconds), status, and error fields.
+
+Expects files named rest-h1-json-m{10,50,100,500,1000}.log etc. and
+grpc-m{10,50,100,500,1000}.json in ../../results/multiplexing/.
+
+Run with: python3 multiplexing_visualize.py
 """
 
+import json
 import sys
 from pathlib import Path
 
@@ -25,45 +34,61 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 SCRIPT_DIR = Path(__file__).parent
-RESULTS_DIR = SCRIPT_DIR.parent.parent / "results" / "element-count"
+RESULTS_DIR = SCRIPT_DIR.parent.parent / "results" / "multiplexing"
 OUTPUT_DIR = SCRIPT_DIR
 
 sys.path.insert(0, str(SCRIPT_DIR.parent))
 from style import COMBO_COLORS, COMBO_ORDER, COMBO_FILE_PREFIX, place_legend_outside  # noqa: E402
 
-# VUs are fixed at 10 for every point in this scenario, and depth is
-# fixed at Level 0, per the agreed configuration; only element count
-# varies.
-VUS = 10
+# Connections are fixed at 1 for every point in this scenario, per the
+# agreed configuration; only m (concurrent requests allowed per
+# connection) varies. Depth is fixed at Level 0, element count at 100
+# (Hundred), matching the same isolation reasoning used in the
+# concurrency scenario.
+POINTS = [10, 50, 100, 500, 1000]
 
-POINTS = [
-    ("one", "1"),
-    ("hundred", "100"),
-    ("thousand", "1000"),
-]
-
-ELEMENT_COLORS = {
-    "1 Elemen": "#A8D5A0",
-    "100 Elemen": "#5FA85A",
-    "1000 Elemen": "#2E6B2E",
+MULTIPLEX_COLORS = {
+    "10 Permintaan": "#D8C4E8",
+    "50 Permintaan": "#B79FD1",
+    "100 Permintaan": "#9678BA",
+    "500 Permintaan": "#74519F",
+    "1000 Permintaan": "#4F2D7A",
 }
 
-SCENARIO_CONTEXT = r"$\bf{Kedalaman\ Data}$: Level 0 - $\bf{Koneksi}$: 10 - $\bf{Total\ Permintaan}$: 500 (tetap di seluruh titik pengujian)"
+SCENARIO_CONTEXT = r"$\bf{Kedalaman\ Data}$: Level 0 - $\bf{Jumlah\ Elemen}$: 100 - $\bf{Koneksi}$: 1 - $\bf{Total\ Permintaan}$: 5000 (tetap di seluruh titik pengujian)"
+
+def load_rest_durations_ms(combo: str, m: int) -> pd.Series:
+    """Load one h2load --log-file result and return its per-request durations in ms.
+    - The file has no header row; columns are start time (us), HTTP status, duration (us).
+    - REST HTTP/1.1 combinations use h2load's pipelining sense of -m rather than genuine
+      multiplexing, included deliberately as a contrast against HTTP/2 and gRPC.
+    """
+    prefix = COMBO_FILE_PREFIX[combo]
+    path = RESULTS_DIR / f"{prefix}-m{m}.log"
+    df = pd.read_csv(path, sep="\t", header=None, names=["start_us", "status", "duration_us"])
+    return df["duration_us"] / 1000
 
 
-def metric_name_for(combo: str) -> str:
-    """Return the k6 metric_name that holds this combination's response time (gRPC and REST log it under different names)."""
-    return "grpc_req_duration" if combo == "gRPC" else "http_req_duration"
+def load_grpc_durations_ms(m: int) -> pd.Series:
+    """Load one ghz --format json result and return its per-request durations in ms.
+    - latency is in nanoseconds in ghz's JSON output, unlike h2load's microseconds.
+    """
+    path = RESULTS_DIR / f"grpc-m{m}.json"
+    with open(path) as f:
+        data = json.load(f)
+    latencies_ns = [d["latency"] for d in data["details"]]
+    return pd.Series(latencies_ns) / 1_000_000
 
 
-def load_csv(prefix: str, point_suffix: str) -> pd.DataFrame:
-    """Load one raw k6 CSV result file for this scenario."""
-    path = RESULTS_DIR / f"{prefix}-{point_suffix}.csv"
-    return pd.read_csv(path, low_memory=False)
+def load_durations_ms(combo: str, m: int) -> pd.Series:
+    """Dispatch to the correct reader depending on which tool produced this combination's data."""
+    if combo == "gRPC":
+        return load_grpc_durations_ms(m)
+    return load_rest_durations_ms(combo, m)
 
 
-def plot_response_time_cdf(point_suffix: str, point_label: str):
-    """CDF chart for one element count: one curve per protocol
+def plot_response_time_cdf(m: int):
+    """CDF chart for one concurrent-request level: one curve per protocol
     combination, showing what fraction of requests completed within a
     given response time. X-axis is zoomed to the 99th percentile
     across all combinations, not the raw max, so rare outliers don't
@@ -75,15 +100,16 @@ def plot_response_time_cdf(point_suffix: str, point_label: str):
     - The summary box's width is measured from the actual rendered text
       width of its widest line, not a hardcoded guess, so it always fits
       snugly regardless of how long the combination names or values are.
+    - Combination names and their values are drawn as two separate
+      columns (tab-stop style), so every colon lines up regardless of
+      how long each combination's name is.
     """
     fig, ax = plt.subplots(figsize=(11, 6))
 
     all_p99 = []
     p50_data = []
     for combo in COMBO_ORDER:
-        prefix = COMBO_FILE_PREFIX[combo]
-        df = load_csv(prefix, point_suffix)
-        vals = df[df["metric_name"] == metric_name_for(combo)]["metric_value"].sort_values().values
+        vals = load_durations_ms(combo, m).sort_values().values
         cumulative_pct = (pd.Series(range(1, len(vals) + 1)) / len(vals)) * 100
         ax.plot(vals, cumulative_pct, label=combo, color=COMBO_COLORS[combo], linewidth=1.8)
         all_p99.append(pd.Series(vals).quantile(0.99))
@@ -173,27 +199,25 @@ def plot_response_time_cdf(point_suffix: str, point_label: str):
     ax.text(text_x, y, footnote_text, transform=ax.transAxes, fontsize=6.5, color="black",
             style="italic", ha="left", va="top", zorder=7)
 
-    fig.suptitle(f"Distribusi Response Time — Jumlah Elemen {point_label}", fontsize=13, fontweight="bold", y=0.98)
+    fig.suptitle(f"Distribusi Response Time — Tingkat Multiplexing {m} Permintaan", fontsize=13, fontweight="bold", y=0.98)
     fig.text(0.5, 0.925, SCENARIO_CONTEXT, ha="center", fontsize=9, color="#555555", style="italic")
     fig.tight_layout(rect=[0, 0, 1, 0.93])
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    filename = f"response_time_cdf_element_{point_suffix}.png"
+    filename = f"response_time_cdf_multiplexing_m{m}.png"
     fig.savefig(OUTPUT_DIR / filename, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Saved {OUTPUT_DIR / filename}")
 
 
 def print_response_time_summary_table():
-    """Print (and save as CSV) the response-time summary statistics table across all element counts and combinations."""
+    """Print (and save as CSV) the response-time summary statistics table across all multiplexing levels and combinations."""
     rows = []
-    for point_suffix, point_label in POINTS:
+    for m in POINTS:
         for combo in COMBO_ORDER:
-            prefix = COMBO_FILE_PREFIX[combo]
-            df = load_csv(prefix, point_suffix)
-            vals = df[df["metric_name"] == metric_name_for(combo)]["metric_value"]
+            vals = load_durations_ms(combo, m)
             rows.append({
-                "Titik": f"{point_label} Elemen",
+                "Titik": f"{m} Permintaan",
                 "Kombinasi": combo,
                 "Mean (ms)": round(vals.mean(), 3),
                 "Median (ms)": round(vals.median(), 3),
@@ -204,7 +228,7 @@ def print_response_time_summary_table():
                 "Max (ms)": round(vals.max(), 3),
             })
     table = pd.DataFrame(rows)
-    print("\nRingkasan Statistik Response Time - Skenario Jumlah Elemen:")
+    print("\nRingkasan Statistik Response Time - Skenario Tingkat Multiplexing:")
     print(table.to_string(index=False))
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -213,84 +237,55 @@ def print_response_time_summary_table():
     print(f"Saved {out_path}")
 
 
-def compute_throughput(prefix: str, point_suffix: str, metric_name: str) -> float:
-    """Compute throughput as VUS / mean_latency_seconds, not from raw timestamp span.
-    - Several points/combinations in this scenario complete in well under a second
-      (e.g. One's sub-millisecond mean latency x 50 iterations), far too short for
-      k6's whole-second timestamp resolution to measure duration accurately.
-    - This assumes the per-vu-iterations closed-model executor used throughout this
-      test suite: each VU runs its iterations strictly sequentially, so one VU's own
-      rate is 1/mean_latency_seconds, and VUS identical parallel VUs multiply that.
+def compute_throughput(combo: str, m: int) -> float:
+    """Compute throughput as m / mean_latency_seconds.
+    - This treats m (max concurrent requests per connection) the same way earlier
+      scenarios treated VUS: since connections are fixed at 1 and m requests are kept
+      continuously in flight, m/mean_latency_seconds approximates the sustained rate,
+      analogous to VUS/mean_latency_seconds for the per-vu-iterations closed model.
     """
-    df = load_csv(prefix, point_suffix)
-    mean_ms = df[df["metric_name"] == metric_name]["metric_value"].mean()
-    return VUS / (mean_ms / 1000)
+    mean_ms = load_durations_ms(combo, m).mean()
+    return m / (mean_ms / 1000)
 
 
 def plot_throughput():
-    """Bar chart: x-axis = protocol combination, grouped bars = one per element count."""
-    fig, ax = plt.subplots(figsize=(12, 6))
+    """Bar chart: x-axis = protocol combination, grouped bars = one per concurrent-request level."""
+    fig, ax = plt.subplots(figsize=(13, 6))
     x = range(len(COMBO_ORDER))
     n = len(POINTS)
     width = 0.8 / n
-    offsets = {point_label: (i - (n - 1) / 2) * width for i, (_, point_label) in enumerate(POINTS)}
+    offsets = {m: (i - (n - 1) / 2) * width for i, m in enumerate(POINTS)}
 
-    for point_suffix, point_label in POINTS:
-        el_label = f"{point_label} Elemen"
-        vals = [compute_throughput(COMBO_FILE_PREFIX[combo], point_suffix, metric_name_for(combo)) for combo in COMBO_ORDER]
-        positions = [xi + offsets[point_label] for xi in x]
-        bars = ax.bar(positions, vals, width=width, label=el_label,
-                      color=ELEMENT_COLORS[el_label], alpha=0.9, edgecolor="#E5E5E5", linewidth=0.6)
+    for m in POINTS:
+        label = f"{m} Permintaan"
+        vals = [compute_throughput(combo, m) for combo in COMBO_ORDER]
+        positions = [xi + offsets[m] for xi in x]
+        bars = ax.bar(positions, vals, width=width, label=label,
+                      color=MULTIPLEX_COLORS[label], alpha=0.9, edgecolor="#E5E5E5", linewidth=0.6)
         ax.bar_label(bars, fmt="%.0f", fontsize=6, padding=2)
 
     ax.set_xticks(list(x))
     ax.set_xticklabels(COMBO_ORDER, rotation=15, ha="right")
     ax.set_ylabel("Throughput (request/detik)")
-    place_legend_outside(ax, title="Jumlah Elemen")
+    place_legend_outside(ax, title="Tingkat Multiplexing")
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
 
-    fig.suptitle("Throughput — Skenario Jumlah Elemen", fontsize=13, fontweight="bold", y=0.98)
+    fig.suptitle("Throughput — Skenario Tingkat Multiplexing", fontsize=13, fontweight="bold", y=0.98)
     fig.text(0.5, 0.925, SCENARIO_CONTEXT, ha="center", fontsize=9, color="#555555", style="italic")
     fig.tight_layout(rect=[0, 0, 1, 0.93])
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUTPUT_DIR / "throughput_element_count.png", dpi=150, bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / "throughput_multiplexing.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"Saved {OUTPUT_DIR / 'throughput_element_count.png'}")
-
-
-def compute_data_received(prefix: str, point_suffix: str) -> float:
-    """Compute the average data_received (bytes) per request for one combination/point."""
-    df = load_csv(prefix, point_suffix)
-    return df[df["metric_name"] == "data_received"]["metric_value"].mean()
-
-
-def print_data_received_table():
-    """Print (and save as CSV) the data_received summary table across all element counts and combinations."""
-    rows = []
-    for point_suffix, point_label in POINTS:
-        row = {"Titik": f"{point_label} Elemen"}
-        for combo in COMBO_ORDER:
-            row[combo] = round(compute_data_received(COMBO_FILE_PREFIX[combo], point_suffix), 1)
-        rows.append(row)
-
-    table = pd.DataFrame(rows)
-    print("\nRingkasan data_received (byte) - Skenario Jumlah Elemen:")
-    print(table.to_string(index=False))
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = OUTPUT_DIR / "data_received_summary.csv"
-    table.to_csv(out_path, index=False)
-    print(f"Saved {out_path}")
+    print(f"Saved {OUTPUT_DIR / 'throughput_multiplexing.png'}")
 
 
 def main():
-    for point_suffix, point_label in POINTS:
-        plot_response_time_cdf(point_suffix, point_label)
+    for m in POINTS:
+        plot_response_time_cdf(m)
     plot_throughput()
     print_response_time_summary_table()
-    print_data_received_table()
 
 
 if __name__ == "__main__":

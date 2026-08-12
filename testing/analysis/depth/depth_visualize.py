@@ -47,8 +47,7 @@ DEPTH_COLORS = {
     "Level 4": "#1F5788",
 }
 
-SCENARIO_CONTEXT = r"$\bf{Jumlah\ Elemen}$: 1 - $\bf{Konkurensi}$: 10 VU (tetap di seluruh titik pengujian)"
-
+SCENARIO_CONTEXT = r"$\bf{Jumlah\ Elemen}$: 1 - $\bf{Koneksi}$: 10 - $\bf{Total\ Permintaan}$: 500 (tetap di seluruh titik pengujian)"
 
 def metric_name_for(combo: str) -> str:
     """Return the k6 metric_name that holds this combination's response time (gRPC and REST log it under different names)."""

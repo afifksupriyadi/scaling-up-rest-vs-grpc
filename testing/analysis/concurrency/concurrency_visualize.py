@@ -47,8 +47,7 @@ CONCURRENCY_COLORS = {
     "100 VU": "#A8501C",
 }
 
-SCENARIO_CONTEXT = r"$\bf{Kedalaman\ Data}$: Level 0 - $\bf{Jumlah\ Elemen}$: 100 (tetap di seluruh titik pengujian)"
-
+SCENARIO_CONTEXT = r"$\bf{Kedalaman\ Data}$: Level 0 - $\bf{Jumlah\ Elemen}$: 100 - $\bf{Total\ Permintaan}$: 500 (tetap di seluruh titik pengujian)"
 
 def metric_name_for(combo: str) -> str:
     """Return the k6 metric_name that holds this combination's response time (gRPC and REST log it under different names)."""
